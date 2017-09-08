@@ -536,3 +536,57 @@ isl::map polly::intersectRange(isl::map Map, isl::union_set Range) {
   isl::set RangeSet = Range.extract_set(Map.get_space().range());
   return Map.intersect_range(RangeSet);
 }
+
+
+static void foreachPoint(const isl::set &Set,
+	const std::function<void(isl::point P)> &F) {
+	isl_set_foreach_point(
+		Set.keep(),
+		[](__isl_take isl_point *p, void *User) -> isl_stat {
+		auto &F = *static_cast<const std::function<void(isl::point)> *>(User);
+		F(give(p));
+		return isl_stat_ok;
+	},
+		const_cast<void *>(static_cast<const void *>(&F)));
+}
+
+void foreachPoint(isl::basic_set BSet,
+	const std::function<void(isl::point P)> &F) {
+	foreachPoint(give(isl_set_from_basic_set(BSet.take())), F);
+}
+
+ isl::union_set expand(const isl::union_set &Arg) {
+	auto USet = Arg;
+	simplify(USet);
+	isl::union_set Expanded =
+		give(isl_union_set_empty(isl_union_set_get_space(USet.keep())));
+	USet.foreach_set([&](isl::set Set) -> isl::stat {
+		Set.foreach_basic_set([&](isl::basic_set BSet) -> isl::stat {
+			bool IsBounded = isl_basic_set_is_bounded(BSet.keep());
+			if (IsBounded) {
+				foreachPoint(Set, [&](isl::point P) {
+					Expanded = give(isl_union_set_add_set(Expanded.take(),
+						isl_set_from_point(P.copy())));
+				});
+			}
+			else {
+				Expanded = give(isl_union_set_add_set(
+					Expanded.take(), isl_set_from_basic_set(BSet.copy())));
+			}
+			return isl::stat::ok;
+		});
+		return isl::stat::ok;
+	});
+	return Expanded;
+	// foreachPoint(USet, [] (isl::point P) { llvm::errs().indent(2)  << P
+	// << '\n'; });
+}
+
+void expandDump(const isl::union_set &Arg) { expand(Arg).dump(); }
+
+isl::union_map expand(const isl::union_map &Map) {
+	auto USet = expand(give(isl_union_map_wrap(Map.copy())));
+	return give(isl_union_set_unwrap(USet.copy()));
+}
+
+void expandDump(const isl::union_map &Arg) { expand(Arg).dump(); }

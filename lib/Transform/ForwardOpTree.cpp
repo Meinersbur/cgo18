@@ -272,7 +272,7 @@ public:
       Translator = makeIdentityMap(Known.range(), false);
     }
 
-    if (!Known || !Translator) {
+    if (!NormalizedPHI || !Known || !Translator) {
       assert(isl_ctx_last_error(IslCtx.get()) == isl_error_quota);
       KnownOutOfQuota++;
       Known = nullptr;
@@ -448,6 +448,7 @@ public:
 
     // { DomainDef[] -> ValInst[] }
     isl::map ExpectedVal = makeValInst(Inst, UseStmt, UseLoop);
+	assert(isNormalized(ExpectedVal) && "LoadInsts are always normalized");
 
     // { DomainTarget[] -> ValInst[] }
     isl::map TargetExpectedVal = ExpectedVal.apply_domain(UseToTarget);

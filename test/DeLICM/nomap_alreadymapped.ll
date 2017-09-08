@@ -35,7 +35,7 @@ outer.for:
       %i = phi i32 [0, %reduction.preheader], [%i.inc, %reduction.inc]
       %phi1 = phi double [0.0, %reduction.preheader], [%add1, %reduction.inc]
       %phi2 = phi double [0.0, %reduction.preheader], [%add2, %reduction.inc]
-      %i.cmp = icmp slt i32 %i, 4
+      %i.cmp = icmp slt i32 %i, 3
       br i1 %i.cmp, label %body, label %reduction.exit
 
 
@@ -77,3 +77,33 @@ return:
 ; CHECK:     Value scalars mapped:  2
 ; CHECK:     PHI scalars mapped:    1
 ; CHECK: }
+ 
+;                                       A[0]          Proposed A[0]
+; [ 0] Stmt_reduction_preheader[0]
+;
+; [ 1] Stmt_reduction_for[0,0]
+;                                     0.0
+; [ 2] Stmt_body[0,0]
+;                                     0.0
+; [ 3] Stmt_reduction_inc[0,0] 
+;                                   add2[0,0]
+; [ 4] Stmt_reduction_for[0,1]
+;                                   add2[0,0]
+; [ 5] Stmt_body[0,1]
+;                                   add2[0,0] / 0.0
+; [ 6] Stmt_reduction_inc[0,1]
+;                                   add2[0,1]
+; [ 7] Stmt_reduction_for[0,2]
+;                                   add2[0,1]
+; [ 8] Stmt_body[0,2]
+;                                   add2[0,1] / 0.0
+; [ 9] Stmt_reduction_inc[0,2]
+;                                   add2[0,2]
+; [10] Stmt_reduction_for[0,3]
+;                                   add2[0,2]
+; [11] Stmt_reduction_exit[0]
+;                                    sum[0] / 0.0
+; [12] Stmt_reduction_preheader[1]
+;                                    sum[0]
+; [13] ...
+;                                    sum[0]
