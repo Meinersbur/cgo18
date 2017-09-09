@@ -526,6 +526,9 @@ public:
 	  Loop *DefLoop, isl::map DefToTarget,
 	  bool DoIt) {
 
+	  return FD_NotApplicable;
+
+#if 0
 	  // Cannot do anything without successful known analysis.
 	  if (Known.is_null())
 		  return FD_NotApplicable;
@@ -625,6 +628,7 @@ public:
 	  NumKnownLoadsForwarded++;
 	  TotalKnownLoadsForwarded++;
 	  return FD_DidForward;
+#endif
   }
 
   /// Forwards a speculatively executable instruction.
