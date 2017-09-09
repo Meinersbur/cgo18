@@ -98,7 +98,7 @@ protected:
   /// { [Element[] -> DomainWrite[]] -> ValInst[] }
   isl::union_map AllWriteValInst;
 
-  /// All reaching definitions for  MemoryKind::Array writes.
+  /// All reaching definitions for MemoryKind::Array writes.
   /// { [Element[] -> Zone[]] -> DomainWrite[] }
   isl::union_map WriteReachDefZone;
 
@@ -301,7 +301,7 @@ public:
   /// reads from that array element in that period.
   ///
   /// @return { [Element[] -> Zone[]] -> ValInst[] }
-  isl::union_map computeKnownFromLoad() const;
+  isl::union_map computeKnownFromLoad(isl::union_map Loadable) const;
 
   /// Compute which value an array element stores at every instant.
   ///
@@ -309,7 +309,9 @@ public:
   /// @param FromRead  Use loads as source of information.
   ///
   /// @return { [Element[] -> Zone[]] -> ValInst[] }
-  isl::union_map computeKnown(bool FromWrite, bool FromRead) const;
+  isl::union_map computeKnown(bool FromWrite, bool FromRead, bool FromInit=false, bool FromReachDef) const;
+
+
 };
 
 /// Create a domain-to-unknown value mapping.

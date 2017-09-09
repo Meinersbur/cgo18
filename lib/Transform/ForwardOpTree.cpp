@@ -265,7 +265,7 @@ public:
       IslMaxOperationsGuard MaxOpGuard(IslCtx.get(), MaxOps);
 
       computeCommon();
-      Known = computeKnown(true, true);
+      Known = computeKnown(true, true, true, true);
       simplify(Known);
 
       // Preexisting ValInsts use the known content analysis of themselves.
@@ -520,20 +520,32 @@ public:
     return FD_DidForward;
   }
 
-  ForwardingDecision reloadKnownContent(ScopStmt *TargetStmt, Instruction *Inst,
-	  ScopStmt *UseStmt, Loop *UseLoop,
-	  isl::map UseToTarget, ScopStmt *DefStmt,
-	  Loop *DefLoop, isl::map DefToTarget,
-	  bool DoIt) {
+  ForwardingDecision reloadKnownContent(ScopStmt *TargetStmt, Instruction *Inst, ScopStmt *UseStmt, Loop *UseLoop,  isl::map UseToTarget, ScopStmt *DefStmt, Loop *DefLoop, isl::map DefToTarget, bool DoIt) {
 
 	  return FD_NotApplicable;
 
-#if 0
+#if 1
 	  // Cannot do anything without successful known analysis.
 	  if (Known.is_null())
 		  return FD_NotApplicable;
 
+	  // { UseDomain[] -> ValInst[] }
+	  auto ValInst =  makeNormalizedValInst(Inst, UseStmt, UseLoop);
 
+	  auto LoadNormedValInst = makeEmptyUnionMap();
+	  ValInst.foreach_map([&LoadNormedValInst](isl::map &Map) -> isl::stat {
+		  auto RangeSpace = Map.get_space().range();
+
+		  if (!RangeSpace.is_wrapping()) {
+			  LoadNormedValInst = LoadNormedValInst.add_map(Map);
+			  return isl::stat::ok;
+		  }
+
+		}
+
+
+		  return isl::stat::ok;
+	  });
 
 
 	  ForwardingDecision OpDecision =forwardTree(TargetStmt, LI->getPointerOperand(), DefStmt, DefLoop, DefToTarget, DoIt);

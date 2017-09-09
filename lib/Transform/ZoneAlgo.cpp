@@ -976,6 +976,8 @@ void ZoneAlgorithm::computeCommon() {
   }
 
 
+
+
   ComputedPHIs = AllPHIs;
   NormalizedPHI = AllPHIMaps;
 
@@ -1024,23 +1026,44 @@ isl::union_map ZoneAlgorithm::computeKnownFromMustWrites() const {
 }
 
 isl::union_map ZoneAlgorithm::computeKnownFromLoad() const {
+
+#if 0
+	for (auto &Stmt : *S) {
+		for (auto *MA : Stmt) {
+			if (!MA->isRead())
+				continue;
+			if (!MA->isLatestArrayKind())
+				continue;
+
+			auto AccRel = MA->getLatestAccessRelation();
+
+			// { LoadValInst[] }
+			isl::map LoadValInst;
+			if (MA->isOriginalArrayKind() && isa<LoadInst>(MA->getAccessInstruction()))
+				LoadValInst = makeValInst(cast<LoadInst>(MA->getAccessInstruction()), &Stmt, Stmt.getSurroundingLoop());
+			else
+				continue;
+
+
+
+		}
+	}
+#endif
+
   // { Element[] }
   isl::union_set AllAccessedElts = AllReads.range().unite(AllWrites.range());
 
   // { Element[] -> Scatter[] }
-  isl::union_map EltZoneUniverse = isl::union_map::from_domain_and_range(
-      AllAccessedElts, isl::set::universe(ScatterSpace));
+  isl::union_map EltZoneUniverse = isl::union_map::from_domain_and_range(AllAccessedElts, isl::set::universe(ScatterSpace));
 
   // This assumes there are no "holes" in
   // isl_union_map_domain(WriteReachDefZone); alternatively, compute the zone
   // before the first write or that are not written at all.
   // { Element[] -> Scatter[] }
-  isl::union_set NonReachDef =
-      EltZoneUniverse.wrap().subtract(WriteReachDefZone.domain());
+  isl::union_set NonReachDef = EltZoneUniverse.wrap().subtract(WriteReachDefZone.domain());
 
   // { [Element[] -> Zone[]] -> ReachDefId[] }
-  isl::union_map DefZone =
-      WriteReachDefZone.unite(isl::union_map::from_domain(NonReachDef));
+  isl::union_map DefZone = WriteReachDefZone.unite(isl::union_map::from_domain(NonReachDef));
 
   // { [Element[] -> Scatter[]] -> Element[] }
   isl::union_map EltZoneElt = EltZoneUniverse.domain_map();
@@ -1064,16 +1087,81 @@ isl::union_map ZoneAlgorithm::computeKnownFromLoad() const {
   isl::union_map ScatterKnown = ReadsElt.apply_range(AllReadValInst);
 
   // { [Element[] -> ReachDefId[]] -> ValInst[] }
-  isl::union_map DefidKnown =
-      DefZoneEltDefId.apply_domain(ScatterKnown).reverse();
+  isl::union_map DefidKnown = DefZoneEltDefId.apply_domain(ScatterKnown).reverse();
 
   // { [Element[] -> Zone[]] -> ValInst[] }
-  return DefZoneEltDefId.apply_range(DefidKnown);
+  auto Result= DefZoneEltDefId.apply_range(DefidKnown);
+
+// TODO: Loads can be normalized to other ValInsts.
+
+  return Result;
 }
 
+// { Element[] -> "Element"[[] -> Element[]] }
+// { Element[] -> "Element"[WriteDomain[] -> Element[]] }
+static isl::map makeElementValInstInst(isl::map At) {
+
+}
+
+// { [Element[] -> Zone[]] -> ValInst[] }
 isl::union_map ZoneAlgorithm::computeKnown(bool FromWrite,
-                                           bool FromRead) const {
+                                           bool FromRead,  bool FromInit, bool FromReachDef) const {
   isl::union_map Result = makeEmptyUnionMap();
+
+  if (FromInit) {
+	  //  {  Element[] -> Scatter[] }
+	 auto AllWritesScatter = AllWrites.apply_domain(Schedule).reverse();
+
+	 auto FirstWrite = AllWritesScatter.lexmin();
+
+	 //  { Element[] -> Zone[] }
+	 auto BeforeWriteUnscalar  =  beforeScatter(FirstWrite, true);
+
+	 // { Element[] }
+ auto NeverWritten=	 AllReads.domain() .subtract( AllWrites.domain());
+
+ auto NeverWrittenUnscalar = isl::union_map::from_domain_and_range(isl::set::universe(ScatterSpace), NeverWritten);
+
+ //  { Element[] -> Zone[] }
+ auto Unscalar = BeforeWriteUnscalar.unite(NeverWrittenUnscalar);
+
+  // { Element[]  -> [[] -> Element[]] }
+ auto X = isl::union_map::from_range(Unscalar.domain()).range_map().reverse();
+ isl::union_map Y= makeEmptyUnionMap();
+ X.foreach_map([&Y](isl::map Map)->isl::stat {
+	 auto NewMap = Map.set_tuple_name(isl::dim::out, "Element");
+	 Y = Y.add_map(Map);
+	 return isl::stat::ok;
+ });
+
+ //  { [Element[] -> Zone[]] -> "Element"[[] -> Element[]] }
+ auto UnscalarValInst = Unscalar.domain_map().apply_range(Y);
+
+ Result = Result.unite(UnscalarValInst);
+  }
+
+  if (FromReachDef) {
+	  // { [Element[] -> Zone[]] -> DomainWrite[] }
+	  WriteReachDefZone;
+
+	  // { Element[] -> DomainWrite[] }
+	  auto WriteDomain = WriteReachDefZone.domain_factor_domain();
+
+	  // { DomainWrite[] -> [DomainWrite[] -> Element[]] }
+	  auto X = WriteDomain.reverse.domain_map().reverse();
+	  isl::union_map Y = makeEmptyUnionMap();
+	  X.foreach_map([&Y](isl::map Map)->isl::stat {
+		  auto NewMap = Map.set_tuple_name(isl::dim::out, "Element");
+		  Y = Y.add_map(Map);
+		  return isl::stat::ok;
+	  });
+
+	  // { [Element[] -> Zone[]] -> "Element"[DomainWrite[] -> Element[]] }
+	  auto ReachDefValInst = WriteReachDefZone.apply_range(Y);
+
+	  Result = Result.unite(ReachDefValInst);
+  }
+
 
   if (FromWrite)
     Result = Result.unite(computeKnownFromMustWrites());
