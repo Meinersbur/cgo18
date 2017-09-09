@@ -13,6 +13,9 @@
 //===----------------------------------------------------------------------===//
 
 #include "polly/Support/ISLTools.h"
+#include "polly/FlattenAlgo.h"
+#include "polly/Support/GICHelper.h"
+#include "llvm/ADT/DenseSet.h"
 
 using namespace polly;
 
@@ -305,29 +308,29 @@ isl::union_map polly::computeReachingWrite(isl::union_map Schedule,
   // { ScatterRead[] -> ScatterWrite[] }
   isl::map Relation;
   if (Reverse)
-    Relation = give(InclPrevDef ? isl_map_lex_lt(ScatterSpace.take())
-                                : isl_map_lex_le(ScatterSpace.take()));
+    Relation = give(InclPrevDef ? isl_map_lex_lt(ScatterSpace.copy())
+                                : isl_map_lex_le(ScatterSpace.copy()));
   else
-    Relation = give(InclNextDef ? isl_map_lex_gt(ScatterSpace.take())
-                                : isl_map_lex_ge(ScatterSpace.take()));
+    Relation = give(InclNextDef ? isl_map_lex_gt(ScatterSpace.copy())
+                                : isl_map_lex_ge(ScatterSpace.copy()));
 
   // { ScatterWrite[] -> [ScatterRead[] -> ScatterWrite[]] }
-  auto RelationMap = give(isl_map_reverse(isl_map_range_map(Relation.take())));
+  auto RelationMap = give(isl_map_reverse(isl_map_range_map(Relation.copy())));
 
   // { Element[] -> ScatterWrite[] }
   auto WriteAction =
-      give(isl_union_map_apply_domain(Schedule.copy(), Writes.take()));
+      give(isl_union_map_apply_domain(Schedule.copy(), Writes.copy()));
 
   // { ScatterWrite[] -> Element[] }
   auto WriteActionRev = give(isl_union_map_reverse(WriteAction.copy()));
 
   // { Element[] -> [ScatterUse[] -> ScatterWrite[]] }
   auto DefSchedRelation = give(isl_union_map_apply_domain(
-      isl_union_map_from_map(RelationMap.take()), WriteActionRev.take()));
+      isl_union_map_from_map(RelationMap.copy()), WriteActionRev.copy()));
 
   // For each element, at every point in time, map to the times of previous
   // definitions. { [Element[] -> ScatterRead[]] -> ScatterWrite[] }
-  auto ReachableWrites = give(isl_union_map_uncurry(DefSchedRelation.take()));
+  auto ReachableWrites = give(isl_union_map_uncurry(DefSchedRelation.copy()));
   if (Reverse)
     ReachableWrites = give(isl_union_map_lexmin(ReachableWrites.copy()));
   else
@@ -339,17 +342,17 @@ isl::union_map polly::computeReachingWrite(isl::union_map Schedule,
   if (InclPrevDef && InclNextDef) {
     // Add the Def itself to the solution.
     ReachableWrites =
-        give(isl_union_map_union(ReachableWrites.take(), SelfUse.take()));
-    ReachableWrites = give(isl_union_map_coalesce(ReachableWrites.take()));
+        give(isl_union_map_union(ReachableWrites.copy(), SelfUse.copy()));
+    ReachableWrites = give(isl_union_map_coalesce(ReachableWrites.copy()));
   } else if (!InclPrevDef && !InclNextDef) {
     // Remove Def itself from the solution.
     ReachableWrites =
-        give(isl_union_map_subtract(ReachableWrites.take(), SelfUse.take()));
+        give(isl_union_map_subtract(ReachableWrites.copy(), SelfUse.copy()));
   }
 
   // { [Element[] -> ScatterRead[]] -> Domain[] }
   auto ReachableWriteDomain = give(isl_union_map_apply_range(
-      ReachableWrites.take(), isl_union_map_reverse(Schedule.take())));
+      ReachableWrites.copy(), isl_union_map_reverse(Schedule.copy())));
 
   return ReachableWriteDomain;
 }
@@ -555,26 +558,161 @@ void foreachPoint(isl::basic_set BSet,
 	foreachPoint(give(isl_set_from_basic_set(BSet.take())), F);
 }
 
+static int flatCompare( const  isl::basic_set& A, const   isl::basic_set &B) {
+	auto ALen = A.dim(isl::dim::set);
+	auto BLen = B.dim(isl::dim::set);
+	int Len = std::min(ALen, BLen);
+
+	for (int i = 0; i < Len; i += 1) {
+		auto ADim = A.project_out(isl::dim::param, 0, A.dim(isl::dim::param)).project_out(isl::dim::set, i + 1, ALen - i - 1).project_out(isl::dim::set, 0, i);
+		auto BDim = B.project_out(isl::dim::param, 0, B.dim(isl::dim::param)).project_out(isl::dim::set, i + 1, BLen - i - 1).project_out(isl::dim::set, 0, i);
+
+		auto AHull = isl::set(ADim).convex_hull();
+		auto BHull = isl::set(BDim).convex_hull();
+
+		auto ALowerBounded = bool( isl::set(AHull).dim_has_any_lower_bound(isl::dim::set, 0));
+		auto BLowerBounded = bool (isl::set(BHull).dim_has_any_lower_bound(isl::dim::set, 0));
+
+
+		//auto ABounded = bool(ADim.is_bounded());
+		//auto BBounded = bool(BDim.is_bounded());
+
+		
+
+		auto BoundedCompare = BLowerBounded - ALowerBounded;
+		if (BoundedCompare != 0)
+			return BoundedCompare;
+
+		if (!ALowerBounded || !BLowerBounded)
+			continue;
+
+		auto AMin = isl::set(ADim).dim_min(0);
+		auto BMin = isl::set(BDim).dim_min(0);
+
+		auto AMinVal = polly::getConstant(AMin, false, true);
+		auto BMinVal = polly::getConstant(BMin, false, true);
+
+		auto MinCompare = AMinVal.sub(BMinVal).sgn();
+		if (MinCompare != 0)
+			return MinCompare;
+	}
+
+	return ((int)ALen) - (int)BLen;
+}
+
+
+static int recursiveCompare(const isl::basic_set &A, const isl::basic_set& B) {
+	auto ASpace = A.get_space();
+	auto BSpace = B.get_space();
+
+	auto WrappingCompare = bool(ASpace.is_wrapping()) - bool(BSpace.is_wrapping());
+	if (WrappingCompare != 0)
+		return WrappingCompare;
+
+	if (ASpace.is_wrapping() && B.is_wrapping()) {
+		auto AMap = A.unwrap();
+		auto BMap = B.unwrap();
+
+		auto FirstResult = recursiveCompare(AMap.domain(), BMap.domain());
+		if (FirstResult != 0)
+			return FirstResult;
+
+		return recursiveCompare(AMap.range(), BMap.range());
+	}
+
+	auto AName = ASpace.has_tuple_name(isl::dim::set) ? ASpace.get_tuple_name(isl::dim::set) : std::string();
+	auto BName = BSpace.has_tuple_name(isl::dim::set) ?  BSpace.get_tuple_name(isl::dim::set) : std::string();
+
+	auto NameCompare = AName.compare(BName);
+	if (NameCompare != 0)
+		return NameCompare;
+
+	return flatCompare(A, B);
+}
+
+void dumpSortedInternal(isl::union_set USet, llvm::raw_ostream &OS, bool IsMap) {
+	std::vector<isl::basic_set> BSets;
+	USet.foreach_set([&BSets](isl::set Set) -> isl::stat {
+		Set.foreach_basic_set([&BSets](isl::basic_set BSet) -> isl::stat {
+			BSets.push_back(BSet);
+			return isl::stat::ok;
+		});
+		return isl::stat::ok;
+	});
+
+	std::sort(BSets.begin(), BSets.end(), [](isl::basic_set &A, isl::basic_set &B) -> bool {return  recursiveCompare(A, B) < 0; });
+
+	OS << "{\n";
+	for (auto &BSet : BSets) {
+		OS.indent(2);
+		if (IsMap)
+			OS << isl::map( BSet.unwrap()).to_str();
+		else
+			OS << isl::set( BSet).to_str();
+		OS << '\n';
+	}
+	OS << "}";
+}
+
+
+static void recursiveExpand(isl::basic_set BSet, int Dim, isl::set &Expanded) {
+	int Dims = BSet.dim(isl::dim::set);
+	if (Dim >= Dims) {
+		Expanded = Expanded.unite(BSet);
+		return;
+	}
+
+	auto DimOnly = BSet.project_out(isl::dim::param, 0, BSet.dim(isl::dim::param)).project_out(isl::dim::set, Dim + 1, Dims - Dim - 1).project_out(isl::dim::set, 0, Dim);
+	if (!DimOnly.is_bounded()) {
+		 recursiveExpand(BSet, Dim +1, Expanded);
+		 return;
+	}
+
+	foreachPoint(DimOnly, [&,Dim](isl::point P) {
+		 auto Val = P.get_coordinate_val(isl::dim::set,0);
+		 auto FixBSet = BSet.fix_val(isl::dim::set, Dim, Val);
+		 recursiveExpand(FixBSet, Dim+1, Expanded);
+	});
+}
+
+isl::set expand(const isl::set &Set) {
+	isl::set Expanded = isl::set::empty(Set.get_space());
+	Set.foreach_basic_set([&](isl::basic_set BSet) -> isl::stat {
+		bool IsBounded = isl_basic_set_is_bounded(BSet.keep());
+		if (IsBounded) {
+			foreachPoint(BSet, [&](isl::point P) {
+				Expanded = give(isl_set_union(Expanded.take(),isl_set_from_point(P.copy())));
+			});
+		} else {
+			//auto NoParams = BSet.project_out(isl::dim::param, 0, BSet.dim(isl::dim::param));
+			//int Dims = BSet.dim(isl::dim::set);
+			recursiveExpand(BSet, 0, Expanded);
+
+
+			//Expanded = give(isl_set_union(Expanded.take(), isl_set_from_basic_set(BSet.copy())));
+		}
+		return isl::stat::ok;
+	});
+	return Expanded;
+}
+
+
+void expandDump(const isl::set &Set) { dumpSortedInternal( expand(Set), llvm::errs(), false); }
+
+isl::map expand(const isl::map &Map) {
+	return  expand(Map.wrap()).unwrap();
+}
+
+void expandDump(const isl::map &Map) { dumpSortedInternal(expand(Map).wrap(), llvm::errs(), true); }
+
  isl::union_set expand(const isl::union_set &Arg) {
 	auto USet = Arg;
 	simplify(USet);
 	isl::union_set Expanded =
 		give(isl_union_set_empty(isl_union_set_get_space(USet.keep())));
 	USet.foreach_set([&](isl::set Set) -> isl::stat {
-		Set.foreach_basic_set([&](isl::basic_set BSet) -> isl::stat {
-			bool IsBounded = isl_basic_set_is_bounded(BSet.keep());
-			if (IsBounded) {
-				foreachPoint(Set, [&](isl::point P) {
-					Expanded = give(isl_union_set_add_set(Expanded.take(),
-						isl_set_from_point(P.copy())));
-				});
-			}
-			else {
-				Expanded = give(isl_union_set_add_set(
-					Expanded.take(), isl_set_from_basic_set(BSet.copy())));
-			}
-			return isl::stat::ok;
-		});
+		auto SetExpanded = expand(Set);
+		Expanded = Expanded.add_set(SetExpanded);
 		return isl::stat::ok;
 	});
 	return Expanded;
@@ -582,11 +720,13 @@ void foreachPoint(isl::basic_set BSet,
 	// << '\n'; });
 }
 
-void expandDump(const isl::union_set &Arg) { expand(Arg).dump(); }
+ void expandDump(const isl::union_set &Arg) { dumpSortedInternal(expand(Arg), llvm::errs(), false); }
 
 isl::union_map expand(const isl::union_map &Map) {
 	auto USet = expand(give(isl_union_map_wrap(Map.copy())));
 	return give(isl_union_set_unwrap(USet.copy()));
 }
 
-void expandDump(const isl::union_map &Arg) { expand(Arg).dump(); }
+void expandDump(const isl::union_map &Arg) { dumpSortedInternal(expand(Arg).wrap(), llvm::errs(), true); }
+
+

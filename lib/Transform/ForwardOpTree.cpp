@@ -520,6 +520,113 @@ public:
     return FD_DidForward;
   }
 
+  ForwardingDecision reloadKnownContent(ScopStmt *TargetStmt, Instruction *Inst,
+	  ScopStmt *UseStmt, Loop *UseLoop,
+	  isl::map UseToTarget, ScopStmt *DefStmt,
+	  Loop *DefLoop, isl::map DefToTarget,
+	  bool DoIt) {
+
+	  // Cannot do anything without successful known analysis.
+	  if (Known.is_null())
+		  return FD_NotApplicable;
+
+
+
+
+	  ForwardingDecision OpDecision =forwardTree(TargetStmt, LI->getPointerOperand(), DefStmt, DefLoop, DefToTarget, DoIt);
+	  switch (OpDecision) {
+	  case FD_CannotForward:
+		  assert(!DoIt);
+		  return OpDecision;
+
+	  case FD_CanForwardLeaf:
+	  case FD_CanForwardTree:
+		  assert(!DoIt);
+		  break;
+
+	  case FD_DidForward:
+		  assert(DoIt);
+		  break;
+
+	  default:
+		  llvm_unreachable("Shouldn't return this");
+	  }
+
+	  // { DomainDef[] -> ValInst[] }
+	  isl::map ExpectedVal = makeValInst(Inst, UseStmt, UseLoop);
+	  assert(isNormalized(ExpectedVal) && "LoadInsts are always normalized");
+
+	  // { DomainTarget[] -> ValInst[] }
+	  isl::map TargetExpectedVal = ExpectedVal.apply_domain(UseToTarget);
+	  isl::union_map TranslatedExpectedVal =
+		  isl::union_map(TargetExpectedVal).apply_range(Translator);
+
+	  // { DomainTarget[] -> Element[] }
+	  isl::union_map Candidates = findSameContentElements(TranslatedExpectedVal);
+
+	  isl::map SameVal = singleLocation(Candidates, getDomainFor(TargetStmt));
+	  if (!SameVal)
+		  return FD_CannotForward;
+
+	  if (!DoIt)
+		  return FD_CanForwardTree;
+
+	  if (Access) {
+		  DEBUG(dbgs() << "    forwarded known load with preexisting MemoryAccess"
+			  << Access << "\n");
+	  }
+	  else {
+		  Access = makeReadArrayAccess(TargetStmt, LI, SameVal);
+		  DEBUG(dbgs() << "    forwarded known load with new MemoryAccess" << Access
+			  << "\n");
+
+		  // { ValInst[] }
+		  isl::space ValInstSpace = ExpectedVal.get_space().range();
+
+		  // After adding a new load to the SCoP, also update the Known content
+		  // about it. The new load will have a known ValInst of
+		  // { [DomainTarget[] -> Value[]] }
+		  // but which -- because it is a copy of it -- has same value as the
+		  // { [DomainDef[] -> Value[]] }
+		  // that it replicates. Instead of  cloning the known content of
+		  // [DomainDef[] -> Value[]]
+		  // for DomainTarget[], we add a 'translator' that maps
+		  // [DomainTarget[] -> Value[]] to [DomainDef[] -> Value[]]
+		  // before comparing to the known content.
+		  // TODO: 'Translator' could also be used to map PHINodes to their incoming
+		  // ValInsts.
+		  if (ValInstSpace.is_wrapping()) {
+			  // { DefDomain[] -> Value[] }
+			  isl::map ValInsts = ExpectedVal.range().unwrap();
+
+			  // { DefDomain[] }
+			  isl::set DefDomain = ValInsts.domain();
+
+			  // { Value[] }
+			  isl::space ValSpace = ValInstSpace.unwrap().range();
+
+			  // { Value[] -> Value[] }
+			  isl::map ValToVal =
+				  isl::map::identity(ValSpace.map_from_domain_and_range(ValSpace));
+
+			  // { [TargetDomain[] -> Value[]] -> [DefDomain[] -> Value] }
+			  isl::map LocalTranslator = DefToTarget.reverse().product(ValToVal);
+
+			  Translator = Translator.add_map(LocalTranslator);
+			  DEBUG(dbgs() << "      local translator is " << LocalTranslator
+				  << "\n");
+		  }
+	  }
+	  DEBUG(dbgs() << "      expected values where " << TargetExpectedVal
+		  << "\n");
+	  DEBUG(dbgs() << "      candidate elements where " << Candidates << "\n");
+	  assert(Access);
+
+	  NumKnownLoadsForwarded++;
+	  TotalKnownLoadsForwarded++;
+	  return FD_DidForward;
+  }
+
   /// Forwards a speculatively executable instruction.
   ///
   /// @param TargetStmt  The statement the operand tree will be copied to.
@@ -720,6 +827,10 @@ public:
                            DefStmt, DefLoop, DefToTarget, DoIt);
       if (KnownResult != FD_NotApplicable)
         return KnownResult;
+
+	  ForwardingDecision ReloadResult =reloadKnownContent(TargetStmt, Inst, UseStmt, UseLoop, UseToTarget, DefStmt, DefLoop, DefToTarget, DoIt);
+	  if (ReloadResult != FD_NotApplicable)
+		  return ReloadResult;
 
       // When no method is found to forward the operand tree, we effectively
       // cannot handle it.

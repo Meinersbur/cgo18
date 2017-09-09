@@ -1000,6 +1000,7 @@ void ZoneAlgorithm::computeCommon() {
   // { [Element[] -> Zone[]] -> DomainWrite[] }
   WriteReachDefZone = computeReachingDefinition(Schedule, AllWrites, false, true);
   simplify(WriteReachDefZone);
+  expandDump(WriteReachDefZone);
 }
 
 void ZoneAlgorithm::printAccesses(llvm::raw_ostream &OS, int Indent) const {

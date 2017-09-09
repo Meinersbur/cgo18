@@ -22,57 +22,58 @@ using namespace llvm;
 
 namespace {
 
-/// Whether a dimension of a set is bounded (lower and upper) by a constant,
-/// i.e. there are two constants Min and Max, such that every value x of the
-/// chosen dimensions is Min <= x <= Max.
-bool isDimBoundedByConstant(isl::set Set, unsigned dim) {
-  auto ParamDims = Set.dim(isl::dim::param);
-  Set = Set.project_out(isl::dim::param, 0, ParamDims);
-  Set = Set.project_out(isl::dim::set, 0, dim);
-  auto SetDims = Set.dim(isl::dim::set);
-  Set = Set.project_out(isl::dim::set, 1, SetDims - 1);
-  return bool(Set.is_bounded());
-}
+	/// Whether a dimension of a set is bounded (lower and upper) by a constant,
+	/// i.e. there are two constants Min and Max, such that every value x of the
+	/// chosen dimensions is Min <= x <= Max.
+	bool isDimBoundedByConstant(isl::set Set, unsigned dim) {
+		auto ParamDims = Set.dim(isl::dim::param);
+		Set = Set.project_out(isl::dim::param, 0, ParamDims);
+		Set = Set.project_out(isl::dim::set, 0, dim);
+		auto SetDims = Set.dim(isl::dim::set);
+		Set = Set.project_out(isl::dim::set, 1, SetDims - 1);
+		return bool(Set.is_bounded());
+	}
 
-/// Whether a dimension of a set is (lower and upper) bounded by a constant or
-/// parameters, i.e. there are two expressions Min_p and Max_p of the parameters
-/// p, such that every value x of the chosen dimensions is
-/// Min_p <= x <= Max_p.
-bool isDimBoundedByParameter(isl::set Set, unsigned dim) {
-  Set = Set.project_out(isl::dim::set, 0, dim);
-  auto SetDims = Set.dim(isl::dim::set);
-  Set = Set.project_out(isl::dim::set, 1, SetDims - 1);
-  return bool(Set.is_bounded());
-}
+	/// Whether a dimension of a set is (lower and upper) bounded by a constant or
+	/// parameters, i.e. there are two expressions Min_p and Max_p of the parameters
+	/// p, such that every value x of the chosen dimensions is
+	/// Min_p <= x <= Max_p.
+	bool isDimBoundedByParameter(isl::set Set, unsigned dim) {
+		Set = Set.project_out(isl::dim::set, 0, dim);
+		auto SetDims = Set.dim(isl::dim::set);
+		Set = Set.project_out(isl::dim::set, 1, SetDims - 1);
+		return bool(Set.is_bounded());
+	}
 
-/// Whether BMap's first out-dimension is not a constant.
-bool isVariableDim(const isl::basic_map &BMap) {
-  auto FixedVal = BMap.plain_get_val_if_fixed(isl::dim::out, 0);
-  return !FixedVal || FixedVal.is_nan();
-}
+	/// Whether BMap's first out-dimension is not a constant.
+	bool isVariableDim(const isl::basic_map &BMap) {
+		auto FixedVal = BMap.plain_get_val_if_fixed(isl::dim::out, 0);
+		return !FixedVal || FixedVal.is_nan();
+	}
 
-/// Whether Map's first out dimension is no constant nor piecewise constant.
-bool isVariableDim(const isl::map &Map) {
-  return Map.foreach_basic_map([](isl::basic_map BMap) -> isl::stat {
-    if (isVariableDim(BMap))
-      return isl::stat::error;
-    return isl::stat::ok;
-  }) == isl::stat::ok;
-}
+	/// Whether Map's first out dimension is no constant nor piecewise constant.
+	bool isVariableDim(const isl::map &Map) {
+		return Map.foreach_basic_map([](isl::basic_map BMap) -> isl::stat {
+			if (isVariableDim(BMap))
+				return isl::stat::error;
+			return isl::stat::ok;
+		}) == isl::stat::ok;
+	}
 
-/// Whether UMap's first out dimension is no (piecewise) constant.
-bool isVariableDim(const isl::union_map &UMap) {
-  return UMap.foreach_map([](isl::map Map) -> isl::stat {
-    if (isVariableDim(Map))
-      return isl::stat::error;
-    return isl::stat::ok;
-  }) == isl::stat::ok;
+	/// Whether UMap's first out dimension is no (piecewise) constant.
+	bool isVariableDim(const isl::union_map &UMap) {
+		return UMap.foreach_map([](isl::map Map) -> isl::stat {
+			if (isVariableDim(Map))
+				return isl::stat::error;
+			return isl::stat::ok;
+		}) == isl::stat::ok;
+	}
 }
 
 /// If @p PwAff maps to a constant, return said constant. If @p Max/@p Min, it
 /// can also be a piecewise constant and it would return the minimum/maximum
 /// value. Otherwise, return NaN.
-isl::val getConstant(isl::pw_aff PwAff, bool Max, bool Min) {
+isl::val polly:: getConstant(isl::pw_aff PwAff, bool Max, bool Min) {
   assert(!Max || !Min);
   isl::val Result;
   PwAff.foreach_piece([=, &Result](isl::set Set, isl::aff Aff) -> isl::stat {
@@ -112,6 +113,7 @@ isl::val getConstant(isl::pw_aff PwAff, bool Max, bool Min) {
   return Result;
 }
 
+namespace {
 /// Compute @p UPwAff - @p Val.
 isl::union_pw_aff subtract(isl::union_pw_aff UPwAff, isl::val Val) {
   if (Val.is_zero())
