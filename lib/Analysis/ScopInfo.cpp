@@ -1856,8 +1856,7 @@ MemoryAccess *ScopStmt::ensureValueRead(Value *V) {
 
   ScopArrayInfo *SAI =
       Parent.getOrCreateScopArrayInfo(V, V->getType(), {}, MemoryKind::Value);
-  Access = new MemoryAccess(this, nullptr, MemoryAccess::READ, V, V->getType(),
-                            true, {}, {}, V, MemoryKind::Value);
+  Access = new MemoryAccess(this, nullptr, MemoryAccess::READ, V, V->getType(), true, {}, {}, V, MemoryKind::Value);
   Parent.addAccessFunction(Access);
   Access->buildAccessRelation(SAI);
   addAccess(Access);

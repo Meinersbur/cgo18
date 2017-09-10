@@ -301,7 +301,7 @@ public:
   /// reads from that array element in that period.
   ///
   /// @return { [Element[] -> Zone[]] -> ValInst[] }
-  isl::union_map computeKnownFromLoad(isl::union_map Loadable) const;
+  isl::union_map computeKnownFromLoad() const;
 
   /// Compute which value an array element stores at every instant.
   ///
@@ -309,7 +309,7 @@ public:
   /// @param FromRead  Use loads as source of information.
   ///
   /// @return { [Element[] -> Zone[]] -> ValInst[] }
-  isl::union_map computeKnown(bool FromWrite, bool FromRead, bool FromInit=false, bool FromReachDef) const;
+  isl::union_map computeKnown(bool FromWrite, bool FromRead, bool FromInit=false, bool FromReachDef=false) const;
 
 
 };

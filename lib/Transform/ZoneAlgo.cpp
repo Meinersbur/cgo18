@@ -902,7 +902,7 @@ void ZoneAlgorithm::computeCommon() {
 				  continue;
 
 			  
-			  auto SAI = MA->getLatestScopArrayInfo();
+			  auto SAI = MA->getOriginalScopArrayInfo();
 
 			  // { PHIDomain[] -> PHIValInst[] }
 			  auto PHIValInst = makeValInst(PHI, &Stmt, Stmt.getSurroundingLoop());
@@ -1129,14 +1129,11 @@ isl::union_map ZoneAlgorithm::computeKnown(bool FromWrite,
   }
 
   if (FromReachDef) {
-	  // { [Element[] -> Zone[]] -> DomainWrite[] }
-	  WriteReachDefZone;
-
 	  // { Element[] -> DomainWrite[] }
 	  auto WriteDomain = WriteReachDefZone.domain_factor_domain();
 
 	  // { DomainWrite[] -> [DomainWrite[] -> Element[]] }
-	  auto X = WriteDomain.reverse.domain_map().reverse();
+	  auto X = WriteDomain.reverse().domain_map().reverse();
 	  isl::union_map Y = makeEmptyUnionMap();
 	  X.foreach_map([&Y](isl::map Map)->isl::stat {
 		  auto NewMap = Map.set_tuple_name(isl::dim::out, "Element");

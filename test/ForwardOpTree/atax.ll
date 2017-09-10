@@ -1,4 +1,4 @@
-; RUN: opt %loadPolly -polly-optree -polly-delicm -polly-simplify -analyze < %s | FileCheck %s -match-full-lines
+; RUN: opt %loadPolly -polly-optree -analyze < %s | FileCheck %s -match-full-lines
 
 target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
 
@@ -118,17 +118,23 @@ attributes #7 = { cold }
 !7 = !{!"double", !4, i64 0}
 
 
-; CHECK-LABEL: Printing analysis 'Polly - Simplify' for region: 'for.body3 => for.end42' in function 'kernel_atax':
+; CHECK: Statistics {
+; CHECK:     Operand trees forwarded: 2
+; CHECK:     Statements with forwarded operand trees: 2
+; CHECK: }
 
-; CHECK:      After accesses {
+; CHECK-NEXT: After statements {
 ; CHECK-NEXT:     Stmt_for_body3
+; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 0]
+; CHECK-NEXT:                 { Stmt_for_body3[i0] -> MemRef_tmp[i0] };
 ; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_body3[i0] -> MemRef1__phi[] };
-; CHECK-NEXT:            new: { Stmt_for_body3[i0] -> MemRef_tmp[i0] };
+; CHECK-NEXT:             Instructions {
+; CHECK-NEXT:                   store double 0.000000e+00, double* %arrayidx5, align 8, !tbaa !2
+; CHECK-NEXT:             }
 ; CHECK-NEXT:     Stmt_for_body8
 ; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_body8[i0, i1] -> MemRef1__phi[] };
-; CHECK-NEXT:            new: { Stmt_for_body8[i0, i1] -> MemRef_tmp[i0] };
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_body8[i0, i1] -> MemRef1__phi[] };
 ; CHECK-NEXT:            new: { Stmt_for_body8[i0, i1] -> MemRef_tmp[i0] };
@@ -136,28 +142,55 @@ attributes #7 = { cold }
 ; CHECK-NEXT:                 { Stmt_for_body8[i0, i1] -> MemRef_A[i0, i1] };
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 0]
 ; CHECK-NEXT:                 { Stmt_for_body8[i0, i1] -> MemRef_x[i1] };
+; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 0]
+; CHECK-NEXT:                 { Stmt_for_body8[i0, i1] -> MemRef_tmp[i0] };
 ; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_body8[i0, i1] -> MemRef_add[] };
+; CHECK-NEXT:             Instructions {
+; CHECK-NEXT:                   %0 = phi double [ 0.000000e+00, %for.body3 ], [ %add, %for.body8 ]
+; CHECK-NEXT:                   %1 = load double, double* %arrayidx14, align 8, !tbaa !2
+; CHECK-NEXT:                   %2 = load double, double* %arrayidx16, align 8, !tbaa !2
+; CHECK-NEXT:                   %mul = fmul double %1, %2
+; CHECK-NEXT:                   %add = fadd double %0, %mul
+; CHECK-NEXT:                   store double %add, double* %arrayidx5, align 8, !tbaa !2
+; CHECK-NEXT:                   %exitcond = icmp eq i64 %indvars.iv.next, 2
+; CHECK-NEXT:             }
 ; CHECK-NEXT:     Stmt_for_end21
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_end21[i0] -> MemRef_add[] };
 ; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_end21[i0] -> MemRef5__phi[] };
+; CHECK-NEXT:             Instructions {
+; CHECK-NEXT:             }
 ; CHECK-NEXT:     Stmt_for_body24
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_body24[i0, i1] -> MemRef5__phi[] };
+; CHECK-NEXT:            new: { Stmt_for_body24[i0, i1] -> MemRef_tmp[i0] };
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 0]
 ; CHECK-NEXT:                 { Stmt_for_body24[i0, i1] -> MemRef_y[i1] };
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 0]
 ; CHECK-NEXT:                 { Stmt_for_body24[i0, i1] -> MemRef_A[i0, i1] };
 ; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 0]
 ; CHECK-NEXT:                 { Stmt_for_body24[i0, i1] -> MemRef_y[i1] };
+; CHECK-NEXT:             Instructions {
+; CHECK-NEXT:                   %3 = phi double [ %add, %for.end21 ], [ %.pre, %for.body24.for.body24_crit_edge ]
+; CHECK-NEXT:                   %4 = load double, double* %arrayidx26, align 8, !tbaa !2
+; CHECK-NEXT:                   %5 = load double, double* %arrayidx30, align 8, !tbaa !2
+; CHECK-NEXT:                   %mul33 = fmul double %5, %3
+; CHECK-NEXT:                   %add34 = fadd double %4, %mul33
+; CHECK-NEXT:                   store double %add34, double* %arrayidx26, align 8, !tbaa !2
+; CHECK-NEXT:                   %exitcond7 = icmp eq i64 %indvars.iv.next6, 2
+; CHECK-NEXT:             }
 ; CHECK-NEXT:     Stmt_for_body24_for_body24_crit_edge
 ; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_body24_for_body24_crit_edge[i0, i1] -> MemRef5__phi[] };
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 0]
 ; CHECK-NEXT:                 { Stmt_for_body24_for_body24_crit_edge[i0, i1] -> MemRef_tmp[i0] };
+; CHECK-NEXT:             Instructions {
+; CHECK-NEXT:                   %.pre = load double, double* %arrayidx5, align 8, !tbaa !2
+; CHECK-NEXT:             }
 ; CHECK-NEXT: }
+
 
 ;                                                 tmp[0]
 ; [ 0] Stmt_for_body3[0]
