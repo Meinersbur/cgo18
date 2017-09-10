@@ -120,12 +120,12 @@ attributes #6 = { cold }
 ; CHECK-NEXT:                 { Stmt_for_body3[i0, i1] -> MemRef1__phi[] };
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_body3[i0, i1] -> MemRef1__phi[] };
-; CHECK-NEXT:            new: { Stmt_for_body3[i0, i1] -> MemRef_A[1 + i1] : i1 >= i0; Stmt_for_body3[1, 0] -> MemRef_A[1] };
+; CHECK-NEXT:            new: { Stmt_for_body3[i0, i1] -> MemRef_A[1 + i1] };
 ; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_body3[i0, i1] -> MemRef2__phi[] };
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 1]
 ; CHECK-NEXT:                 { Stmt_for_body3[i0, i1] -> MemRef2__phi[] };
-; CHECK-NEXT:            new: { Stmt_for_body3[i0, i1] -> MemRef_A[i1] : i1 <= 1 - i0; Stmt_for_body3[1, 1] -> MemRef_A[1] };
+; CHECK-NEXT:            new: { Stmt_for_body3[i0, i1] -> MemRef_A[i1] };
 ; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 0]
 ; CHECK-NEXT:                 { Stmt_for_body3[i0, i1] -> MemRef_A[2 + i1] };
 ; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 0]

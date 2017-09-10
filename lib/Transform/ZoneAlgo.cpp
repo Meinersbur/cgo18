@@ -968,6 +968,7 @@ void ZoneAlgorithm::computeCommon() {
 
   ComputedPHIs = AllPHIs;
   NormalizedPHI = AllPHIMaps;
+  simplify(NormalizedPHI);
 
   assert(!NormalizedPHI || isNormalized(NormalizedPHI));
 
@@ -1049,6 +1050,7 @@ isl::union_map ZoneAlgorithm::computeKnownFromLoad() const {
   // before the first write or that are not written at all.
   // { Element[] -> Scatter[] }
   isl::union_set NonReachDef = EltZoneUniverse.wrap().subtract(WriteReachDefZone.domain());
+  simplify(NonReachDef);
 
   // { [Element[] -> Zone[]] -> ReachDefId[] }
   isl::union_map DefZone = WriteReachDefZone.unite(isl::union_map::from_domain(NonReachDef));
@@ -1146,7 +1148,7 @@ isl::union_map ZoneAlgorithm::computeKnown(bool FromWrite,
 
 	  Result = Result.unite(ReachDefValInst);
   }
-
+   
 
   if (FromWrite)
     Result = Result.unite(computeKnownFromMustWrites());
@@ -1154,6 +1156,6 @@ isl::union_map ZoneAlgorithm::computeKnown(bool FromWrite,
   if (FromRead)
     Result = Result.unite(computeKnownFromLoad());
 
-  simplify(Result);
+//  simplify(Result);
   return Result;
 }

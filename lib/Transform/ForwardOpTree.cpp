@@ -51,7 +51,7 @@ static cl::opt<bool>
                  cl::desc("Analyze array contents for load forwarding"),
                  cl::cat(PollyCategory), cl::init(true), cl::Hidden);
 
-static cl::opt<unsigned long>
+static cl::opt<unsigned long long>
     MaxOps("polly-optree-max-ops",
            cl::desc("Maximum number of ISL operations to invest for known "
                     "analysis; 0=no limit"),
@@ -266,7 +266,7 @@ public:
 
       computeCommon();
       Known = computeKnown(true, true, false, false);
-      simplify(Known);
+   
 
       // Preexisting ValInsts use the known content analysis of themselves.
       Translator = makeIdentityMap(Known.range(), false);
@@ -276,7 +276,7 @@ public:
       assert(isl_ctx_last_error(IslCtx.get()) == isl_error_quota);
       KnownOutOfQuota++;
       Known = nullptr;
-      Translator = nullptr;
+	  Translator = nullptr; NormalizedPHI = nullptr;
       DEBUG(dbgs() << "Known analysis exceeded max_operations\n");
       return false;
     }
@@ -343,6 +343,7 @@ public:
     S->addAccessFunction(Access);
     Stmt->addAccess(Access, true);
 
+	simplify(AccessRelation);
     Access->setNewAccessRelation(AccessRelation);
 
     return Access;
@@ -352,6 +353,7 @@ public:
 	  auto RA = Stmt->ensureValueRead( Val);
 	  assert(RA->isValueKind());
 
+	  simplify(AccessRelation);
 	  RA->setNewAccessRelation(AccessRelation);
 	  return RA;
   }
@@ -528,6 +530,11 @@ public:
   }
 
   ForwardingDecision reloadKnownContent(ScopStmt *TargetStmt, Instruction *Inst, ScopStmt *UseStmt, Loop *UseLoop,  isl::map UseToTarget, ScopStmt *DefStmt, Loop *DefLoop, isl::map DefToTarget, bool DoIt, SmallPtrSetImpl<MemoryAccess*> &RequiredAccesses) {
+	  // Cannot do anything without successful known analysis.
+	  if (Known.is_null()) {
+		  llvm_unreachable("Haaa!");
+		  return FD_NotApplicable;
+	  }
 
 	 auto Access = TargetStmt->lookupInputAccessOf(Inst);
 	 if (Access && Access->isLatestArrayKind()) {
@@ -536,54 +543,7 @@ public:
 		 return FD_CanForwardLeaf;
 	 }
 		
-	 //if (InputAccess)
-	//	 return FD_CanForwardLeaf;
 
-
-#if 0
-	  // Cannot do anything without successful known analysis.
-	  if (Known.is_null())
-		  return FD_NotApplicable;
-
-	  // { UseDomain[] -> ValInst[] }
-	  auto ValInst =  makeNormalizedValInst(Inst, UseStmt, UseLoop);
-
-	  auto LoadNormedValInst = makeEmptyUnionMap();
-	  ValInst.foreach_map([&LoadNormedValInst](isl::map &Map) -> isl::stat {
-		  auto RangeSpace = Map.get_space().range();
-
-		  if (!RangeSpace.is_wrapping()) {
-			  LoadNormedValInst = LoadNormedValInst.add_map(Map);
-			  return isl::stat::ok;
-		  }
-
-		}
-
-
-		  return isl::stat::ok;
-	  });
-#endif
-
-#if 0
-	  ForwardingDecision OpDecision = forwardTree(TargetStmt, LI->getPointerOperand(), DefStmt, DefLoop, DefToTarget, DoIt);
-	  switch (OpDecision) {
-	  case FD_CannotForward:
-		  assert(!DoIt);
-		  return OpDecision;
-
-	  case FD_CanForwardLeaf:
-	  case FD_CanForwardTree:
-		  assert(!DoIt);
-		  break;
-
-	  case FD_DidForward:
-		  assert(DoIt);
-		  break;
-
-	  default:
-		  llvm_unreachable("Shouldn't return this");
-	  }
-#endif
 
 	  // { DomainDef[] -> ValInst[] }
 	  isl::union_map ExpectedVal = makeNormalizedValInst(Inst, UseStmt, UseLoop);
@@ -610,61 +570,6 @@ public:
 	  Access->setNewAccessRelation(SameVal);
 	  RequiredAccesses.insert(Access);
 
-#if 0
-	  if (Access) {
-		  DEBUG(dbgs() << "    forwarded known load with preexisting MemoryAccess"
-			  << Access << "\n");
-	  }
-	  else {
-		  Access = makeReadArrayAccess(TargetStmt, LI, SameVal);
-		  DEBUG(dbgs() << "    forwarded known load with new MemoryAccess" << Access
-			  << "\n");
-
-		  // { ValInst[] }
-		  isl::space ValInstSpace = ExpectedVal.get_space().range();
-
-		  // After adding a new load to the SCoP, also update the Known content
-		  // about it. The new load will have a known ValInst of
-		  // { [DomainTarget[] -> Value[]] }
-		  // but which -- because it is a copy of it -- has same value as the
-		  // { [DomainDef[] -> Value[]] }
-		  // that it replicates. Instead of  cloning the known content of
-		  // [DomainDef[] -> Value[]]
-		  // for DomainTarget[], we add a 'translator' that maps
-		  // [DomainTarget[] -> Value[]] to [DomainDef[] -> Value[]]
-		  // before comparing to the known content.
-		  // TODO: 'Translator' could also be used to map PHINodes to their incoming
-		  // ValInsts.
-		  if (ValInstSpace.is_wrapping()) {
-			  // { DefDomain[] -> Value[] }
-			  isl::map ValInsts = ExpectedVal.range().unwrap();
-
-			  // { DefDomain[] }
-			  isl::set DefDomain = ValInsts.domain();
-
-			  // { Value[] }
-			  isl::space ValSpace = ValInstSpace.unwrap().range();
-
-			  // { Value[] -> Value[] }
-			  isl::map ValToVal =
-				  isl::map::identity(ValSpace.map_from_domain_and_range(ValSpace));
-
-			  // { [TargetDomain[] -> Value[]] -> [DefDomain[] -> Value] }
-			  isl::map LocalTranslator = DefToTarget.reverse().product(ValToVal);
-
-			  Translator = Translator.add_map(LocalTranslator);
-			  DEBUG(dbgs() << "      local translator is " << LocalTranslator
-				  << "\n");
-		  }
-	  }
-	  DEBUG(dbgs() << "      expected values where " << TargetExpectedVal
-		  << "\n");
-	  DEBUG(dbgs() << "      candidate elements where " << Candidates << "\n");
-	  assert(Access);
-
-	  NumKnownLoadsForwarded++;
-	  TotalKnownLoadsForwarded++;
-#endif
 	  return FD_DidForward;
   }
 
