@@ -532,7 +532,7 @@ public:
   ForwardingDecision reloadKnownContent(ScopStmt *TargetStmt, Instruction *Inst, ScopStmt *UseStmt, Loop *UseLoop,  isl::map UseToTarget, ScopStmt *DefStmt, Loop *DefLoop, isl::map DefToTarget, bool DoIt, SmallPtrSetImpl<MemoryAccess*> &RequiredAccesses) {
 	  // Cannot do anything without successful known analysis.
 	  if (Known.is_null()) {
-		  llvm_unreachable("Haaa!");
+		  // llvm_unreachable("Haaa!");
 		  return FD_NotApplicable;
 	  }
 
