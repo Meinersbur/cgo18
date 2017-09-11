@@ -630,6 +630,8 @@ static int recursiveCompare(const isl::basic_set &A, const isl::basic_set& B) {
 	return flatCompare(A, B);
 }
 
+static bool ordercomparer(const isl::basic_set &A, const isl::basic_set &B) { return  recursiveCompare(A, B) < 0; }
+
 void dumpSortedInternal(isl::union_set USet, llvm::raw_ostream &OS, bool IsMap) {
 	std::vector<isl::basic_set> BSets;
 	USet.foreach_set([&BSets](isl::set Set) -> isl::stat {
@@ -640,7 +642,7 @@ void dumpSortedInternal(isl::union_set USet, llvm::raw_ostream &OS, bool IsMap) 
 		return isl::stat::ok;
 	});
 
-	std::sort(BSets.begin(), BSets.end(), [](isl::basic_set &A, isl::basic_set &B) -> bool {return  recursiveCompare(A, B) < 0; });
+	std::sort(BSets.begin(), BSets.end(), ordercomparer);
 
 	OS << "{\n";
 	for (auto &BSet : BSets) {
