@@ -64,6 +64,7 @@ STATISTIC(KnownOutOfQuota,
 STATISTIC(TotalInstructionsCopied, "Number of copied instructions");
 STATISTIC(TotalKnownLoadsForwarded,
           "Number of forwarded loads because their value was known");
+STATISTIC(TotalReloads,	"Number of reloaded values");
 STATISTIC(TotalReadOnlyCopied, "Number of copied read-only accesses");
 STATISTIC(TotalForwardedTrees, "Number of forwarded operand trees");
 STATISTIC(TotalModifiedStmts,
@@ -136,6 +137,8 @@ private:
 
   /// Number of loads forwarded because their value was known.
   int NumKnownLoadsForwarded = 0;
+
+  int NumReloads = 0;
 
   /// How many read-only accesses have been copied.
   int NumReadOnlyCopied = 0;
@@ -538,13 +541,11 @@ public:
 
 	 auto Access = TargetStmt->lookupInputAccessOf(Inst);
 	 if (Access && Access->isLatestArrayKind()) {
-		 if (DoIt)
+		 if (DoIt) 
 			 return FD_DidForward;
 		 return FD_CanForwardLeaf;
 	 }
 		
-
-
 	  // { DomainDef[] -> ValInst[] }
 	  isl::union_map ExpectedVal = makeNormalizedValInst(Inst, UseStmt, UseLoop);
 
@@ -570,6 +571,8 @@ public:
 	  Access->setNewAccessRelation(SameVal);
 	  RequiredAccesses.insert(Access);
 
+	  TotalReloads++;
+	  NumReloads++;
 	  return FD_DidForward;
   }
 
