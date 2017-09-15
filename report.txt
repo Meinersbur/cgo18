@@ -1,0 +1,7 @@
+Start: 2017-09-15 11:54:20.588288
+Duration: 4:54:33.038861
+Exit-code: 0
+
+OS: Linux
+Platform: Linux-2.6.32-573.42.2.el6.x86_64-x86_64-with-redhat-6.7-Santiago
+Processor: x86_64
