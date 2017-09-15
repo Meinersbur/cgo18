@@ -1615,7 +1615,7 @@ bool IslScheduleOptimizer::runOnScop(Scop &S) {
   auto *TTI = &getAnalysis<TargetTransformInfoWrapperPass>().getTTI(F);
   const OptimizerAdditionalInfoTy OAI = {TTI, const_cast<Dependences *>(&D)};
   auto NewSchedule = ScheduleTreeOptimizer::optimizeSchedule(Schedule, &OAI);
-  walkScheduleTreeForStatistics(NewSchedule, 1);
+  walkScheduleTreeForStatistics(NewSchedule, 2);
 
   if (!ScheduleTreeOptimizer::isProfitableSchedule(S, NewSchedule))
     return false;
