@@ -1431,8 +1431,10 @@ static void walkScheduleTreeForStatistics(isl::schedule Schedule, int Version) {
   if (!Root)
     return;
 
-  Root.foreach_ancestor_top_down([Version](
-                                     isl::schedule_node Node) -> isl::stat {
+  isl_schedule_node_foreach_descendant_top_down(Root.get(), [](__isl_keep isl_schedule_node* nodeptr, void *user) -> isl_bool {
+	  auto Node = isl::manage(isl_schedule_node_copy( nodeptr));
+	  auto Version = *((int*)user);
+
     switch (isl_schedule_node_get_type(Node.get())) {
     case isl_schedule_node_band: {
       NumBands[Version]++;
@@ -1460,8 +1462,8 @@ static void walkScheduleTreeForStatistics(isl::schedule Schedule, int Version) {
       break;
     }
 
-    return isl::stat::ok;
-  });
+    return isl_bool_true;
+  }, &Version);
 }
 
 bool IslScheduleOptimizer::runOnScop(Scop &S) {
