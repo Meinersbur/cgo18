@@ -1,0 +1,1655 @@
+[stdout] Running on: leone11
+[stdout] job config: --suite-exec-threads=1 --revision=r312875 --llvm-revision=f9d4e1794de9bde62ecbc20baf378adc4e768f82 --clang-revision=99cd18fcc84507e9b35cc6cdfaa90d3cf50ab58c --libcxxabi-revision=caa78daf9285dada17e3e6b8aebcf7d128427f83 --libcxx-revision=11762b4acd1fc19fb8f6d0015b339ad6b9c8f2f5 --suite-revision=82ca28db385b63780a41c5f2bc5d10425569db98 --llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON --test-only=Performance/Polybench-421 --test-only=Polybench/Polybench-boost --suite-build-flags=-ffast-math --suite-build-flags=-march=native --suite-build-flags=-DEXTRALARGE_DATASET --suite-build-flags=-fno-exceptions --suite-build-mllvm=-polly-only-func=kernel_ --suite-build-mllvm=-polly-optree-max-ops=0 --suite-build-mllvm=-inline-threshold=4096 --suite-build-mllvm=-polly-position=early --suite-build-mllvm=-polly-enable-simplify=1 --suite-build-mllvm=-polly-enable-optree=1 --suite-build-mllvm=-polly-enable-delicm=1 --polly --stats --multisample=5
+[stdout] Parsed config: ['--suite-exec-threads=1', '--revision=r312875', '--llvm-revision=f9d4e1794de9bde62ecbc20baf378adc4e768f82', '--clang-revision=99cd18fcc84507e9b35cc6cdfaa90d3cf50ab58c', '--libcxxabi-revision=caa78daf9285dada17e3e6b8aebcf7d128427f83', '--libcxx-revision=11762b4acd1fc19fb8f6d0015b339ad6b9c8f2f5', '--suite-revision=82ca28db385b63780a41c5f2bc5d10425569db98', '--llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON', '--test-only=Performance/Polybench-421', '--test-only=Polybench/Polybench-boost', '--suite-build-flags=-ffast-math', '--suite-build-flags=-march=native', '--suite-build-flags=-DEXTRALARGE_DATASET', '--suite-build-flags=-fno-exceptions', '--suite-build-mllvm=-polly-only-func=kernel_', '--suite-build-mllvm=-polly-optree-max-ops=0', '--suite-build-mllvm=-inline-threshold=4096', '--suite-build-mllvm=-polly-position=early', '--suite-build-mllvm=-polly-enable-simplify=1', '--suite-build-mllvm=-polly-enable-optree=1', '--suite-build-mllvm=-polly-enable-delicm=1', '--polly', '--stats', '--multisample=5']
+[stdout] default config: 
+[stdout] override config: --llvm-build-cmakedefs=LLVM_TARGETS_TO_BUILD=X86 --libcxx --suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99 --llvm-build-cmakedefs=CMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc --suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF
+[stdout] effective config: ['--suite-exec-threads=1', '--revision=r312875', '--llvm-revision=f9d4e1794de9bde62ecbc20baf378adc4e768f82', '--clang-revision=99cd18fcc84507e9b35cc6cdfaa90d3cf50ab58c', '--libcxxabi-revision=caa78daf9285dada17e3e6b8aebcf7d128427f83', '--libcxx-revision=11762b4acd1fc19fb8f6d0015b339ad6b9c8f2f5', '--suite-revision=82ca28db385b63780a41c5f2bc5d10425569db98', '--llvm-build-cmakedefs=LLVM_TARGETS_TO_BUILD=X86', '--llvm-build-cmakedefs=CMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc', '--llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON', '--test-only=Performance/Polybench-421', '--test-only=Polybench/Polybench-boost', '--suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99', '--suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF', '--suite-build-flags=-ffast-math', '--suite-build-flags=-march=native', '--suite-build-flags=-DEXTRALARGE_DATASET', '--suite-build-flags=-fno-exceptions', '--suite-build-mllvm=-polly-only-func=kernel_', '--suite-build-mllvm=-polly-optree-max-ops=0', '--suite-build-mllvm=-inline-threshold=4096', '--suite-build-mllvm=-polly-position=early', '--suite-build-mllvm=-polly-enable-simplify=1', '--suite-build-mllvm=-polly-enable-optree=1', '--suite-build-mllvm=-polly-enable-delicm=1', '--polly', '--stats', '--libcxx', '--suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99', '--suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF', '--multisample=5']
+[stderr] $ perf stat ls
+[stdout] cmake
+[stdout] CMakeLists.txt
+[stdout] CREDITS.txt
+[stdout] docs
+[stdout] gittool.py
+[stdout] include
+[stdout] lib
+[stdout] LICENSE.txt
+[stdout] output.txt
+[stdout] __pycache__
+[stdout] README
+[stdout] run-test-suite
+[stdout] run-test-suite.py
+[stdout] stderr.txt
+[stdout] stdout.txt
+[stdout] test
+[stdout] tools
+[stdout] unittests
+[stdout] utils
+[stdout] www
+[stderr] 
+[stderr]  Performance counter stats for 'ls':
+[stderr] 
+[stderr]           1.960170      task-clock (msec)         #    0.819 CPUs utilized          
+[stderr]                  1      context-switches          #    0.510 K/sec                  
+[stderr]                  0      cpu-migrations            #    0.000 K/sec                  
+[stderr]                246      page-faults               #    0.125 M/sec                  
+[stderr]          6,761,009      cycles                    #    3.449 GHz                    
+[stderr]    <not supported>      stalled-cycles-frontend  
+[stderr]    <not supported>      stalled-cycles-backend   
+[stderr]          6,727,085      instructions              #    0.99  insns per cycle        
+[stderr]          1,273,095      branches                  #  649.482 M/sec                  
+[stderr]             15,452      branch-misses             #    1.21% of all branches        
+[stderr] 
+[stderr]        0.002393452 seconds time elapsed
+[stderr] 
+[stdout] Has_perf result is True (use_perf=None)
+[stdout] 
+[stdout] /proc/cpuinfo:
+[stdout] processor	: 0
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 0
+[stdout] cpu cores	: 8
+[stdout] apicid		: 0
+[stdout] initial apicid	: 0
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.23
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 1
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 2
+[stdout] cpu cores	: 8
+[stdout] apicid		: 4
+[stdout] initial apicid	: 4
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.23
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 2
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 4
+[stdout] cpu cores	: 8
+[stdout] apicid		: 8
+[stdout] initial apicid	: 8
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.23
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 3
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 6
+[stdout] cpu cores	: 8
+[stdout] apicid		: 12
+[stdout] initial apicid	: 12
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.23
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 4
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 0
+[stdout] cpu cores	: 8
+[stdout] apicid		: 16
+[stdout] initial apicid	: 16
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.87
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 5
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 2
+[stdout] cpu cores	: 8
+[stdout] apicid		: 20
+[stdout] initial apicid	: 20
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.87
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 6
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 4
+[stdout] cpu cores	: 8
+[stdout] apicid		: 24
+[stdout] initial apicid	: 24
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.87
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 7
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 6
+[stdout] cpu cores	: 8
+[stdout] apicid		: 28
+[stdout] initial apicid	: 28
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.87
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 8
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 1
+[stdout] cpu cores	: 8
+[stdout] apicid		: 2
+[stdout] initial apicid	: 2
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.23
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 9
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 3
+[stdout] cpu cores	: 8
+[stdout] apicid		: 6
+[stdout] initial apicid	: 6
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.23
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 10
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 5
+[stdout] cpu cores	: 8
+[stdout] apicid		: 10
+[stdout] initial apicid	: 10
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.23
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 11
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 7
+[stdout] cpu cores	: 8
+[stdout] apicid		: 14
+[stdout] initial apicid	: 14
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.23
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 12
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 1
+[stdout] cpu cores	: 8
+[stdout] apicid		: 18
+[stdout] initial apicid	: 18
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.87
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 13
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 3
+[stdout] cpu cores	: 8
+[stdout] apicid		: 22
+[stdout] initial apicid	: 22
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.87
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 14
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 5
+[stdout] cpu cores	: 8
+[stdout] apicid		: 26
+[stdout] initial apicid	: 26
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.87
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 15
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.117
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 7
+[stdout] cpu cores	: 8
+[stdout] apicid		: 30
+[stdout] initial apicid	: 30
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.87
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] 
+[stdout] 
+[stdout] /proc/meminfo:
+[stdout] MemTotal:       794082400 kB
+[stdout] MemFree:        777898352 kB
+[stdout] Buffers:               0 kB
+[stdout] Cached:          3819836 kB
+[stdout] SwapCached:            0 kB
+[stdout] Active:          1189972 kB
+[stdout] Inactive:        2860680 kB
+[stdout] Active(anon):    1154364 kB
+[stdout] Inactive(anon):  2720684 kB
+[stdout] Active(file):      35608 kB
+[stdout] Inactive(file):   139996 kB
+[stdout] Unevictable:     2097152 kB
+[stdout] Mlocked:           36800 kB
+[stdout] SwapTotal:             0 kB
+[stdout] SwapFree:              0 kB
+[stdout] Dirty:                 0 kB
+[stdout] Writeback:             0 kB
+[stdout] AnonPages:       2328012 kB
+[stdout] Mapped:           423992 kB
+[stdout] Shmem:           3644696 kB
+[stdout] Slab:            2670144 kB
+[stdout] SReclaimable:     149360 kB
+[stdout] SUnreclaim:      2520784 kB
+[stdout] KernelStack:       14080 kB
+[stdout] PageTables:        13056 kB
+[stdout] NFS_Unstable:          0 kB
+[stdout] Bounce:                0 kB
+[stdout] WritebackTmp:          0 kB
+[stdout] CommitLimit:    794082400 kB
+[stdout] Committed_AS:    6496712 kB
+[stdout] VmallocTotal:   34359738367 kB
+[stdout] VmallocUsed:     3364824 kB
+[stdout] VmallocChunk:   33946744684 kB
+[stdout] HardwareCorrupted:     0 kB
+[stdout] AnonHugePages:   2113536 kB
+[stdout] HugePages_Total:       0
+[stdout] HugePages_Free:        0
+[stdout] HugePages_Rsvd:        0
+[stdout] HugePages_Surp:        0
+[stdout] Hugepagesize:       2048 kB
+[stdout] DirectMap4k:       12288 kB
+[stdout] DirectMap2M:     2011136 kB
+[stdout] DirectMap1G:    803209216 kB
+[stdout] 
+[stdout] 
+[stdout] /proc/loadavg:
+[stdout] 0.97 1.00 1.00 2/865 11862
+[stdout] 
+[stdout] 
+[stdout] /proc/uptime:
+[stdout] 4019408.00 61332337.07
+[stdout] 
+[stdout] 
+[stdout] /proc/version:
+[stdout] Linux version 2.6.32-573.42.2.el6.x86_64 (mockbuild@x86-031.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-16) (GCC) ) #1 SMP Tue Jun 6 07:38:33 EDT 2017
+[stdout] 
+[stdout] LLVM source      : /users/krusemi/scratch/execslave/persistent/llvm
+[stdout] LLVM build       : /users/krusemi/scratch/execslave/persistent/llvm-build
+[stdout] test-suite source: /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite
+[stdout] test-suite build : /scratch/shared/leone/krusemi/execslave/work/run-test-suite
+[stdout] ### Checking out llvm
+[stdout] ## Merging /users/krusemi/scratch/execslave/persistent/llvm
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && git remote add official http://llvm.org/git/llvm.git)
+[stderr] fatal: remote official already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && git fetch official --prune)
+[stderr] From http://llvm.org/git/llvm
+[stderr]    fe612a2..d800c2e  master     -> official/master
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && git remote add github-mirror https://github.com/llvm-mirror/llvm.git)
+[stderr] fatal: remote github-mirror already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && git fetch github-mirror --prune)
+[stderr] From https://github.com/llvm-mirror/llvm
+[stderr]    fe612a2..d800c2e  master     -> github-mirror/master
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && git remote add meinersbur git@meinersbur.de:llvm.git)
+[stderr] fatal: remote meinersbur already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && git fetch meinersbur --prune)
+[stdout] ### Checking out polly
+[stdout] ## Chosen not to checkout subproject /users/krusemi/scratch/execslave/persistent/llvm/tools/polly
+[stdout] ### Checking out clang
+[stdout] ## Merging /users/krusemi/scratch/execslave/persistent/llvm/tools/clang
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git remote add official http://llvm.org/git/clang.git)
+[stderr] fatal: remote official already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git fetch official --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git remote add github-mirror https://github.com/llvm-mirror/clang.git)
+[stderr] fatal: remote github-mirror already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git fetch github-mirror --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git remote add meinersbur git@meinersbur.de:clang.git)
+[stderr] fatal: remote meinersbur already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git fetch meinersbur --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git checkout --detach)
+[stderr] HEAD is now at 99cd18f... clang fix for LLVM API change: isKnownNonNull -> isKnownNonZero
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git checkout --detach --force 99cd18fcc84507e9b35cc6cdfaa90d3cf50ab58c)
+[stderr] HEAD is now at 99cd18f... clang fix for LLVM API change: isKnownNonNull -> isKnownNonZero
+[stdout] ### Checking out test-suite
+[stdout] ## Merging /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git remote add official http://llvm.org/git/test-suite.git)
+[stderr] fatal: remote official already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git fetch official --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git remote add github-mirror https://github.com/llvm-mirror/test-suite.git)
+[stderr] fatal: remote github-mirror already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git fetch github-mirror --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git remote add meinersbur git@meinersbur.de:test-suite.git)
+[stderr] fatal: remote meinersbur already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git fetch meinersbur --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git checkout --detach)
+[stderr] HEAD is now at 82c0a92... Avoid loop-rate fro cholesky
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git checkout --detach --force 82ca28db385b63780a41c5f2bc5d10425569db98)
+[stderr] Previous HEAD position was 82c0a92... Avoid loop-rate fro cholesky
+[stderr] HEAD is now at 82ca28d... Fix Pboost 3mm access violation
+[stdout] ### Checking out libcxxabi
+[stdout] ## Merging /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git remote add official http://llvm.org/git/libcxxabi.git)
+[stderr] fatal: remote official already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git fetch official --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git remote add github-mirror https://github.com/llvm-mirror/libcxxabi.git)
+[stderr] fatal: remote github-mirror already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git fetch github-mirror --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git remote add meinersbur git@meinersbur.de:libcxxabi.git)
+[stderr] fatal: remote meinersbur already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git fetch meinersbur --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git checkout --detach)
+[stderr] HEAD is now at caa78da... Revert "[libcxxabi] When built with ASan, __cxa_throw calls __asan_handle_no_return"
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git checkout --detach --force caa78daf9285dada17e3e6b8aebcf7d128427f83)
+[stderr] HEAD is now at caa78da... Revert "[libcxxabi] When built with ASan, __cxa_throw calls __asan_handle_no_return"
+[stdout] ### Checking out libcxx
+[stdout] ## Merging /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git remote add official http://llvm.org/git/libcxx.git)
+[stderr] fatal: remote official already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git fetch official --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git remote add github-mirror https://github.com/llvm-mirror/libcxx.git)
+[stderr] fatal: remote github-mirror already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git fetch github-mirror --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git remote add meinersbur git@meinersbur.de:libcxx.git)
+[stderr] fatal: remote meinersbur already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git fetch meinersbur --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git checkout --detach)
+[stderr] HEAD is now at 11762b4... XFAIL tests on SLES11
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git checkout --detach --force 11762b4acd1fc19fb8f6d0015b339ad6b9c8f2f5)
+[stderr] HEAD is now at 11762b4... XFAIL tests on SLES11
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && git checkout --detach)
+[stderr] HEAD is now at f9d4e17... [X86] Add v2i4 store test case (PR20012)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && git checkout --detach --force f9d4e1794de9bde62ecbc20baf378adc4e768f82)
+[stderr] HEAD is now at f9d4e17... [X86] Add v2i4 store test case (PR20012)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && LC_ALL=C git rev-parse HEAD)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm && LC_ALL=C git log f9d4e1794de9bde62ecbc20baf378adc4e768f82 -n1)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && LC_ALL=C git rev-parse HEAD)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && LC_ALL=C git log 99cd18fcc84507e9b35cc6cdfaa90d3cf50ab58c -n1)
+[stderr] $ (cd /scratch/shared/leone/krusemi/execslave/work && LC_ALL=C git rev-parse HEAD)
+[stderr] $ (cd /scratch/shared/leone/krusemi/execslave/work && LC_ALL=C git log f99be8465ceb80431ce459ed2a17f3a8ffdad6f7 -n1)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && LC_ALL=C git rev-parse HEAD)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && LC_ALL=C git log 82ca28db385b63780a41c5f2bc5d10425569db98 -n1)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && LC_ALL=C git rev-parse HEAD)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && LC_ALL=C git log caa78daf9285dada17e3e6b8aebcf7d128427f83 -n1)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && LC_ALL=C git rev-parse HEAD)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && LC_ALL=C git log 11762b4acd1fc19fb8f6d0015b339ad6b9c8f2f5 -n1)
+[stdout] configure tests  : Performance/Polybench-421 Polybench/Polybench-boost
+[stdout] run tests        : Performance/Polybench-421 Polybench/Polybench-boost
+[stdout] LLVM log:
+[stdout] commit f9d4e1794de9bde62ecbc20baf378adc4e768f82
+[stdout] Author: Simon Pilgrim <llvm-dev@redking.me.uk>
+[stdout] Date:   Sat Sep 9 20:28:50 2017 +0000
+[stdout] 
+[stdout]     [X86] Add v2i4 store test case (PR20012)
+[stdout]     
+[stdout]     git-svn-id: https://llvm.org/svn/llvm-project/llvm/trunk@312874 91177308-0d34-0410-b5e6-96231b3b80d8
+[stdout] 
+[stdout] 
+[stdout] Clang log:
+[stdout] commit 99cd18fcc84507e9b35cc6cdfaa90d3cf50ab58c
+[stdout] Author: Nuno Lopes <nunoplopes@sapo.pt>
+[stdout] Date:   Sat Sep 9 18:25:36 2017 +0000
+[stdout] 
+[stdout]     clang fix for LLVM API change: isKnownNonNull -> isKnownNonZero
+[stdout]     
+[stdout]     Differential Revision: https://reviews.llvm.org/D37628
+[stdout]     
+[stdout]     git-svn-id: https://llvm.org/svn/llvm-project/cfe/trunk@312870 91177308-0d34-0410-b5e6-96231b3b80d8
+[stdout] 
+[stdout] 
+[stdout] Polly log:
+[stdout] commit f99be8465ceb80431ce459ed2a17f3a8ffdad6f7
+[stdout] Author: Michael Kruse <llvm@meinersbur.de>
+[stdout] Date:   Thu Sep 14 16:24:07 2017 +0200
+[stdout] 
+[stdout]     [r312875/f2c4a3] --suite-exec-threads=1 --revision=r312875 --llvm-revision=f9d4e1794de9bde62ecbc20baf378adc4e768f82 --clang-revision=99cd18fcc84507e9b35cc6cdfaa90d3cf50ab58c --libcxxabi-revision=caa78daf9285dada17e3e6b8aebcf7d128427f83 --libcxx-revision=11762b4acd1fc19fb8f6d0015b339ad6b9c8f2f5 --suite-revision=82ca28db385b63780a41c5f2bc5d10425569db98 --llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON --test-only=Performance/Polybench-421 --test-only=Polybench/Polybench-boost --suite-build-flags=-ffast-math --suite-build-flags=-march=native --suite-build-flags=-DEXTRALARGE_DATASET --suite-build-flags=-fno-exceptions --suite-build-mllvm=-polly-only-func=kernel_ --suite-build-mllvm=-polly-optree-max-ops=0 --suite-build-mllvm=-inline-threshold=4096 --suite-build-mllvm=-polly-position=early --suite-build-mllvm=-polly-enable-simplify=1 --suite-build-mllvm=-polly-enable-optree=1 --suite-build-mllvm=-polly-enable-delicm=1 --polly --stats --multisample=5
+[stdout]     
+[stdout]     Job create using command:
+[stdout]     /c/Users/Meinersbur/src/gittool/gittool.py makejob A50_polly_early_delicm --suite-build-flags=-ffast-math --suite-build-flags=-march=native --llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON --stats --exec-threads 1 --multisample 5 --test-only Performance/Polybench-421 --test-only Polybench/Polybench-boost --mllvm=-polly-only-func=kernel_ --mllvm=-polly-optree-max-ops=0 --suite-build-flags=-DEXTRALARGE_DATASET --mllvm=-inline-threshold=4096 --cppflags=-fno-exceptions --polly --suite-build-mllvm=-polly-position=early --suite-build-mllvm=-polly-enable-simplify=1 --suite-build-mllvm=-polly-enable-optree=1 --suite-build-mllvm=-polly-enable-delicm=1
+[stdout]     
+[stdout]     Exec: python3 ./run-test-suite.py --suite-exec-threads=1 --revision=r312875 --llvm-revision=f9d4e1794de9bde62ecbc20baf378adc4e768f82 --clang-revision=99cd18fcc84507e9b35cc6cdfaa90d3cf50ab58c --libcxxabi-revision=caa78daf9285dada17e3e6b8aebcf7d128427f83 --libcxx-revision=11762b4acd1fc19fb8f6d0015b339ad6b9c8f2f5 --suite-revision=82ca28db385b63780a41c5f2bc5d10425569db98 --llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON --test-only=Performance/Polybench-421 --test-only=Polybench/Polybench-boost --suite-build-flags=-ffast-math --suite-build-flags=-march=native --suite-build-flags=-DEXTRALARGE_DATASET --suite-build-flags=-fno-exceptions --suite-build-mllvm=-polly-only-func=kernel_ --suite-build-mllvm=-polly-optree-max-ops=0 --suite-build-mllvm=-inline-threshold=4096 --suite-build-mllvm=-polly-position=early --suite-build-mllvm=-polly-enable-simplify=1 --suite-build-mllvm=-polly-enable-optree=1 --suite-build-mllvm=-polly-enable-delicm=1 --polly --stats --multisample=5
+[stdout] 
+[stdout] 
+[stdout] test-suite log:
+[stdout] commit 82ca28db385b63780a41c5f2bc5d10425569db98
+[stdout] Author: Michael Kruse <test-suite@meinersbur.de>
+[stdout] Date:   Thu Sep 14 16:15:57 2017 +0200
+[stdout] 
+[stdout]     Fix Pboost 3mm access violation
+[stdout] 
+[stdout] 
+[stdout] libcxxabi log:
+[stdout] commit caa78daf9285dada17e3e6b8aebcf7d128427f83
+[stdout] Author: Petr Hosek <phosek@chromium.org>
+[stdout] Date:   Wed Sep 6 03:00:42 2017 +0000
+[stdout] 
+[stdout]     Revert "[libcxxabi] When built with ASan, __cxa_throw calls __asan_handle_no_return"
+[stdout]     
+[stdout]     This reverts commit r312606 because it's causing an error on
+[stdout]     libcxx-libcxxabi-x86_64-linux-ubuntu-asan bot.
+[stdout]     
+[stdout]     git-svn-id: https://llvm.org/svn/llvm-project/libcxxabi/trunk@312609 91177308-0d34-0410-b5e6-96231b3b80d8
+[stdout] 
+[stdout] 
+[stdout] libcxx log:
+[stdout] commit 11762b4acd1fc19fb8f6d0015b339ad6b9c8f2f5
+[stdout] Author: Brian Cain <bcain@codeaurora.org>
+[stdout] Date:   Fri Sep 8 03:57:02 2017 +0000
+[stdout] 
+[stdout]     XFAIL tests on SLES11
+[stdout]     
+[stdout]     XFAIL some failing tests for SLES11 (older glibc), also replace spaces
+[stdout]     in linux distro w/dashes.
+[stdout]     
+[stdout]     
+[stdout]     
+[stdout]     git-svn-id: https://llvm.org/svn/llvm-project/libcxx/trunk@312774 91177308-0d34-0410-b5e6-96231b3b80d8
+[stdout] 
+[stdout] 
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm-build && cmake /users/krusemi/scratch/execslave/persistent/llvm -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=-DLLVM_ENABLE_STATS=ON -DCMAKE_CXX_FLAGS=-DLLVM_ENABLE_STATS=ON -DLLVM_TOOL_POLLY_BUILD=ON -DLLVM_POLLY_BUILD=ON -DLLVM_EXTERNAL_POLLY_SOURCE_DIR=/scratch/shared/leone/krusemi/execslave/work -DLLVM_TARGETS_TO_BUILD=X86 -DCMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc -DLLVM_ENABLE_ASSERTIONS=ON)
+[stdout] -- Native target architecture is X86
+[stdout] -- Threads enabled.
+[stdout] -- Doxygen disabled.
+[stdout] -- Go bindings disabled.
+[stdout] -- Could NOT find OCaml (missing: OCAMLFIND OCAML_VERSION OCAML_STDLIB_PATH) 
+[stdout] -- Could NOT find OCaml (missing: OCAMLFIND OCAML_VERSION OCAML_STDLIB_PATH) 
+[stdout] -- OCaml bindings disabled.
+[stdout] -- LLVM host triple: x86_64-unknown-linux-gnu
+[stdout] -- LLVM default target triple: x86_64-unknown-linux-gnu
+[stdout] -- Building with -fPIC
+[stdout] -- Constructing LLVMBuild project information
+[stdout] -- Linker detection: GNU Gold
+[stdout] -- Targeting X86
+[stdout] -- Linker detection: GNU Gold
+[stdout] -- Linker detection: GNU Gold
+[stdout] -- ISL version: isl-0.18-812-g565da6e
+[stdout] -- PPCG version: ppcg-0.07
+[stdout] -- Clang version: 6.0.0
+[stdout] -- Configuring done
+[stdout] -- Generating done
+[stdout] -- Build files have been written to: /scratch/shared/leone/krusemi/execslave/persistent/llvm-build
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/llvm-build && ninja clang cxx_shared llvm-size)
+[stdout] [1/4] Building CXX object tools/polly/lib/CMakeFiles/PollyCore.dir/Transform/ForwardOpTree.cpp.o
+[stdout] [2/4] Linking CXX static library lib/libPolly.a
+[stdout] [3/4] Linking CXX executable bin/clang-6.0
+[stdout] [4/4] Creating executable symlink bin/clang
+[stderr] $ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && cmake /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite -GNinja '-DTEST_SUITE_HOST_CC=gcc;-std=c99' -DTEST_SUITE_ENABLE_BITCODE_TESTS=OFF -DCMAKE_C_COMPILER=/users/krusemi/scratch/execslave/persistent/llvm-build/bin/clang -DCMAKE_CXX_COMPILER=/users/krusemi/scratch/execslave/persistent/llvm-build/bin/clang++ '-DTEST_SUITE_SUBDIRS=Performance/Polybench-421;Polybench/Polybench-boost' -DCMAKE_BUILD_TYPE=Release -DTEST_SUITE_LLVM_SIZE=/users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-size -DTEST_SUITE_LIT=/users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -DTEST_SUITE_COLLECT_STATS=ON '-DCMAKE_C_FLAGS=-mllvm -polly -ffast-math -march=native -DEXTRALARGE_DATASET -fno-exceptions -mllvm -polly-only-func=kernel_ -mllvm -polly-optree-max-ops=0 -mllvm -inline-threshold=4096 -mllvm -polly-position=early -mllvm -polly-enable-simplify=1 -mllvm -polly-enable-optree=1 -mllvm -polly-enable-delicm=1' '-DCMAKE_CXX_FLAGS=-stdlib=libc++ -L /users/krusemi/scratch/execslave/persistent/llvm-build/lib -mllvm -polly -ffast-math -march=native -DEXTRALARGE_DATASET -fno-exceptions -mllvm -polly-only-func=kernel_ -mllvm -polly-optree-max-ops=0 -mllvm -inline-threshold=4096 -mllvm -polly-position=early -mllvm -polly-enable-simplify=1 -mllvm -polly-enable-optree=1 -mllvm -polly-enable-delicm=1' '-DTEST_SUITE_LIT_FLAGS=-j1;-s;-o;/scratch/shared/leone/krusemi/execslave/work/run-test-suite/output.json;Performance/Polybench-421;Polybench/Polybench-boost')
+[stdout] -- The C compiler identification is Clang 6.0.0
+[stdout] -- The CXX compiler identification is Clang 6.0.0
+[stdout] -- Check for working C compiler: /users/krusemi/scratch/execslave/persistent/llvm-build/bin/clang
+[stdout] -- Check for working C compiler: /users/krusemi/scratch/execslave/persistent/llvm-build/bin/clang -- works
+[stdout] -- Detecting C compiler ABI info
+[stdout] -- Detecting C compiler ABI info - done
+[stdout] -- Detecting C compile features
+[stdout] -- Detecting C compile features - done
+[stdout] -- Check for working CXX compiler: /users/krusemi/scratch/execslave/persistent/llvm-build/bin/clang++
+[stdout] -- Check for working CXX compiler: /users/krusemi/scratch/execslave/persistent/llvm-build/bin/clang++ -- works
+[stdout] -- Detecting CXX compiler ABI info
+[stdout] -- Detecting CXX compiler ABI info - done
+[stdout] -- Detecting CXX compile features
+[stdout] -- Detecting CXX compile features - done
+[stdout] -- Found Tclsh: /usr/bin/tclsh (found version "8.5") 
+[stdout] -- Could NOT find TCL (missing: TCL_INCLUDE_PATH) 
+[stdout] -- Could NOT find TCLTK (missing: TCL_INCLUDE_PATH TK_INCLUDE_PATH) 
+[stdout] -- Could NOT find TK (missing: TK_INCLUDE_PATH) 
+[stdout] -- Check target operating system - Linux
+[stdout] -- Check target system architecture: x86
+[stdout] -- Check if the system is big endian
+[stdout] -- Searching 16 bit integer
+[stdout] -- Looking for sys/types.h
+[stdout] -- Looking for sys/types.h - found
+[stdout] -- Looking for stdint.h
+[stdout] -- Looking for stdint.h - found
+[stdout] -- Looking for stddef.h
+[stdout] -- Looking for stddef.h - found
+[stdout] -- Check size of unsigned short
+[stdout] -- Check size of unsigned short - done
+[stdout] -- Using unsigned short
+[stdout] -- Check if the system is big endian - little endian
+[stdout] -- Adding directory Performance/Polybench-421
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/datamining/correlation/Pb421-perf_correlation.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/datamining/correlation/Pb421-perf-restrict_correlation.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/datamining/covariance/Pb421-perf_covariance.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/datamining/covariance/Pb421-perf-restrict_covariance.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/delicm/rowwisesum/Pb421-perf_rowwisesum.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/delicm/rowwisesum/Pb421-perf-restrict_rowwisesum.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/delicm/columnwisesum/Pb421-perf_columnwisesum.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/delicm/columnwisesum/Pb421-perf-restrict_columnwisesum.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm-interchange.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm-interchange.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm-onestmt.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm-onestmt.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm-interchange-onestmt.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm-interchange-onestmt.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemver/Pb421-perf_gemver.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemver/Pb421-perf-restrict_gemver.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gesummv/Pb421-perf_gesummv.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gesummv/Pb421-perf-restrict_gesummv.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/symm/Pb421-perf_symm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/symm/Pb421-perf-restrict_symm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syr2k/Pb421-perf_syr2k.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syr2k/Pb421-perf-restrict_syr2k.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syrk/Pb421-perf_syrk.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syrk/Pb421-perf-restrict_syrk.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/trmm/Pb421-perf_trmm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/trmm/Pb421-perf-restrict_trmm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/2mm/Pb421-perf_2mm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/2mm/Pb421-perf-restrict_2mm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/3mm/Pb421-perf_3mm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/3mm/Pb421-perf-restrict_3mm.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/atax/Pb421-perf_atax.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/atax/Pb421-perf-restrict_atax.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/bicg/Pb421-perf_bicg.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/bicg/Pb421-perf-restrict_bicg.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/doitgen/Pb421-perf_doitgen.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/doitgen/Pb421-perf-restrict_doitgen.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/mvt/Pb421-perf_mvt.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/mvt/Pb421-perf-restrict_mvt.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/cholesky/Pb421-perf_cholesky.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/cholesky/Pb421-perf-restrict_cholesky.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/durbin/Pb421-perf_durbin.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/durbin/Pb421-perf-restrict_durbin.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/gramschmidt/Pb421-perf_gramschmidt.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/gramschmidt/Pb421-perf-restrict_gramschmidt.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/lu/Pb421-perf_lu.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/lu/Pb421-perf-restrict_lu.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/ludcmp/Pb421-perf_ludcmp.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/ludcmp/Pb421-perf-restrict_ludcmp.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/trisolv/Pb421-perf_trisolv.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/trisolv/Pb421-perf-restrict_trisolv.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/deriche/Pb421-perf_deriche.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/deriche/Pb421-perf-restrict_deriche.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/floyd-warshall/Pb421-perf_floyd-warshall.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/floyd-warshall/Pb421-perf-restrict_floyd-warshall.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/nussinov/Pb421-perf_nussinov.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/nussinov/Pb421-perf-restrict_nussinov.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/adi/Pb421-perf_adi.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/adi/Pb421-perf-restrict_adi.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/fdtd-2d/Pb421-perf_fdtd-2d.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/fdtd-2d/Pb421-perf-restrict_fdtd-2d.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/heat-3d/Pb421-perf_heat-3d.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/heat-3d/Pb421-perf-restrict_heat-3d.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/jacobi-1d/Pb421-perf_jacobi-1d.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/jacobi-1d/Pb421-perf-restrict_jacobi-1d.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/jacobi-2d/Pb421-perf_jacobi-2d.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/jacobi-2d/Pb421-perf-restrict_jacobi-2d.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/seidel-2d/Pb421-perf_seidel-2d.test
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/seidel-2d/Pb421-perf-restrict_seidel-2d.test
+[stdout] -- Adding directory Polybench/Polybench-boost
+[stderr] -- No reference output found for test Pboost_correlation
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/datamining/correlation/Pboost_correlation.test
+[stderr] -- No reference output found for test Pboost_covariance
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/datamining/covariance/Pboost_covariance.test
+[stderr] -- No reference output found for test Pboost_gemm
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/linear-algebra/blas/gemm/Pboost_gemm.test
+[stderr] -- No reference output found for test Pboost_2mm
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/linear-algebra/kernels/2mm/Pboost_2mm.test
+[stderr] -- No reference output found for test Pboost_3mm
+[stderr] Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/linear-algebra/kernels/3mm/Pboost_3mm.test
+[stdout] -- Configuring done
+[stdout] -- Generating done
+[stderr] CMake Warning:
+[stderr]   Manually-specified variables were not used by the project:
+[stderr] 
+[stderr]     TEST_SUITE_ENABLE_BITCODE_TESTS
+[stderr] 
+[stderr] 
+[stdout] -- Build files have been written to: /scratch/shared/leone/krusemi/execslave/work/run-test-suite
+[stderr] $ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && ninja -k0)
+[stdout] [1/158] Building C object tools/CMakeFiles/timeit-target.dir/timeit.c.o
+[stdout] [2/158] Linking C executable tools/timeit-target
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [3/158] [TEST_SUITE_HOST_CC] Compiling host source timeit.c
+[stdout] /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite/tools/timeit.c: In function ‘terminate_handler’:
+[stdout] /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite/tools/timeit.c:123:5: warning: implicit declaration of function ‘kill’ [-Wimplicit-function-declaration]
+[stdout]      kill(-g_monitored_pid, SIGKILL);
+[stdout]      ^
+[stdout] /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite/tools/timeit.c: In function ‘monitor_child_process’:
+[stdout] /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite/tools/timeit.c:155:5: warning: implicit declaration of function ‘sigemptyset’ [-Wimplicit-function-declaration]
+[stdout]      sigemptyset(&masked);
+[stdout]      ^
+[stdout] /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite/tools/timeit.c:156:5: warning: implicit declaration of function ‘sigaddset’ [-Wimplicit-function-declaration]
+[stdout]      sigaddset(&masked, SIGALRM);
+[stdout]      ^
+[stdout] /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite/tools/timeit.c: In function ‘execute_target_process’:
+[stdout] /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite/tools/timeit.c:277:14: warning: implicit declaration of function ‘fileno’ [-Wimplicit-function-declaration]
+[stdout]      int fd = fileno(fp);
+[stdout]               ^
+[stdout] [4/158] [TEST_SUITE_HOST_CC] Compiling host source fpcmp.c
+[stdout] [5/158] [TEST_SUITE_HOST_CC] Linking host executable timeit
+[stdout] [6/158] [TEST_SUITE_HOST_CC] Linking host executable fpcmp
+[stdout] [7/158] Building C object Performance/Polybench-421/delicm/rowwisesum/CMakeFiles/Pb421-perf-restrict_rowwisesum.dir/rowwisesum.c.o
+[stdout] [8/158] Building C object Performance/Polybench-421/delicm/rowwisesum/CMakeFiles/Pb421-perf_rowwisesum.dir/rowwisesum.c.o
+[stdout] [9/158] Building C object Performance/Polybench-421/delicm/columnwisesum/CMakeFiles/Pb421-perf_columnwisesum.dir/columnwisesum.c.o
+[stdout] [10/158] Building C object Performance/Polybench-421/delicm/columnwisesum/CMakeFiles/Pb421-perf-restrict_columnwisesum.dir/columnwisesum.c.o
+[stdout] [11/158] Building C object Performance/Polybench-421/linear-algebra/blas/gesummv/CMakeFiles/Pb421-perf-restrict_gesummv.dir/gesummv.c.o
+[stdout] [12/158] Linking C executable Performance/Polybench-421/delicm/columnwisesum/Pb421-perf_columnwisesum
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [13/158] Linking C executable Performance/Polybench-421/delicm/rowwisesum/Pb421-perf-restrict_rowwisesum
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [14/158] Linking C executable Performance/Polybench-421/delicm/rowwisesum/Pb421-perf_rowwisesum
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [15/158] Linking C executable Performance/Polybench-421/delicm/columnwisesum/Pb421-perf-restrict_columnwisesum
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [16/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gesummv/Pb421-perf-restrict_gesummv
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [17/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemver/CMakeFiles/Pb421-perf-restrict_gemver.dir/gemver.c.o
+[stdout] [18/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemver/Pb421-perf-restrict_gemver
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [19/158] Building C object Performance/Polybench-421/linear-algebra/blas/gesummv/CMakeFiles/Pb421-perf_gesummv.dir/gesummv.c.o
+[stdout] [20/158] Building C object Performance/Polybench-421/datamining/covariance/CMakeFiles/Pb421-perf_covariance.dir/covariance.c.o
+[stdout] [21/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gesummv/Pb421-perf_gesummv
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [22/158] Linking C executable Performance/Polybench-421/datamining/covariance/Pb421-perf_covariance
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [23/158] Building C object Performance/Polybench-421/datamining/covariance/CMakeFiles/Pb421-perf-restrict_covariance.dir/covariance.c.o
+[stdout] [24/158] Building C object Performance/Polybench-421/linear-algebra/blas/symm/CMakeFiles/Pb421-perf-restrict_symm.dir/symm.c.o
+[stdout] [25/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemver/CMakeFiles/Pb421-perf_gemver.dir/gemver.c.o
+[stdout] [26/158] Linking C executable Performance/Polybench-421/datamining/covariance/Pb421-perf-restrict_covariance
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [27/158] Building C object Performance/Polybench-421/linear-algebra/blas/symm/CMakeFiles/Pb421-perf_symm.dir/symm.c.o
+[stdout] [28/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/symm/Pb421-perf-restrict_symm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [29/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/symm/Pb421-perf_symm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [30/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemver/Pb421-perf_gemver
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [31/158] Building C object Performance/Polybench-421/linear-algebra/blas/syr2k/CMakeFiles/Pb421-perf-restrict_syr2k.dir/syr2k.c.o
+[stdout] [32/158] Building C object Performance/Polybench-421/datamining/correlation/CMakeFiles/Pb421-perf-restrict_correlation.dir/correlation.c.o
+[stdout] [33/158] Building C object Performance/Polybench-421/linear-algebra/blas/syr2k/CMakeFiles/Pb421-perf_syr2k.dir/syr2k.c.o
+[stdout] [34/158] Building C object Performance/Polybench-421/datamining/correlation/CMakeFiles/Pb421-perf_correlation.dir/correlation.c.o
+[stdout] [35/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/syr2k/Pb421-perf-restrict_syr2k
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [36/158] Linking C executable Performance/Polybench-421/datamining/correlation/Pb421-perf-restrict_correlation
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [37/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/syr2k/Pb421-perf_syr2k
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [38/158] Building C object Performance/Polybench-421/linear-algebra/blas/syrk/CMakeFiles/Pb421-perf-restrict_syrk.dir/syrk.c.o
+[stdout] [39/158] Linking C executable Performance/Polybench-421/datamining/correlation/Pb421-perf_correlation
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [40/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/syrk/Pb421-perf-restrict_syrk
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [41/158] Building C object Performance/Polybench-421/linear-algebra/blas/syrk/CMakeFiles/Pb421-perf_syrk.dir/syrk.c.o
+[stdout] [42/158] Building C object Performance/Polybench-421/linear-algebra/blas/trmm/CMakeFiles/Pb421-perf_trmm.dir/trmm.c.o
+[stdout] [43/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/syrk/Pb421-perf_syrk
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [44/158] Building C object Performance/Polybench-421/linear-algebra/blas/trmm/CMakeFiles/Pb421-perf-restrict_trmm.dir/trmm.c.o
+[stdout] [45/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/trmm/Pb421-perf_trmm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [46/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemm/CMakeFiles/Pb421-perf-restrict_gemm-onestmt.dir/gemm-onestmt.c.o
+[stdout] [47/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/trmm/Pb421-perf-restrict_trmm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [48/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemm/CMakeFiles/Pb421-perf-restrict_gemm-interchange-onestmt.dir/gemm-interchange-onestmt.c.o
+[stdout] [49/158] Building C object Performance/Polybench-421/linear-algebra/kernels/atax/CMakeFiles/Pb421-perf-restrict_atax.dir/atax.c.o
+[stdout] [50/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemm/CMakeFiles/Pb421-perf_gemm-onestmt.dir/gemm-onestmt.c.o
+[stdout] [51/158] Building C object Performance/Polybench-421/linear-algebra/kernels/bicg/CMakeFiles/Pb421-perf-restrict_bicg.dir/bicg.c.o
+[stdout] [52/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm-onestmt
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [53/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemm/CMakeFiles/Pb421-perf-restrict_gemm-interchange.dir/gemm-interchange.c.o
+[stdout] [54/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemm/CMakeFiles/Pb421-perf_gemm-interchange-onestmt.dir/gemm-interchange-onestmt.c.o
+[stdout] [55/158] Building C object Performance/Polybench-421/linear-algebra/kernels/atax/CMakeFiles/Pb421-perf_atax.dir/atax.c.o
+[stdout] [56/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm-interchange-onestmt
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [57/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/atax/Pb421-perf-restrict_atax
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [58/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm-onestmt
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [59/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/bicg/Pb421-perf-restrict_bicg
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [60/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemm/CMakeFiles/Pb421-perf-restrict_gemm.dir/gemm.c.o
+[stdout] [61/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm-interchange
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [62/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemm/CMakeFiles/Pb421-perf_gemm.dir/gemm.c.o
+[stdout] [63/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm-interchange-onestmt
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [64/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/atax/Pb421-perf_atax
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [65/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [66/158] Building C object Performance/Polybench-421/linear-algebra/kernels/bicg/CMakeFiles/Pb421-perf_bicg.dir/bicg.c.o
+[stdout] [67/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [68/158] Building C object Performance/Polybench-421/linear-algebra/blas/gemm/CMakeFiles/Pb421-perf_gemm-interchange.dir/gemm-interchange.c.o
+[stdout] [69/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/bicg/Pb421-perf_bicg
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [70/158] Building C object Performance/Polybench-421/linear-algebra/kernels/mvt/CMakeFiles/Pb421-perf-restrict_mvt.dir/mvt.c.o
+[stdout] [71/158] Linking C executable Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm-interchange
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [72/158] Building C object Performance/Polybench-421/linear-algebra/kernels/mvt/CMakeFiles/Pb421-perf_mvt.dir/mvt.c.o
+[stdout] [73/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/mvt/Pb421-perf-restrict_mvt
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [74/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/mvt/Pb421-perf_mvt
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [75/158] Building C object Performance/Polybench-421/linear-algebra/kernels/doitgen/CMakeFiles/Pb421-perf_doitgen.dir/doitgen.c.o
+[stdout] [76/158] Building C object Performance/Polybench-421/linear-algebra/kernels/doitgen/CMakeFiles/Pb421-perf-restrict_doitgen.dir/doitgen.c.o
+[stdout] [77/158] Building C object Performance/Polybench-421/linear-algebra/solvers/durbin/CMakeFiles/Pb421-perf-restrict_durbin.dir/durbin.c.o
+[stdout] [78/158] Building C object Performance/Polybench-421/linear-algebra/solvers/cholesky/CMakeFiles/Pb421-perf-restrict_cholesky.dir/cholesky.c.o
+[stdout] [79/158] Building C object Performance/Polybench-421/linear-algebra/solvers/durbin/CMakeFiles/Pb421-perf_durbin.dir/durbin.c.o
+[stdout] [80/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/doitgen/Pb421-perf_doitgen
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [81/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/cholesky/Pb421-perf-restrict_cholesky
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [82/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/durbin/Pb421-perf-restrict_durbin
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [83/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/durbin/Pb421-perf_durbin
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [84/158] Building C object Performance/Polybench-421/linear-algebra/solvers/cholesky/CMakeFiles/Pb421-perf_cholesky.dir/cholesky.c.o
+[stdout] [85/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/doitgen/Pb421-perf-restrict_doitgen
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [86/158] Building C object Performance/Polybench-421/linear-algebra/solvers/lu/CMakeFiles/Pb421-perf-restrict_lu.dir/lu.c.o
+[stdout] [87/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/lu/Pb421-perf-restrict_lu
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [88/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/cholesky/Pb421-perf_cholesky
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [89/158] Building C object Performance/Polybench-421/linear-algebra/solvers/lu/CMakeFiles/Pb421-perf_lu.dir/lu.c.o
+[stdout] [90/158] Building C object Performance/Polybench-421/linear-algebra/solvers/gramschmidt/CMakeFiles/Pb421-perf-restrict_gramschmidt.dir/gramschmidt.c.o
+[stdout] [91/158] Building C object Performance/Polybench-421/linear-algebra/solvers/trisolv/CMakeFiles/Pb421-perf-restrict_trisolv.dir/trisolv.c.o
+[stdout] [92/158] Building C object Performance/Polybench-421/linear-algebra/solvers/trisolv/CMakeFiles/Pb421-perf_trisolv.dir/trisolv.c.o
+[stdout] [93/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/trisolv/Pb421-perf-restrict_trisolv
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [94/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/gramschmidt/Pb421-perf-restrict_gramschmidt
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [95/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/lu/Pb421-perf_lu
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [96/158] Building C object Performance/Polybench-421/linear-algebra/solvers/gramschmidt/CMakeFiles/Pb421-perf_gramschmidt.dir/gramschmidt.c.o
+[stdout] [97/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/trisolv/Pb421-perf_trisolv
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [98/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/gramschmidt/Pb421-perf_gramschmidt
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [99/158] Building C object Performance/Polybench-421/medley/nussinov/CMakeFiles/Pb421-perf_nussinov.dir/nussinov.c.o
+[stdout] [100/158] Building C object Performance/Polybench-421/medley/floyd-warshall/CMakeFiles/Pb421-perf_floyd-warshall.dir/floyd-warshall.c.o
+[stdout] [101/158] Building C object Performance/Polybench-421/medley/nussinov/CMakeFiles/Pb421-perf-restrict_nussinov.dir/nussinov.c.o
+[stdout] [102/158] Building C object Performance/Polybench-421/medley/floyd-warshall/CMakeFiles/Pb421-perf-restrict_floyd-warshall.dir/floyd-warshall.c.o
+[stdout] [103/158] Linking C executable Performance/Polybench-421/medley/floyd-warshall/Pb421-perf_floyd-warshall
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [104/158] Linking C executable Performance/Polybench-421/medley/nussinov/Pb421-perf_nussinov
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [105/158] Linking C executable Performance/Polybench-421/medley/floyd-warshall/Pb421-perf-restrict_floyd-warshall
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [106/158] Linking C executable Performance/Polybench-421/medley/nussinov/Pb421-perf-restrict_nussinov
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [107/158] Building C object Performance/Polybench-421/linear-algebra/solvers/ludcmp/CMakeFiles/Pb421-perf-restrict_ludcmp.dir/ludcmp.c.o
+[stdout] [108/158] Building C object Performance/Polybench-421/stencils/jacobi-1d/CMakeFiles/Pb421-perf-restrict_jacobi-1d.dir/jacobi-1d.c.o
+[stdout] [109/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/ludcmp/Pb421-perf-restrict_ludcmp
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [110/158] Building C object Performance/Polybench-421/medley/deriche/CMakeFiles/Pb421-perf-restrict_deriche.dir/deriche.c.o
+[stdout] [111/158] Building C object Performance/Polybench-421/stencils/jacobi-1d/CMakeFiles/Pb421-perf_jacobi-1d.dir/jacobi-1d.c.o
+[stdout] [112/158] Linking C executable Performance/Polybench-421/stencils/jacobi-1d/Pb421-perf-restrict_jacobi-1d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [113/158] Linking C executable Performance/Polybench-421/medley/deriche/Pb421-perf-restrict_deriche
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [114/158] Linking C executable Performance/Polybench-421/stencils/jacobi-1d/Pb421-perf_jacobi-1d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [115/158] Building C object Performance/Polybench-421/medley/deriche/CMakeFiles/Pb421-perf_deriche.dir/deriche.c.o
+[stdout] [116/158] Linking C executable Performance/Polybench-421/medley/deriche/Pb421-perf_deriche
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [117/158] Building C object Performance/Polybench-421/linear-algebra/solvers/ludcmp/CMakeFiles/Pb421-perf_ludcmp.dir/ludcmp.c.o
+[stdout] [118/158] Building C object Polybench/Polybench-boost/utilities/CMakeFiles/Pboostlib.dir/polybench.c.o
+[stdout] [119/158] Linking C executable Performance/Polybench-421/linear-algebra/solvers/ludcmp/Pb421-perf_ludcmp
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [120/158] Linking C static library Polybench/Polybench-boost/utilities/libPboostlib.a
+[stdout] [121/158] Building C object Performance/Polybench-421/stencils/fdtd-2d/CMakeFiles/Pb421-perf-restrict_fdtd-2d.dir/fdtd-2d.c.o
+[stdout] [122/158] Linking C executable Performance/Polybench-421/stencils/fdtd-2d/Pb421-perf-restrict_fdtd-2d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [123/158] Building C object Performance/Polybench-421/stencils/adi/CMakeFiles/Pb421-perf_adi.dir/adi.c.o
+[stdout] [124/158] Building C object Performance/Polybench-421/stencils/fdtd-2d/CMakeFiles/Pb421-perf_fdtd-2d.dir/fdtd-2d.c.o
+[stdout] [125/158] Linking C executable Performance/Polybench-421/stencils/adi/Pb421-perf_adi
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [126/158] Linking C executable Performance/Polybench-421/stencils/fdtd-2d/Pb421-perf_fdtd-2d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [127/158] Building C object Performance/Polybench-421/stencils/jacobi-2d/CMakeFiles/Pb421-perf-restrict_jacobi-2d.dir/jacobi-2d.c.o
+[stdout] [128/158] Building C object Performance/Polybench-421/stencils/jacobi-2d/CMakeFiles/Pb421-perf_jacobi-2d.dir/jacobi-2d.c.o
+[stdout] [129/158] Linking C executable Performance/Polybench-421/stencils/jacobi-2d/Pb421-perf-restrict_jacobi-2d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [130/158] Linking C executable Performance/Polybench-421/stencils/jacobi-2d/Pb421-perf_jacobi-2d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [131/158] Building C object Performance/Polybench-421/linear-algebra/kernels/2mm/CMakeFiles/Pb421-perf_2mm.dir/2mm.c.o
+[stdout] [132/158] Building C object Performance/Polybench-421/linear-algebra/kernels/2mm/CMakeFiles/Pb421-perf-restrict_2mm.dir/2mm.c.o
+[stdout] [133/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/2mm/Pb421-perf_2mm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [134/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/2mm/Pb421-perf-restrict_2mm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [135/158] Building C object Performance/Polybench-421/stencils/adi/CMakeFiles/Pb421-perf-restrict_adi.dir/adi.c.o
+[stdout] [136/158] Linking C executable Performance/Polybench-421/stencils/adi/Pb421-perf-restrict_adi
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [137/158] Building C object Performance/Polybench-421/stencils/seidel-2d/CMakeFiles/Pb421-perf-restrict_seidel-2d.dir/seidel-2d.c.o
+[stdout] [138/158] Linking C executable Performance/Polybench-421/stencils/seidel-2d/Pb421-perf-restrict_seidel-2d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [139/158] Building C object Performance/Polybench-421/stencils/seidel-2d/CMakeFiles/Pb421-perf_seidel-2d.dir/seidel-2d.c.o
+[stdout] [140/158] Linking C executable Performance/Polybench-421/stencils/seidel-2d/Pb421-perf_seidel-2d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [141/158] Building C object Performance/Polybench-421/linear-algebra/kernels/3mm/CMakeFiles/Pb421-perf-restrict_3mm.dir/3mm.c.o
+[stdout] [142/158] Building C object Performance/Polybench-421/linear-algebra/kernels/3mm/CMakeFiles/Pb421-perf_3mm.dir/3mm.c.o
+[stdout] [143/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/3mm/Pb421-perf-restrict_3mm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [144/158] Linking C executable Performance/Polybench-421/linear-algebra/kernels/3mm/Pb421-perf_3mm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [145/158] Building C object Performance/Polybench-421/stencils/heat-3d/CMakeFiles/Pb421-perf_heat-3d.dir/heat-3d.c.o
+[stdout] [146/158] Linking C executable Performance/Polybench-421/stencils/heat-3d/Pb421-perf_heat-3d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [147/158] Building C object Performance/Polybench-421/stencils/heat-3d/CMakeFiles/Pb421-perf-restrict_heat-3d.dir/heat-3d.c.o
+[stdout] [148/158] Linking C executable Performance/Polybench-421/stencils/heat-3d/Pb421-perf-restrict_heat-3d
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [149/158] Building CXX object Polybench/Polybench-boost/datamining/covariance/CMakeFiles/Pboost_covariance.dir/covariance.cpp.o
+[stdout] [150/158] Building CXX object Polybench/Polybench-boost/datamining/correlation/CMakeFiles/Pboost_correlation.dir/correlation.cpp.o
+[stdout] [151/158] Linking CXX executable Polybench/Polybench-boost/datamining/covariance/Pboost_covariance
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [152/158] Linking CXX executable Polybench/Polybench-boost/datamining/correlation/Pboost_correlation
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [153/158] Building CXX object Polybench/Polybench-boost/linear-algebra/blas/gemm/CMakeFiles/Pboost_gemm.dir/gemm.cpp.o
+[stdout] [154/158] Building CXX object Polybench/Polybench-boost/linear-algebra/kernels/3mm/CMakeFiles/Pboost_3mm.dir/3mm.cpp.o
+[stdout] [155/158] Linking CXX executable Polybench/Polybench-boost/linear-algebra/blas/gemm/Pboost_gemm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [156/158] Linking CXX executable Polybench/Polybench-boost/linear-algebra/kernels/3mm/Pboost_3mm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] [157/158] Building CXX object Polybench/Polybench-boost/linear-algebra/kernels/2mm/CMakeFiles/Pboost_2mm.dir/2mm.cpp.o
+[stdout] [158/158] Linking CXX executable Polybench/Polybench-boost/linear-algebra/kernels/2mm/Pboost_2mm
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-only-func=kernel_' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-optree-max-ops=0' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -inline-threshold=4096' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-position=early' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-simplify=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-optree=1' [-Wunused-command-line-argument]
+[stdout] clang-6.0: warning: argument unused during compilation: '-mllvm -polly-enable-delicm=1' [-Wunused-command-line-argument]
+[stdout] Run: 1 of 5
+[stderr] $ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-0.json Performance/Polybench-421 Polybench/Polybench-boost)
+[stdout] -- Testing: 75 tests, 1 threads --
+[stdout] Testing: 0 .. 10.. 20.. 30.. 40.. 50.. 60.. 70.. 80.. 90.. 
+[stdout] Testing Time: 6565.10s
+[stdout]   Expected Passes    : 75
+[stderr] $ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-1.json Performance/Polybench-421 Polybench/Polybench-boost)
+[stdout] Run: 2 of 5
+[stdout] -- Testing: 75 tests, 1 threads --
+[stdout] Testing: 0 .. 10.. 20.. 30.. 40.. 50.. 60.. 70.. 80.. 90.. 
+[stdout] Testing Time: 5808.65s
+[stdout]   Expected Passes    : 75
+[stdout] Run: 3 of 5
+[stderr] $ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-2.json Performance/Polybench-421 Polybench/Polybench-boost)
+[stdout] -- Testing: 75 tests, 1 threads --
+[stdout] Testing: 0 .. 10.. 20.. 30.. 40.. 50.. 60.. 70.. 80.. 90.. 
+[stdout] Testing Time: 5957.06s
+[stdout]   Expected Passes    : 75
+[stdout] Run: 4 of 5
+[stderr] $ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-3.json Performance/Polybench-421 Polybench/Polybench-boost)
+[stdout] -- Testing: 75 tests, 1 threads --
+[stdout] Testing: 0 .. 10.. 20.. 30.. 40.. 50.. 60.. 70.. 80.. 90.. 
+[stdout] Testing Time: 6065.37s
+[stdout]   Expected Passes    : 75
+[stdout] Run: 5 of 5
+[stderr] $ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-4.json Performance/Polybench-421 Polybench/Polybench-boost)
+[stdout] -- Testing: 75 tests, 1 threads --
+[stdout] Testing: 0 .. 10.. 20.. 30.. 40.. 50.. 60.. 70.. 80.. 90.. 
+[stdout] Testing Time: 5773.26s
+[stdout]   Expected Passes    : 75
