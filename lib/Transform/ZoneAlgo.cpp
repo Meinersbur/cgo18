@@ -425,7 +425,7 @@ isl::union_map ZoneAlgorithm::getWrittenValue(MemoryAccess *MA, isl::map AccRel)
                                      : Stmt->getSurroundingLoop();
   if (AccVal &&
       AccVal->getType() == MA->getLatestScopArrayInfo()->getElementType() &&
-      AccRel.is_single_valued())
+      AccRel.is_single_valued().is_true())
     return makeNormalizedValInst (AccVal, Stmt, L);
 
   // memset(_, '0', ) is equivalent to writing the null value to all touched
