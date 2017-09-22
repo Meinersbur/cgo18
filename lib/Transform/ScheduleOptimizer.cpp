@@ -1431,39 +1431,43 @@ static void walkScheduleTreeForStatistics(isl::schedule Schedule, int Version) {
   if (!Root)
     return;
 
-  isl_schedule_node_foreach_descendant_top_down(Root.get(), [](__isl_keep isl_schedule_node* nodeptr, void *user) -> isl_bool {
-	  auto Node = isl::manage(isl_schedule_node_copy( nodeptr));
-	  auto Version = *((int*)user);
+  isl_schedule_node_foreach_descendant_top_down(
+      Root.get(),
+      [](__isl_keep isl_schedule_node *nodeptr, void *user) -> isl_bool {
+        isl::schedule_node Node = isl::manage(isl_schedule_node_copy(nodeptr));
+        int Version = *static_cast<int *>(user);
 
-    switch (isl_schedule_node_get_type(Node.get())) {
-    case isl_schedule_node_band: {
-      NumBands[Version]++;
-      if (isl_schedule_node_band_get_permutable(Node.get()) == isl_bool_true)
-        NumPermutable[Version]++;
+        switch (isl_schedule_node_get_type(Node.get())) {
+        case isl_schedule_node_band: {
+          NumBands[Version]++;
+          if (isl_schedule_node_band_get_permutable(Node.get()) ==
+              isl_bool_true)
+            NumPermutable[Version]++;
 
-      int CountMembers = isl_schedule_node_band_n_member(Node.get());
-      NumBandMembers[Version] += CountMembers;
-      for (int i = 0; i < CountMembers; i += 1) {
-        if (Node.band_member_get_coincident(i))
-          NumCoincident[Version]++;
-      }
-      break;
-    }
+          int CountMembers = isl_schedule_node_band_n_member(Node.get());
+          NumBandMembers[Version] += CountMembers;
+          for (int i = 0; i < CountMembers; i += 1) {
+            if (Node.band_member_get_coincident(i))
+              NumCoincident[Version]++;
+          }
+          break;
+        }
 
-    case isl_schedule_node_filter:
-      NumFilters[Version]++;
-      break;
+        case isl_schedule_node_filter:
+          NumFilters[Version]++;
+          break;
 
-    case isl_schedule_node_extension:
-      NumExtension[Version]++;
-      break;
+        case isl_schedule_node_extension:
+          NumExtension[Version]++;
+          break;
 
-    default:
-      break;
-    }
+        default:
+          break;
+        }
 
-    return isl_bool_true;
-  }, &Version);
+        return isl_bool_true;
+      },
+      &Version);
 }
 
 bool IslScheduleOptimizer::runOnScop(Scop &S) {
@@ -1480,6 +1484,11 @@ bool IslScheduleOptimizer::runOnScop(Scop &S) {
 
   const Dependences &D =
       getAnalysis<DependenceInfo>().getDependences(Dependences::AL_Statement);
+
+  if (D.getSharedIslCtx() != S.getSharedIslCtx()) {
+    DEBUG(dbgs() << "DependenceInfo for another SCoP/isl_ctx\n");
+    return false;
+  }
 
   if (!D.hasValidDependences())
     return false;

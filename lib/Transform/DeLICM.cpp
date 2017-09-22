@@ -660,6 +660,19 @@ private:
     return std::make_pair(DefUses, Lifetime);
   }
 
+  /// The returned relation generally is injective, meaning that every PHI write
+  /// has at most one (or zero, if the incoming block's branch does not jump to
+  /// the PHI's block) PHI Read that reads it. However, due to the SCoP's
+  /// parameter context it is possible a statement instance that would overwrite
+  /// the PHI scalar is not in the statement's domain and thus a PHI write
+  /// appear to be used twice.  This is a static property, at runtime the
+  /// runtime condition should avoid that a configuration is executed. Although
+  /// incorrect, it should not have any effect in DeLICM.  If it passes the
+  /// conflict check, there are multiple locations, one for each PHI Read it
+  /// matches, it had to write to.  MemoryAccess::getAddressFunction() will
+  /// select only one of them.  That is, statically, not all necessary value are
+  /// written, but the runtime check guards it from ever being executed.
+  ///
 
 
   /// Try to map a MemoryKind::Value to a given array element.
