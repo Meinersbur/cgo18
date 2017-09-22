@@ -199,11 +199,10 @@ inline llvm::raw_ostream &operator<<(llvm::raw_ostream &OS,
 }
 
 inline llvm::raw_ostream &operator<<(llvm::raw_ostream &OS,
-	__isl_keep isl_basic_set *BSet) {
-	OS << polly::stringFromIslObj(BSet);
-	return OS;
+                                     __isl_keep isl_basic_set *BSet) {
+  OS << polly::stringFromIslObj(BSet);
+  return OS;
 }
-
 
 inline llvm::raw_ostream &operator<<(llvm::raw_ostream &OS,
                                      __isl_keep isl_pw_aff *Map) {

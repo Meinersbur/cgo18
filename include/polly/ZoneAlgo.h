@@ -149,13 +149,11 @@ private:
 
   void addArrayWriteAccess(MemoryAccess *MA);
 
-llvm::  SmallDenseSet<llvm:: PHINode*, 4> RecursivePHIs;
+  llvm::SmallDenseSet<llvm::PHINode *, 4> RecursivePHIs;
   bool isRecursivePHI(llvm::PHINode *PHI);
   int recursiveDepth(llvm::PHINode *PHI);
 
-
-  llvm::DenseMap<llvm:: PHINode*, isl::union_map > PerPHIMaps;
-
+  llvm::DenseMap<llvm::PHINode *, isl::union_map> PerPHIMaps;
 
 protected:
   isl::union_set makeEmptyUnionSet() const;
@@ -171,7 +169,7 @@ protected:
   /// @param SAI The ScopArrayInfo representing the PHI's storage.
   ///
   /// @return { DomainPHIRead[] -> DomainPHIWrite[] }
-  isl::union_map computePerPHI(const polly:: ScopArrayInfo *SAI);
+  isl::union_map computePerPHI(const polly::ScopArrayInfo *SAI);
 
   /// Find the array elements that can be used for zone analysis.
   void collectCompatibleElts();
@@ -266,8 +264,9 @@ protected:
   isl::map makeValInst(llvm::Value *Val, ScopStmt *UserStmt, llvm::Loop *Scope,
                        bool IsCertain = true);
 
-
-  isl::union_map makeNormalizedValInst(llvm::Value *Val, ScopStmt *UserStmt, llvm::Loop *Scope, bool IsCertain = true);
+  isl::union_map makeNormalizedValInst(llvm::Value *Val, ScopStmt *UserStmt,
+                                       llvm::Loop *Scope,
+                                       bool IsCertain = true);
 
   /// Return whether @p MA can be used for transformations (e.g. OpTree load
   /// forwarding, DeLICM mapping).
@@ -282,10 +281,12 @@ protected:
   /// Print the current state of all MemoryAccesses to @p.
   void printAccesses(llvm::raw_ostream &OS, int Indent = 0) const;
 
- llvm::  DenseSet< llvm::PHINode*> ComputedPHIs;
+  llvm::DenseSet<llvm::PHINode *> ComputedPHIs;
   isl::union_map NormalizedPHI;
 
-  isl::union_map normalizeValInst(isl::union_map Input, isl::union_map NormalizedPHIs, llvm::DenseSet< llvm::PHINode*> &TranslatedPHIs);
+  isl::union_map
+  normalizeValInst(isl::union_map Input, isl::union_map NormalizedPHIs,
+                   llvm::DenseSet<llvm::PHINode *> &TranslatedPHIs);
 
 public:
   /// Return the SCoP this object is analyzing.
@@ -309,9 +310,9 @@ public:
   /// @param FromRead  Use loads as source of information.
   ///
   /// @return { [Element[] -> Zone[]] -> ValInst[] }
-  isl::union_map computeKnown(bool FromWrite, bool FromRead, bool FromInit=false, bool FromReachDef=false) const;
-
-
+  isl::union_map computeKnown(bool FromWrite, bool FromRead,
+                              bool FromInit = false,
+                              bool FromReachDef = false) const;
 };
 
 /// Create a domain-to-unknown value mapping.
@@ -331,7 +332,6 @@ public:
 /// @return { Domain[] -> ValInst[] }
 isl::union_map makeUnknownForDomain(isl::union_set Domain);
 } // namespace polly
-
 
 isl::union_set expand(const isl::union_set &Arg);
 void expandDump(const isl::union_set &Arg);

@@ -64,7 +64,7 @@ STATISTIC(KnownOutOfQuota,
 STATISTIC(TotalInstructionsCopied, "Number of copied instructions");
 STATISTIC(TotalKnownLoadsForwarded,
           "Number of forwarded loads because their value was known");
-STATISTIC(TotalReloads,	"Number of reloaded values");
+STATISTIC(TotalReloads, "Number of reloaded values");
 STATISTIC(TotalReadOnlyCopied, "Number of copied read-only accesses");
 STATISTIC(TotalForwardedTrees, "Number of forwarded operand trees");
 STATISTIC(TotalModifiedStmts,
@@ -279,7 +279,8 @@ public:
     if (!NormalizedPHI || !Known || !Translator) {
       assert(isl_ctx_last_error(IslCtx.get()) == isl_error_quota);
       Known = nullptr;
-	  Translator = nullptr; NormalizedPHI = nullptr;
+      Translator = nullptr;
+      NormalizedPHI = nullptr;
       DEBUG(dbgs() << "Known analysis exceeded max_operations\n");
       return false;
     }
@@ -326,7 +327,8 @@ public:
   ///                       accesses.
   ///
   /// @param The newly created access.
-  MemoryAccess *makeReadArrayAccess(ScopStmt *Stmt, LoadInst *LI,  isl::map AccessRelation) {
+  MemoryAccess *makeReadArrayAccess(ScopStmt *Stmt, LoadInst *LI,
+                                    isl::map AccessRelation) {
     isl::id ArrayId = AccessRelation.get_tuple_id(isl::dim::out);
     ScopArrayInfo *SAI = reinterpret_cast<ScopArrayInfo *>(ArrayId.get_user());
 
@@ -346,19 +348,20 @@ public:
     S->addAccessFunction(Access);
     Stmt->addAccess(Access, true);
 
-	simplify(AccessRelation);
+    simplify(AccessRelation);
     Access->setNewAccessRelation(AccessRelation);
 
     return Access;
   }
 
-  MemoryAccess *makeReadValueAccess(ScopStmt *Stmt, Instruction *Val, isl::map AccessRelation) {
-	  auto RA = Stmt->ensureValueRead( Val);
-	  assert(RA->isValueKind());
+  MemoryAccess *makeReadValueAccess(ScopStmt *Stmt, Instruction *Val,
+                                    isl::map AccessRelation) {
+    auto RA = Stmt->ensureValueRead(Val);
+    assert(RA->isValueKind());
 
-	  simplify(AccessRelation);
-	  RA->setNewAccessRelation(AccessRelation);
-	  return RA;
+    simplify(AccessRelation);
+    RA->setNewAccessRelation(AccessRelation);
+    return RA;
   }
 
   /// For an llvm::Value defined in @p DefStmt, compute the RAW dependency for a
@@ -409,11 +412,11 @@ public:
   ///                           instance.
   ///         FD_CanForwardTree if @p Inst is forwardable.
   ///         FD_DidForward     if @p DoIt was true.
-  ForwardingDecision forwardKnownLoad(ScopStmt *TargetStmt, Instruction *Inst,
-                                      ScopStmt *UseStmt, Loop *UseLoop,
-                                      isl::map UseToTarget, ScopStmt *DefStmt,
-                                      Loop *DefLoop, isl::map DefToTarget,
-                                      bool DoIt, SmallPtrSetImpl<MemoryAccess*> &RequiredAccesses) {
+  ForwardingDecision
+  forwardKnownLoad(ScopStmt *TargetStmt, Instruction *Inst, ScopStmt *UseStmt,
+                   Loop *UseLoop, isl::map UseToTarget, ScopStmt *DefStmt,
+                   Loop *DefLoop, isl::map DefToTarget, bool DoIt,
+                   SmallPtrSetImpl<MemoryAccess *> &RequiredAccesses) {
     // Cannot do anything without successful known analysis.
     if (Known.is_null() || Translator.is_null() || UseToTarget.is_null() ||
         DefToTarget.is_null() || MaxOpGuard.hasQuotaExceeded())
@@ -435,9 +438,9 @@ public:
     if (Access && !DoIt)
       return FD_CanForwardTree;
 
-
-
-    ForwardingDecision OpDecision =  forwardTree(TargetStmt, LI->getPointerOperand(), DefStmt, DefLoop, DefToTarget, DoIt,RequiredAccesses);
+    ForwardingDecision OpDecision =
+        forwardTree(TargetStmt, LI->getPointerOperand(), DefStmt, DefLoop,
+                    DefToTarget, DoIt, RequiredAccesses);
     switch (OpDecision) {
     case FD_CannotForward:
       assert(!DoIt);
@@ -460,7 +463,7 @@ public:
 
     // { DomainDef[] -> ValInst[] }
     isl::map ExpectedVal = makeValInst(Inst, UseStmt, UseLoop);
-	assert(isNormalized(ExpectedVal) && "LoadInsts are always normalized");
+    assert(isNormalized(ExpectedVal) && "LoadInsts are always normalized");
 
     // { DomainTarget[] -> ValInst[] }
     isl::map TargetExpectedVal = ExpectedVal.apply_domain(UseToTarget);
@@ -474,8 +477,8 @@ public:
     if (!SameVal)
       return FD_NotApplicable;
 
-	if (DoIt)
-		TargetStmt->prependInstruction(LI);
+    if (DoIt)
+      TargetStmt->prependInstruction(LI);
 
     if (!DoIt)
       return FD_CanForwardTree;
@@ -535,48 +538,52 @@ public:
     return FD_DidForward;
   }
 
-  ForwardingDecision reloadKnownContent(ScopStmt *TargetStmt, Instruction *Inst, ScopStmt *UseStmt, Loop *UseLoop,  isl::map UseToTarget, ScopStmt *DefStmt, Loop *DefLoop, isl::map DefToTarget, bool DoIt, SmallPtrSetImpl<MemoryAccess*> &RequiredAccesses) {
-	  // Cannot do anything without successful known analysis.
-	  if (Known.is_null()) {
-		  // llvm_unreachable("Haaa!");
-		  return FD_NotApplicable;
-	  }
+  ForwardingDecision
+  reloadKnownContent(ScopStmt *TargetStmt, Instruction *Inst, ScopStmt *UseStmt,
+                     Loop *UseLoop, isl::map UseToTarget, ScopStmt *DefStmt,
+                     Loop *DefLoop, isl::map DefToTarget, bool DoIt,
+                     SmallPtrSetImpl<MemoryAccess *> &RequiredAccesses) {
+    // Cannot do anything without successful known analysis.
+    if (Known.is_null()) {
+      // llvm_unreachable("Haaa!");
+      return FD_NotApplicable;
+    }
 
-	 auto Access = TargetStmt->lookupInputAccessOf(Inst);
-	 if (Access && Access->isLatestArrayKind()) {
-		 if (DoIt) 
-			 return FD_DidForward;
-		 return FD_CanForwardLeaf;
-	 }
-		
-	  // { DomainDef[] -> ValInst[] }
-	  isl::union_map ExpectedVal = makeNormalizedValInst(Inst, UseStmt, UseLoop);
+    auto Access = TargetStmt->lookupInputAccessOf(Inst);
+    if (Access && Access->isLatestArrayKind()) {
+      if (DoIt)
+        return FD_DidForward;
+      return FD_CanForwardLeaf;
+    }
 
-	  // { DomainTarget[] -> ValInst[] }
-	  isl::union_map TargetExpectedVal = ExpectedVal.apply_domain(UseToTarget);
-	  isl::union_map TranslatedExpectedVal = TargetExpectedVal.apply_range(Translator);
+    // { DomainDef[] -> ValInst[] }
+    isl::union_map ExpectedVal = makeNormalizedValInst(Inst, UseStmt, UseLoop);
 
-	  // { DomainTarget[] -> Element[] }
-	  isl::union_map Candidates = findSameContentElements(TranslatedExpectedVal);
+    // { DomainTarget[] -> ValInst[] }
+    isl::union_map TargetExpectedVal = ExpectedVal.apply_domain(UseToTarget);
+    isl::union_map TranslatedExpectedVal =
+        TargetExpectedVal.apply_range(Translator);
 
-	  isl::map SameVal = singleLocation(Candidates, getDomainFor(TargetStmt));
-	  if (!SameVal)
-		  return FD_CannotForward;
+    // { DomainTarget[] -> Element[] }
+    isl::union_map Candidates = findSameContentElements(TranslatedExpectedVal);
 
-	  if (!DoIt)
-		  return FD_CanForwardTree;
+    isl::map SameVal = singleLocation(Candidates, getDomainFor(TargetStmt));
+    if (!SameVal)
+      return FD_CannotForward;
 
+    if (!DoIt)
+      return FD_CanForwardTree;
 
-	  if (!Access)
-		  Access = TargetStmt->ensureValueRead(Inst);
-	  
-	  simplify(SameVal);
-	  Access->setNewAccessRelation(SameVal);
-	  RequiredAccesses.insert(Access);
+    if (!Access)
+      Access = TargetStmt->ensureValueRead(Inst);
 
-	  TotalReloads++;
-	  NumReloads++;
-	  return FD_DidForward;
+    simplify(SameVal);
+    Access->setNewAccessRelation(SameVal);
+    RequiredAccesses.insert(Access);
+
+    TotalReloads++;
+    NumReloads++;
+    return FD_DidForward;
   }
 
   /// Forwards a speculatively executable instruction.
@@ -598,10 +605,11 @@ public:
   ///                           forwardable.
   ///         FD_CanForwardTree if @p UseInst is forwardable.
   ///         FD_DidForward     if @p DoIt was true.
-  ForwardingDecision forwardSpeculatable(ScopStmt *TargetStmt,
-                                         Instruction *UseInst,
-                                         ScopStmt *DefStmt, Loop *DefLoop,
-                                         isl::map DefToTarget, bool DoIt, SmallPtrSetImpl<MemoryAccess*> &RequiredAccesses) {
+  ForwardingDecision
+  forwardSpeculatable(ScopStmt *TargetStmt, Instruction *UseInst,
+                      ScopStmt *DefStmt, Loop *DefLoop, isl::map DefToTarget,
+                      bool DoIt,
+                      SmallPtrSetImpl<MemoryAccess *> &RequiredAccesses) {
     // PHIs, unless synthesizable, are not yet supported.
     if (isa<PHINode>(UseInst))
       return FD_NotApplicable;
@@ -634,7 +642,8 @@ public:
 
     for (Value *OpVal : UseInst->operand_values()) {
       ForwardingDecision OpDecision =
-          forwardTree(TargetStmt, OpVal, DefStmt, DefLoop, DefToTarget, DoIt, RequiredAccesses);
+          forwardTree(TargetStmt, OpVal, DefStmt, DefLoop, DefToTarget, DoIt,
+                      RequiredAccesses);
       switch (OpDecision) {
       case FD_CannotForward:
         assert(!DoIt);
@@ -677,9 +686,10 @@ public:
   ///
   /// @return If DoIt==false, return whether the operand tree can be forwarded.
   ///         If DoIt==true, return FD_DidForward.
-  ForwardingDecision forwardTree(ScopStmt *TargetStmt, Value *UseVal,
-                                 ScopStmt *UseStmt, Loop *UseLoop,
-                                 isl::map UseToTarget, bool DoIt, SmallPtrSetImpl<MemoryAccess*> &RequiredAccesses) {
+  ForwardingDecision
+  forwardTree(ScopStmt *TargetStmt, Value *UseVal, ScopStmt *UseStmt,
+              Loop *UseLoop, isl::map UseToTarget, bool DoIt,
+              SmallPtrSetImpl<MemoryAccess *> &RequiredAccesses) {
     ScopStmt *DefStmt = nullptr;
     Loop *DefLoop = nullptr;
 
@@ -734,8 +744,10 @@ public:
         return FD_CanForwardLeaf;
 
       // If we model read-only scalars, we need to create a MemoryAccess for it.
-	  if (ModelReadOnlyScalars) {
-		 auto *ReadOnlyAcc =  TargetStmt->ensureValueRead(UseVal); RequiredAccesses.insert(ReadOnlyAcc); }
+      if (ModelReadOnlyScalars) {
+        auto *ReadOnlyAcc = TargetStmt->ensureValueRead(UseVal);
+        RequiredAccesses.insert(ReadOnlyAcc);
+      }
 
       NumReadOnlyCopied++;
       TotalReadOnlyCopied++;
@@ -771,20 +783,23 @@ public:
         simplify(DefToTarget);
       }
 
-      ForwardingDecision SpeculativeResult = forwardSpeculatable(
-          TargetStmt, Inst, DefStmt, DefLoop, DefToTarget, DoIt, RequiredAccesses);
+      ForwardingDecision SpeculativeResult =
+          forwardSpeculatable(TargetStmt, Inst, DefStmt, DefLoop, DefToTarget,
+                              DoIt, RequiredAccesses);
       if (SpeculativeResult != FD_NotApplicable)
         return SpeculativeResult;
 
-      ForwardingDecision KnownResult =
-          forwardKnownLoad(TargetStmt, Inst, UseStmt, UseLoop, UseToTarget,
-                           DefStmt, DefLoop, DefToTarget, DoIt, RequiredAccesses);
+      ForwardingDecision KnownResult = forwardKnownLoad(
+          TargetStmt, Inst, UseStmt, UseLoop, UseToTarget, DefStmt, DefLoop,
+          DefToTarget, DoIt, RequiredAccesses);
       if (KnownResult != FD_NotApplicable)
         return KnownResult;
 
-	  ForwardingDecision ReloadResult = reloadKnownContent(TargetStmt, Inst, UseStmt, UseLoop, UseToTarget, DefStmt, DefLoop, DefToTarget, DoIt, RequiredAccesses);
-	  if (ReloadResult != FD_NotApplicable)
-		  return ReloadResult;
+      ForwardingDecision ReloadResult = reloadKnownContent(
+          TargetStmt, Inst, UseStmt, UseLoop, UseToTarget, DefStmt, DefLoop,
+          DefToTarget, DoIt, RequiredAccesses);
+      if (ReloadResult != FD_NotApplicable)
+        return ReloadResult;
 
       // When no method is found to forward the operand tree, we effectively
       // cannot handle it.
@@ -810,19 +825,24 @@ public:
           isl::map::identity(DomSpace.map_from_domain_and_range(DomSpace));
     }
 
-	SmallPtrSet<MemoryAccess*, 8> RequiredAccesses;
-    ForwardingDecision Assessment = forwardTree(Stmt, RA->getAccessValue(), Stmt, InLoop, TargetToUse, false,  RequiredAccesses);
-	assert(RequiredAccesses.empty());
+    SmallPtrSet<MemoryAccess *, 8> RequiredAccesses;
+    ForwardingDecision Assessment =
+        forwardTree(Stmt, RA->getAccessValue(), Stmt, InLoop, TargetToUse,
+                    false, RequiredAccesses);
+    assert(RequiredAccesses.empty());
     assert(Assessment != FD_DidForward);
     if (Assessment != FD_CanForwardTree)
       return false;
 
-    ForwardingDecision Execution = forwardTree(Stmt, RA->getAccessValue(), Stmt, InLoop, TargetToUse, true, RequiredAccesses);
-    assert(Execution == FD_DidForward && "A previous positive assessment must also be executable");
+    ForwardingDecision Execution =
+        forwardTree(Stmt, RA->getAccessValue(), Stmt, InLoop, TargetToUse, true,
+                    RequiredAccesses);
+    assert(Execution == FD_DidForward &&
+           "A previous positive assessment must also be executable");
     (void)Execution;
 
-	if (!RequiredAccesses.count(RA))
-		Stmt->removeSingleMemoryAccess(RA);
+    if (!RequiredAccesses.count(RA))
+      Stmt->removeSingleMemoryAccess(RA);
     return true;
   }
 

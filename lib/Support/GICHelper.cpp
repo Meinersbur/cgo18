@@ -120,7 +120,8 @@ std::string polly::stringFromIslObj(__isl_keep isl_set *set) {
 }
 
 std::string polly::stringFromIslObj(__isl_keep isl_basic_set *bset) {
-	return stringFromIslObjInternal(bset, isl_basic_set_get_ctx, isl_printer_print_basic_set);
+  return stringFromIslObjInternal(bset, isl_basic_set_get_ctx,
+                                  isl_printer_print_basic_set);
 }
 
 std::string polly::stringFromIslObj(__isl_keep isl_union_map *umap) {
