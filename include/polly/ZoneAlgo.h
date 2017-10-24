@@ -330,14 +330,9 @@ public:
   ///
   /// @param FromWrite Use stores as source of information.
   /// @param FromRead  Use loads as source of information.
-  /// @param FromInit  For loads that do read a previously stored value, create
-  /// a dummy value to present itself.
-  /// @param FromReachDef Use reaching definitions as source of information.
   ///
   /// @return { [Element[] -> Zone[]] -> ValInst[] }
-  isl::union_map computeKnown(bool FromWrite, bool FromRead,
-                              bool FromInit = false,
-                              bool FromReachDef = false) const;
+  isl::union_map computeKnown(bool FromWrite, bool FromRead) const;
 };
 
 /// Create a domain-to-unknown value mapping.

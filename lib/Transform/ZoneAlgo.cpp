@@ -995,29 +995,6 @@ isl::union_map ZoneAlgorithm::computeKnownFromMustWrites() const {
 
 isl::union_map ZoneAlgorithm::computeKnownFromLoad() const {
 
-#if 0
-	for (auto &Stmt : *S) {
-		for (auto *MA : Stmt) {
-			if (!MA->isRead())
-				continue;
-			if (!MA->isLatestArrayKind())
-				continue;
-
-			auto AccRel = MA->getLatestAccessRelation();
-
-			// { LoadValInst[] }
-			isl::map LoadValInst;
-			if (MA->isOriginalArrayKind() && isa<LoadInst>(MA->getAccessInstruction()))
-				LoadValInst = makeValInst(cast<LoadInst>(MA->getAccessInstruction()), &Stmt, Stmt.getSurroundingLoop());
-			else
-				continue;
-
-
-
-		}
-	}
-#endif
-
   // { Element[] }
   isl::union_set AllAccessedElts = AllReads.range().unite(AllWrites.range());
 
@@ -1071,63 +1048,8 @@ isl::union_map ZoneAlgorithm::computeKnownFromLoad() const {
 }
 
 // { [Element[] -> Zone[]] -> ValInst[] }
-isl::union_map ZoneAlgorithm::computeKnown(bool FromWrite, bool FromRead,
-                                           bool FromInit,
-                                           bool FromReachDef) const {
+isl::union_map ZoneAlgorithm::computeKnown(bool FromWrite, bool FromRead) const {
   isl::union_map Result = makeEmptyUnionMap();
-
-  if (FromInit) {
-    //  {  Element[] -> Scatter[] }
-    auto AllWritesScatter = AllWrites.apply_domain(Schedule).reverse();
-
-    auto FirstWrite = AllWritesScatter.lexmin();
-
-    //  { Element[] -> Zone[] }
-    auto BeforeWriteUnscalar = beforeScatter(FirstWrite, true);
-
-    // { Element[] }
-    auto NeverWritten = AllReads.domain().subtract(AllWrites.domain());
-
-    auto NeverWrittenUnscalar = isl::union_map::from_domain_and_range(
-        isl::set::universe(ScatterSpace), NeverWritten);
-
-    //  { Element[] -> Zone[] }
-    auto Unscalar = BeforeWriteUnscalar.unite(NeverWrittenUnscalar);
-
-    // { Element[]  -> [[] -> Element[]] }
-    auto X =
-        isl::union_map::from_range(Unscalar.domain()).range_map().reverse();
-    isl::union_map Y = makeEmptyUnionMap();
-    X.foreach_map([&Y](isl::map Map) -> isl::stat {
-      auto NewMap = Map.set_tuple_name(isl::dim::out, "Element");
-      Y = Y.add_map(Map);
-      return isl::stat::ok;
-    });
-
-    //  { [Element[] -> Zone[]] -> "Element"[[] -> Element[]] }
-    auto UnscalarValInst = Unscalar.domain_map().apply_range(Y);
-
-    Result = Result.unite(UnscalarValInst);
-  }
-
-  if (FromReachDef) {
-    // { Element[] -> DomainWrite[] }
-    auto WriteDomain = WriteReachDefZone.domain_factor_domain();
-
-    // { DomainWrite[] -> [DomainWrite[] -> Element[]] }
-    auto X = WriteDomain.reverse().domain_map().reverse();
-    isl::union_map Y = makeEmptyUnionMap();
-    X.foreach_map([&Y](isl::map Map) -> isl::stat {
-      auto NewMap = Map.set_tuple_name(isl::dim::out, "Element");
-      Y = Y.add_map(Map);
-      return isl::stat::ok;
-    });
-
-    // { [Element[] -> Zone[]] -> "Element"[DomainWrite[] -> Element[]] }
-    auto ReachDefValInst = WriteReachDefZone.apply_range(Y);
-
-    Result = Result.unite(ReachDefValInst);
-  }
 
   if (FromWrite)
     Result = Result.unite(computeKnownFromMustWrites());
