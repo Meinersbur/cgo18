@@ -450,26 +450,24 @@ void ZoneAlgorithm::addArrayWriteAccess(MemoryAccess *MA) {
   auto *Stmt = MA->getStatement();
 
   // { Domain[] -> Element[] }
-  auto AccRel = intersectRange(getAccessRelationFor(MA), CompatibleElts);
+  isl::map AccRel = intersectRange(getAccessRelationFor(MA), CompatibleElts);
 
   if (MA->isMustWrite())
-    AllMustWrites =
-        give(isl_union_map_add_map(AllMustWrites.take(), AccRel.copy()));
+    AllMustWrites = AllMustWrites.add_map(AccRel);
 
   if (MA->isMayWrite())
-    AllMayWrites =
-        give(isl_union_map_add_map(AllMayWrites.take(), AccRel.copy()));
+    AllMayWrites = AllMayWrites.add_map(AccRel);
 
   // { Domain[] -> ValInst[] }
-  auto WriteValInstance = getWrittenValue(MA, AccRel);
+  isl::union_map WriteValInstance = getWrittenValue(MA, AccRel);
   if (!WriteValInstance)
     WriteValInstance = makeUnknownForDomain(Stmt);
 
   // { Domain[] -> [Element[] -> Domain[]] }
-  auto IncludeElement = give(isl_map_curry(isl_map_domain_map(AccRel.copy())));
+  isl::map IncludeElement = AccRel.domain_map().curry();
 
   // { [Element[] -> DomainWrite[]] -> ValInst[] }
-  auto EltWriteValInst = WriteValInstance.apply_domain(IncludeElement);
+  isl::union_map EltWriteValInst = WriteValInstance.apply_domain(IncludeElement);
 
   AllWriteValInst = AllWriteValInst.unite(EltWriteValInst);
 }
