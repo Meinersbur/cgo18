@@ -474,61 +474,48 @@ void ZoneAlgorithm::addArrayWriteAccess(MemoryAccess *MA) {
   AllWriteValInst = AllWriteValInst.unite(EltWriteValInst);
 }
 
-bool ZoneAlgorithm::isRecursivePHI(PHINode *PHI) {
-  SmallVector<std::pair<PHINode *, int>, 8> Worklist;
+/// Return whether @p PHI refers (also transitively through other PHIs) to
+/// itself.
+///
+/// loop:
+///   %phi1 = phi [0, %preheader], [%phi1, %loop]
+///   br i1 %c, label %loop, label %exit
+///
+/// exit:
+///   %phi2 = phi [%phi1, %bb]
+///
+/// In this example, %phi1 is recursive, but %phi2 is not.
+static bool isRecursivePHI(PHINode *PHI) {
+  SmallVector<PHINode *, 8> Worklist;
   SmallPtrSet<PHINode *, 8> Visited;
-  Worklist.push_back({PHI, 0});
-  int MaxDepth = 0;
+  Worklist.push_back(PHI);
 
   while (!Worklist.empty()) {
-    PHINode *Cur;
-    int Depth;
-    std::tie(Cur, Depth) = Worklist.pop_back_val();
-
-    if (RecursivePHIs.count(Cur))
-      continue;
+    PHINode *Cur = Worklist.pop_back_val();
 
     if (Visited.count(Cur))
       continue;
     Visited.insert(Cur);
 
-    MaxDepth = std::max(MaxDepth, Depth);
-
-    for (auto &Incoming : Cur->incoming_values()) {
-      auto IncomingVal = Incoming.get();
-      auto IncomingPHI = dyn_cast<PHINode>(IncomingVal);
+    for (Use &Incoming : Cur->incoming_values()) {
+      Value *IncomingVal = Incoming.get();
+      auto *IncomingPHI = dyn_cast<PHINode>(IncomingVal);
       if (!IncomingPHI)
         continue;
 
       if (IncomingPHI == PHI)
         return true;
-      Worklist.push_back({IncomingPHI, Depth + 1});
+      Worklist.push_back(IncomingPHI);
     }
   }
   return false;
 }
 
-int ZoneAlgorithm::recursiveDepth(PHINode *PHI) {
-  if (RecursivePHIs.count(PHI))
-    return 0;
-
-  int MaxDepth = 1;
-  for (auto &Incoming : PHI->incoming_values()) {
-    auto IncomingVal = Incoming.get();
-    auto IncomingPHI = dyn_cast<PHINode>(IncomingVal);
-    if (!IncomingPHI)
-      continue;
-
-    MaxDepth = std::max(MaxDepth, 1 + recursiveDepth(IncomingPHI));
-  }
-  return MaxDepth;
-}
-
 isl::union_map ZoneAlgorithm::computePerPHI(const ScopArrayInfo *SAI) {
   // TODO: If the PHI has an incoming block from before the SCoP, it is not
-  // represented as a ScopStmt.
+  // represented int any ScopStmt.
 
-  auto PHI = cast<PHINode>(SAI->getBasePtr());
+  auto *PHI = cast<PHINode>(SAI->getBasePtr());
   auto It = PerPHIMaps.find(PHI);
   if (It != PerPHIMaps.end())
     return It->second;
@@ -536,36 +523,32 @@ isl::union_map ZoneAlgorithm::computePerPHI(const ScopArrayInfo *SAI) {
   assert(SAI->isPHIKind());
 
   // { DomainPHIWrite[] -> Scatter[] }
-  auto PHIWriteScatter = makeEmptyUnionMap();
+  isl::union_map PHIWriteScatter = makeEmptyUnionMap();
 
   // Collect all incoming block timepoint.
-  for (auto *MA : S->getPHIIncomings(SAI)) {
-    auto Scatter = getScatterFor(MA);
-    PHIWriteScatter =
-        give(isl_union_map_add_map(PHIWriteScatter.take(), Scatter.take()));
+  for (MemoryAccess *MA : S->getPHIIncomings(SAI)) {
+    isl::map Scatter = getScatterFor(MA);
+    PHIWriteScatter = PHIWriteScatter.add_map(Scatter);
   }
 
   // { DomainPHIRead[] -> Scatter[] }
-  auto PHIReadScatter = getScatterFor(S->getPHIRead(SAI));
+  isl::map PHIReadScatter = getScatterFor(S->getPHIRead(SAI));
 
   // { DomainPHIRead[] -> Scatter[] }
-  auto BeforeRead = beforeScatter(PHIReadScatter, true);
+  isl::map BeforeRead = beforeScatter(PHIReadScatter, true);
 
   // { Scatter[] }
-  auto WriteTimes = singleton(give(isl_union_map_range(PHIWriteScatter.copy())),
-                              ScatterSpace);
+  isl::set WriteTimes = singleton(PHIWriteScatter.range(), ScatterSpace);
 
   // { DomainPHIRead[] -> Scatter[] }
-  auto PHIWriteTimes =
-      give(isl_map_intersect_range(BeforeRead.take(), WriteTimes.take()));
-  auto LastPerPHIWrites = give(isl_map_lexmax(PHIWriteTimes.take()));
+  isl::map PHIWriteTimes = BeforeRead.intersect_range(WriteTimes);
+  isl::map LastPerPHIWrites = PHIWriteTimes.lexmax();
 
   // { DomainPHIRead[] -> DomainPHIWrite[] }
-  auto Result = give(
-      isl_union_map_apply_range(isl_union_map_from_map(LastPerPHIWrites.take()),
-                                isl_union_map_reverse(PHIWriteScatter.take())));
-  assert(isl_union_map_is_single_valued(Result.keep()) != isl_bool_false);
-  assert(isl_union_map_is_injective(Result.keep()) != isl_bool_false);
+  isl::union_map Result =
+      isl::union_map(LastPerPHIWrites).apply_range(PHIWriteScatter.reverse());
+  assert(!Result.is_single_valued().is_false());
+  assert(!Result.is_injective().is_false());
 
   PerPHIMaps.insert({PHI, Result});
   return Result;
@@ -891,7 +874,7 @@ void ZoneAlgorithm::computeCommon() {
   isl::union_map AllPHIMaps = makeEmptyUnionMap();
 
   DenseSet<PHINode *> AllPHIs;
-  for (auto &Stmt : *S) {
+  for (ScopStmt &Stmt : *S) {
     for (auto *MA : Stmt) {
       if (!MA->isOriginalPHIKind())
         continue;
@@ -1086,10 +1069,6 @@ isl::union_map ZoneAlgorithm::computeKnownFromLoad() const {
 
   return Result;
 }
-
-// { Element[] -> "Element"[[] -> Element[]] }
-// { Element[] -> "Element"[WriteDomain[] -> Element[]] }
-static isl::map makeElementValInstInst(isl::map At) {}
 
 // { [Element[] -> Zone[]] -> ValInst[] }
 isl::union_map ZoneAlgorithm::computeKnown(bool FromWrite, bool FromRead,

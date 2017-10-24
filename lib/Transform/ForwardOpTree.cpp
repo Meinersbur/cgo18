@@ -270,7 +270,7 @@ public:
       IslQuotaScope QuotaScope = MaxOpGuard.enter();
 
       computeCommon();
-      Known = computeKnown(true, true, false, false);
+      Known = computeKnown(true, true);
 
       // Preexisting ValInsts use the known content analysis of themselves.
       Translator = makeIdentityMap(Known.range(), false);

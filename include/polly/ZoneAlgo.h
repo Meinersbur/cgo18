@@ -16,6 +16,7 @@
 
 #include "llvm/ADT/DenseMap.h"
 #include "llvm/ADT/DenseSet.h"
+#include "llvm/ADT/SmallPtrSet.h"
 #include "isl/isl-noexceptions.h"
 #include <memory>
 
@@ -111,6 +112,26 @@ protected:
   /// { Element[] }
   isl::union_set CompatibleElts;
 
+  /// List of PHIs that may transitively refer to themselves.
+  ///
+  /// Computing them would require a polyhedral transitive closure operation,
+  /// for which isl may only return an approximation. We correctness, we always
+  /// require an exact result. Hence, we exclude such PHIs.
+  llvm::SmallPtrSet<llvm::PHINode *, 4> RecursivePHIs;
+
+  /// PHIs that have been computed.
+  ///
+  /// Computed PHIs are replaced by their incoming values.
+  llvm::DenseSet<llvm::PHINode *> ComputedPHIs;
+
+  /// For computed PHIs, contains the ValInst they stand for.
+  ///
+  /// { PHIValInst[] -> IncomingValInst[] }
+  isl::union_map NormalizedPHI;
+
+  /// Cache for computePerPHI(const ScopArrayInfo *)
+  llvm::SmallDenseMap<llvm::PHINode *, isl::union_map> PerPHIMaps;
+
   /// Prepare the object before computing the zones of @p S.
   ///
   /// @param PassName Name of the pass using this analysis.
@@ -148,12 +169,6 @@ private:
   isl::union_map getWrittenValue(MemoryAccess *MA, isl::map AccRel);
 
   void addArrayWriteAccess(MemoryAccess *MA);
-
-  llvm::SmallDenseSet<llvm::PHINode *, 4> RecursivePHIs;
-  bool isRecursivePHI(llvm::PHINode *PHI);
-  int recursiveDepth(llvm::PHINode *PHI);
-
-  llvm::DenseMap<llvm::PHINode *, isl::union_map> PerPHIMaps;
 
 protected:
   isl::union_set makeEmptyUnionSet() const;
@@ -264,6 +279,10 @@ protected:
   isl::map makeValInst(llvm::Value *Val, ScopStmt *UserStmt, llvm::Loop *Scope,
                        bool IsCertain = true);
 
+  /// Create and normalize a ValInst.
+  ///
+  /// @see makeValInst
+  /// @see normalizeValInst
   isl::union_map makeNormalizedValInst(llvm::Value *Val, ScopStmt *UserStmt,
                                        llvm::Loop *Scope,
                                        bool IsCertain = true);
@@ -272,21 +291,24 @@ protected:
   /// forwarding, DeLICM mapping).
   bool isCompatibleAccess(MemoryAccess *MA);
 
-  bool isNormalized(isl::map Map);
-  bool isNormalized(isl::union_map Map);
-
   /// Compute the different zones.
   void computeCommon();
 
   /// Print the current state of all MemoryAccesses to @p.
   void printAccesses(llvm::raw_ostream &OS, int Indent = 0) const;
 
-  llvm::DenseSet<llvm::PHINode *> ComputedPHIs;
-  isl::union_map NormalizedPHI;
-
+  /// Remove all computed PHIs out of @p Input and replace by their incoming
+  /// value.
   isl::union_map
   normalizeValInst(isl::union_map Input, isl::union_map NormalizedPHIs,
                    llvm::DenseSet<llvm::PHINode *> &TranslatedPHIs);
+
+  /// @{
+  /// Determine whether the argument does not map to any computed PHI. Those
+  /// should have been replaced by their incoming values.
+  bool isNormalized(isl::map Map);
+  bool isNormalized(isl::union_map Map);
+  /// @}
 
 public:
   /// Return the SCoP this object is analyzing.
@@ -308,6 +330,9 @@ public:
   ///
   /// @param FromWrite Use stores as source of information.
   /// @param FromRead  Use loads as source of information.
+  /// @param FromInit  For loads that do read a previously stored value, create
+  /// a dummy value to present itself.
+  /// @param FromReachDef Use reaching definitions as source of information.
   ///
   /// @return { [Element[] -> Zone[]] -> ValInst[] }
   isl::union_map computeKnown(bool FromWrite, bool FromRead,
