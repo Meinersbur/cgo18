@@ -297,11 +297,8 @@ protected:
   /// Print the current state of all MemoryAccesses to @p.
   void printAccesses(llvm::raw_ostream &OS, int Indent = 0) const;
 
-  /// Remove all computed PHIs out of @p Input and replace by their incoming
-  /// value.
-  isl::union_map
-  normalizeValInst(isl::union_map Input, isl::union_map NormalizedPHIs,
-                   llvm::DenseSet<llvm::PHINode *> &TranslatedPHIs);
+
+
 
   /// @{
   /// Determine whether the argument does not map to any computed PHI. Those

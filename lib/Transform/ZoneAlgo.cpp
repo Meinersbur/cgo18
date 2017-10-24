@@ -765,13 +765,44 @@ isl::map ZoneAlgorithm::makeValInst(Value *Val, ScopStmt *UserStmt, Loop *Scope,
   llvm_unreachable("Unhandled use type");
 }
 
+
+/// Remove all computed PHIs out of @p Input and replace by their incoming
+/// value.
+static isl::union_map normalizeValInst(isl::union_map Input,
+	isl::union_map NormalizedPHIs,
+	DenseSet<PHINode *> &TranslatedPHIs) {
+	isl::union_map Result = isl::union_map::empty(Input.get_space());
+	Input.foreach_map([ &Result, &NormalizedPHIs,
+		&TranslatedPHIs](isl::map Map) -> isl::stat {
+		auto Space = Map.get_space();
+		auto RangeSpace = Space.range();
+
+		if (!RangeSpace.is_wrapping()) {
+			Result = Result.add_map(Map);
+			return isl::stat::ok;
+		}
+
+		auto *PHI = dyn_cast<PHINode>(static_cast<Value *>(
+			RangeSpace.unwrap().get_tuple_id(isl::dim::out).get_user()));
+		if (!TranslatedPHIs.count(PHI)) {
+			Result = Result.add_map(Map);
+			return isl::stat::ok;
+		}
+
+		NumPHINormialization++;
+		auto Mapped = isl::union_map(Map).apply_range(NormalizedPHIs);
+		Result = Result.unite(Mapped);
+		return isl::stat::ok;
+	});
+	return Result;
+}
+
 isl::union_map ZoneAlgorithm::makeNormalizedValInst(llvm::Value *Val,
                                                     ScopStmt *UserStmt,
                                                     llvm::Loop *Scope,
                                                     bool IsCertain) {
-  auto ValInst = makeValInst(Val, UserStmt, Scope, IsCertain);
-  auto Normalized =
-      normalizeValInst(ValInst, NormalizedPHI, this->ComputedPHIs);
+  isl::map ValInst = makeValInst(Val, UserStmt, Scope, IsCertain);
+  isl::union_map Normalized = normalizeValInst(ValInst, NormalizedPHI, this->ComputedPHIs);
   return Normalized;
 }
 
@@ -784,35 +815,6 @@ bool ZoneAlgorithm::isCompatibleAccess(MemoryAccess *MA) {
   return isa<StoreInst>(AccInst) || isa<LoadInst>(AccInst);
 }
 
-isl::union_map
-ZoneAlgorithm::normalizeValInst(isl::union_map Input,
-                                isl::union_map NormalizedPHIs,
-                                DenseSet<PHINode *> &TranslatedPHIs) {
-  isl::union_map Result = isl::union_map::empty(Input.get_space());
-  Input.foreach_map([this, &Result, &NormalizedPHIs,
-                     &TranslatedPHIs](isl::map Map) -> isl::stat {
-    auto Space = Map.get_space();
-    auto RangeSpace = Space.range();
-
-    if (!RangeSpace.is_wrapping()) {
-      Result = Result.add_map(Map);
-      return isl::stat::ok;
-    }
-
-    auto *PHI = dyn_cast<PHINode>(static_cast<Value *>(
-        RangeSpace.unwrap().get_tuple_id(isl::dim::out).get_user()));
-    if (!TranslatedPHIs.count(PHI)) {
-      Result = Result.add_map(Map);
-      return isl::stat::ok;
-    }
-
-    NumPHINormialization++;
-    auto Mapped = isl::union_map(Map).apply_range(NormalizedPHIs);
-    Result = Result.unite(Mapped);
-    return isl::stat::ok;
-  });
-  return Result;
-}
 
 bool ZoneAlgorithm::isNormalized(isl::map Map) {
   auto Space = Map.get_space();
