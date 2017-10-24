@@ -98,7 +98,7 @@ protected:
   /// { [Element[] -> DomainWrite[]] -> ValInst[] }
   isl::union_map AllWriteValInst;
 
-  /// All reaching definitions for MemoryKind::Array writes.
+  /// All reaching definitions for  MemoryKind::Array writes.
   /// { [Element[] -> Zone[]] -> DomainWrite[] }
   isl::union_map WriteReachDefZone;
 
@@ -332,10 +332,5 @@ public:
 /// @return { Domain[] -> ValInst[] }
 isl::union_map makeUnknownForDomain(isl::union_set Domain);
 } // namespace polly
-
-isl::union_set expand(const isl::union_set &Arg);
-void expandDump(const isl::union_set &Arg);
-isl::union_map expand(const isl::union_map &Map);
-void expandDump(const isl::union_map &Arg);
 
 #endif /* POLLY_ZONEALGO_H */

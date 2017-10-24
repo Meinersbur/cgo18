@@ -69,52 +69,7 @@ bool isVariableDim(const isl::union_map &UMap) {
     return isl::stat::ok;
   }) == isl::stat::ok;
 }
-} // namespace
 
-/// If @p PwAff maps to a constant, return said constant. If @p Max/@p Min, it
-/// can also be a piecewise constant and it would return the minimum/maximum
-/// value. Otherwise, return NaN.
-isl::val polly::getConstant(isl::pw_aff PwAff, bool Max, bool Min) {
-  assert(!Max || !Min);
-  isl::val Result;
-  PwAff.foreach_piece([=, &Result](isl::set Set, isl::aff Aff) -> isl::stat {
-    if (Result && Result.is_nan())
-      return isl::stat::ok;
-
-    // TODO: If Min/Max, we can also determine a minimum/maximum value if
-    // Set is constant-bounded.
-    if (!Aff.is_cst()) {
-      Result = isl::val::nan(Aff.get_ctx());
-      return isl::stat::error;
-    }
-
-    auto ThisVal = Aff.get_constant_val();
-    if (!Result) {
-      Result = ThisVal;
-      return isl::stat::ok;
-    }
-
-    if (Result.eq(ThisVal))
-      return isl::stat::ok;
-
-    if (Max && ThisVal.gt(Result)) {
-      Result = ThisVal;
-      return isl::stat::ok;
-    }
-
-    if (Min && ThisVal.lt(Result)) {
-      Result = ThisVal;
-      return isl::stat::ok;
-    }
-
-    // Not compatible
-    Result = isl::val::nan(Aff.get_ctx());
-    return isl::stat::error;
-  });
-  return Result;
-}
-
-namespace {
 /// Compute @p UPwAff - @p Val.
 isl::union_pw_aff subtract(isl::union_pw_aff UPwAff, isl::val Val) {
   if (Val.is_zero())

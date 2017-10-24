@@ -525,9 +525,4 @@ void dumpExpanded(__isl_keep isl_union_map *UMap);
 
 } // namespace polly
 
-isl::union_set expand(const isl::union_set &Arg);
-void expandDump(const isl::union_set &Arg);
-isl::union_map expand(const isl::union_map &Map);
-void expandDump(const isl::union_map &Arg);
-
 #endif /* POLLY_ISLTOOLS_H */

@@ -18,8 +18,6 @@
 #include "polly/Support/GICHelper.h"
 
 namespace polly {
-isl::val getConstant(isl::pw_aff PwAff, bool Max, bool Min);
-
 /// Recursively flatten a schedule.
 ///
 /// Reduce the number of scatter dimensions as much as possible without changing
