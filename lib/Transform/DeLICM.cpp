@@ -1256,7 +1256,7 @@ public:
     isl::union_set EltUnused;
     isl::union_map EltKnown, EltWritten;
 
-    { 
+    {
       IslMaxOperationsGuard MaxOpGuard(IslCtx.get(), DelicmMaxOps);
 
       computeCommon();
