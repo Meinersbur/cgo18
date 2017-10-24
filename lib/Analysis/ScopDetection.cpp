@@ -61,7 +61,7 @@
 #include "llvm/Analysis/Loads.h"
 #include "llvm/Analysis/LoopInfo.h"
 #include "llvm/Analysis/MemoryLocation.h"
-#include "llvm/Analysis/OptimizationDiagnosticInfo.h"
+#include "llvm/Analysis/OptimizationRemarkEmitter.h"
 #include "llvm/Analysis/RegionInfo.h"
 #include "llvm/Analysis/ScalarEvolution.h"
 #include "llvm/Analysis/ScalarEvolutionExpressions.h"
@@ -596,7 +596,7 @@ bool ScopDetection::isValidBranch(BasicBlock &BB, BranchInst *BI,
   }
 
   if (auto Load = dyn_cast<LoadInst>(Condition))
-    if (!IsLoopBranch) {
+    if (!IsLoopBranch && Context.CurRegion.contains(Load)) {
       Context.RequiredILS.insert(Load);
       return true;
     }
