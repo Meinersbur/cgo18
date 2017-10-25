@@ -297,9 +297,6 @@ protected:
   /// Print the current state of all MemoryAccesses to @p.
   void printAccesses(llvm::raw_ostream &OS, int Indent = 0) const;
 
-
-
-
   /// @{
   /// Determine whether the argument does not map to any computed PHI. Those
   /// should have been replaced by their incoming values.
