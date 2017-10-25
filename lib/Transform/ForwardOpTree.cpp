@@ -141,6 +141,7 @@ private:
   /// Number of loads forwarded because their value was known.
   int NumKnownLoadsForwarded = 0;
 
+  /// Number of values reloaded from known array elements.
   int NumReloads = 0;
 
   /// How many read-only accesses have been copied.
@@ -276,7 +277,7 @@ public:
       Translator = makeIdentityMap(Known.range(), false);
     }
 
-    if (!NormalizedPHI || !Known || !Translator) {
+    if (  !Known || !Translator || !NormalizedPHI) {
       assert(isl_ctx_last_error(IslCtx.get()) == isl_error_quota);
       Known = nullptr;
       Translator = nullptr;
@@ -348,20 +349,9 @@ public:
     S->addAccessFunction(Access);
     Stmt->addAccess(Access, true);
 
-    simplify(AccessRelation);
     Access->setNewAccessRelation(AccessRelation);
 
     return Access;
-  }
-
-  MemoryAccess *makeReadValueAccess(ScopStmt *Stmt, Instruction *Val,
-                                    isl::map AccessRelation) {
-    auto RA = Stmt->ensureValueRead(Val);
-    assert(RA->isValueKind());
-
-    simplify(AccessRelation);
-    RA->setNewAccessRelation(AccessRelation);
-    return RA;
   }
 
   /// For an llvm::Value defined in @p DefStmt, compute the RAW dependency for a
@@ -405,6 +395,7 @@ public:
   ///                    forwarded. If true, carry out the forwarding. Do not
   ///                    use DoIt==true if an operand tree is not known to be
   ///                    forwardable.
+  /// @param ReqAccs     Accessess are reused and are not allowed to be removed.
   ///
   /// @return FD_NotApplicable  if @p Inst is not a LoadInst.
   ///         FD_CannotForward  if no array element to load from was found.
@@ -416,7 +407,7 @@ public:
   forwardKnownLoad(ScopStmt *TargetStmt, Instruction *Inst, ScopStmt *UseStmt,
                    Loop *UseLoop, isl::map UseToTarget, ScopStmt *DefStmt,
                    Loop *DefLoop, isl::map DefToTarget, bool DoIt,
-                   SmallPtrSetImpl<MemoryAccess *> &RequiredAccesses) {
+                   SmallPtrSetImpl<MemoryAccess *> &ReqAccs) {
     // Cannot do anything without successful known analysis.
     if (Known.is_null() || Translator.is_null() || UseToTarget.is_null() ||
         DefToTarget.is_null() || MaxOpGuard.hasQuotaExceeded())
