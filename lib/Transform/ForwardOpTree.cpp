@@ -51,6 +51,11 @@ static cl::opt<bool>
                  cl::desc("Analyze array contents for load forwarding"),
                  cl::cat(PollyCategory), cl::init(true), cl::Hidden);
 
+static cl::opt<bool>
+NormalizePHIs("polly-optree-normalize-phi",
+	cl::desc("Replace PHIs by their incoming values"),
+	cl::cat(PollyCategory), cl::init(false), cl::Hidden);
+
 static cl::opt<unsigned>
     MaxOps("polly-optree-max-ops",
            cl::desc("Maximum number of ISL operations to invest for known "
@@ -280,6 +285,8 @@ public:
       IslQuotaScope QuotaScope = MaxOpGuard.enter();
 
       computeCommon();
+	  if (NormalizePHIs)
+		computeNormalizedPHIs();
       Known = computeKnown(true, true);
 
       // Preexisting ValInsts use the known content analysis of themselves.

@@ -715,10 +715,10 @@ private:
     // When known knowledge is disabled, just return the unknown value. It will
     // either get filtered out or conflict with itself.
     // { DomainDef[] -> ValInst[] }
-    isl::union_map ValInst;
+    isl::map ValInst;
     if (DelicmComputeKnown)
-      ValInst = makeNormalizedValInst(V, DefMA->getStatement(),
-                                      LI->getLoopFor(DefInst->getParent()));
+      ValInst = makeValInst(V, DefMA->getStatement(),
+                            LI->getLoopFor(DefInst->getParent()));
     else
       ValInst = makeUnknownForDomain(DefMA->getStatement());
 
@@ -727,7 +727,8 @@ private:
         give(isl_map_range_product(DefTarget.copy(), Lifetime.copy()));
 
     // { [Element[] -> Zone[]] -> ValInst[] }
-    auto EltKnown = ValInst.apply_domain(EltKnownTranslator);
+    auto EltKnown =
+        give(isl_map_apply_domain(ValInst.copy(), EltKnownTranslator.take()));
     simplify(EltKnown);
 
     // { DomainDef[] -> [Element[] -> Scatter[]] }
@@ -735,7 +736,8 @@ private:
         give(isl_map_range_product(DefTarget.copy(), DefSched.take()));
 
     // { [Element[] -> Scatter[]] -> ValInst[] }
-    auto DefEltSched = ValInst.apply_domain(WrittenTranslator);
+    auto DefEltSched =
+        give(isl_map_apply_domain(ValInst.copy(), WrittenTranslator.take()));
     simplify(DefEltSched);
 
     Knowledge Proposed(EltZone, nullptr, filterKnownValInst(EltKnown),
@@ -797,14 +799,13 @@ private:
     NumberOfMappedValueScalars += 1;
   }
 
-  isl::union_map makeNormalizedValInst(Value *Val, ScopStmt *UserStmt,
-                                       Loop *Scope, bool IsCertain = true) {
+  isl::map makeValInst(Value *Val, ScopStmt *UserStmt, Loop *Scope,
+                       bool IsCertain = true) {
     // When known knowledge is disabled, just return the unknown value. It will
     // either get filtered out or conflict with itself.
     if (!DelicmComputeKnown)
       return makeUnknownForDomain(UserStmt);
-    return ZoneAlgorithm::makeNormalizedValInst(Val, UserStmt, Scope,
-                                                IsCertain);
+    return ZoneAlgorithm::makeValInst(Val, UserStmt, Scope, IsCertain);
   }
 
   /// Express the incoming values of a PHI for each incoming statement in an
@@ -825,8 +826,8 @@ private:
       auto Incoming = MA->getIncoming();
       assert(!Incoming.empty());
       if (Incoming.size() == 1) {
-        ValInst = makeNormalizedValInst(Incoming[0].second, WriteStmt,
-                                        LI->getLoopFor(Incoming[0].first));
+        ValInst = makeValInst(Incoming[0].second, WriteStmt,
+                              LI->getLoopFor(Incoming[0].first));
       } else {
         // If the PHI is in a subregion's exit node it can have multiple
         // incoming values (+ maybe another incoming edge from an unrelated

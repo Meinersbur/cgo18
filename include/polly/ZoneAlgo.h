@@ -294,6 +294,9 @@ protected:
   /// Compute the different zones.
   void computeCommon();
 
+  ///  Compute the normalization map that replaces PHIs by their incoming values.
+  void computeNormalizedPHIs();
+
   /// Print the current state of all MemoryAccesses to @p.
   void printAccesses(llvm::raw_ostream &OS, int Indent = 0) const;
 

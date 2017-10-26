@@ -857,100 +857,12 @@ void ZoneAlgorithm::computeCommon() {
   AllWriteValInst = makeEmptyUnionMap();
   AllReadValInst = makeEmptyUnionMap();
 
-  for (auto &Stmt : *S) {
-    for (auto *MA : Stmt) {
-      if (MA->isPHIKind() && MA->isRead()) {
-        // TODO: Can be more efficient
-        auto *PHI = cast<PHINode>(MA->getAccessInstruction());
-        if (isRecursivePHI(PHI)) {
-          NumRecursivePHIs++;
-          RecursivePHIs.insert(PHI);
-        }
-      }
-    }
-  }
+  // Default to empty, i.e. no normalization/replacement is taking place. Call computeNormalizedPHIs() to initialize.
+  NormalizedPHI = makeEmptyUnionMap();
+  ComputedPHIs.clear();
 
-  // { PHIValInst[] -> IncomingValInst[] }
-  isl::union_map AllPHIMaps = makeEmptyUnionMap();
-
-  DenseSet<PHINode *> AllPHIs;
   for (ScopStmt &Stmt : *S) {
-    for (auto *MA : Stmt) {
-      if (!MA->isOriginalPHIKind())
-        continue;
-      if (!MA->isRead())
-        continue;
-
-      auto *PHI = cast<PHINode>(MA->getAccessInstruction());
-      if (RecursivePHIs.count(PHI))
-        continue;
-
-      auto SAI = MA->getOriginalScopArrayInfo();
-
-      // { PHIDomain[] -> PHIValInst[] }
-      auto PHIValInst = makeValInst(PHI, &Stmt, Stmt.getSurroundingLoop());
-
-      // { Scatter[] -> PHIValInst[] }
-      // auto ScatterValInst = PHIValInst.apply_domain(  getScatterFor(&Stmt) );
-
-      // { PHIValInst[] -> IncomingValInst[] }
-      // isl::union_map PHIMap = makeEmptyUnionMap();
-
-      // { IncomingDomain[] -> IncomingValInst[] }
-      isl::union_map IncomingValInsts = makeEmptyUnionMap();
-
-      for (auto *MA : S->getPHIIncomings(SAI)) {
-        auto IncomingStmt = MA->getStatement();
-        auto Incoming = MA->getIncoming();
-        Value *IncomingVal = PHI;
-        if (Incoming.size() == 1)
-          IncomingVal = Incoming[0].second;
-
-        // { Scatter[] -> IncomingDomain[] }
-        //  auto ReachDef =
-        //  getScalarReachingDefinition(IncomingStmt->getDomain());
-
-        // { PHIValInst[] -> IncomingDomain[] }
-        // auto ReachDefValInst = ReachDef.apply_domain(ScatterValInst);
-
-        // TODO: For Incoming.size() > 1, ensure that [RegionStmtDomain[] ->
-        // Val_PHI[]] is the ValInst.
-        // { IncomingDomain[] -> IncomingValInst[] }
-        auto IncomingValInst = makeValInst(IncomingVal, IncomingStmt,
-                                           IncomingStmt->getSurroundingLoop());
-
-        // { PHIValInst[] -> IncomingValInst[] }
-        // auto IncomingMap = ReachDefValInst.apply_range(IncomingValInst);
-
-        // PHIMap = PHIMap.add_map(IncomingMap);
-        IncomingValInsts = IncomingValInsts.add_map(IncomingValInst);
-      }
-
-      // { PHIDomain[] -> IncomingDomain[] }
-      auto PerPHI = computePerPHI(SAI);
-
-      // { PHIValInst[] -> IncomingValInst[] }
-      auto PHIMap =
-          PerPHI.apply_domain(PHIValInst).apply_range(IncomingValInsts);
-      assert(!PHIMap.is_single_valued().is_false());
-
-      PHIMap = normalizeValInst(PHIMap, AllPHIMaps, AllPHIs);
-      AllPHIs.insert(PHI);
-      AllPHIMaps = normalizeValInst(AllPHIMaps, PHIMap, AllPHIs);
-
-      AllPHIMaps = AllPHIMaps.unite(PHIMap);
-      NumNormalizablePHIs++;
-    }
-  }
-
-  ComputedPHIs = AllPHIs;
-  NormalizedPHI = AllPHIMaps;
-  simplify(NormalizedPHI);
-
-  assert(!NormalizedPHI || isNormalized(NormalizedPHI));
-
-  for (auto &Stmt : *S) {
-    for (auto *MA : Stmt) {
+    for (MemoryAccess *MA : Stmt) {
       if (!MA->isLatestArrayKind())
         continue;
 
@@ -963,13 +875,93 @@ void ZoneAlgorithm::computeCommon() {
   }
 
   // { DomainWrite[] -> Element[] }
-  AllWrites =
-      give(isl_union_map_union(AllMustWrites.copy(), AllMayWrites.copy()));
+  AllWrites = give(isl_union_map_union(AllMustWrites.copy(), AllMayWrites.copy()));
 
   // { [Element[] -> Zone[]] -> DomainWrite[] }
-  WriteReachDefZone =
-      computeReachingDefinition(Schedule, AllWrites, false, true);
+  WriteReachDefZone = computeReachingDefinition(Schedule, AllWrites, false, true);
   simplify(WriteReachDefZone);
+}
+
+void ZoneAlgorithm::computeNormalizedPHIs() {
+	for (ScopStmt &Stmt : *S) {
+		for (MemoryAccess *MA : Stmt) {
+			if (MA->isPHIKind() && MA->isRead()) {
+				// TODO: Can be more efficient
+				auto *PHI = cast<PHINode>(MA->getAccessInstruction());
+				if (isRecursivePHI(PHI)) {
+					NumRecursivePHIs++;
+					RecursivePHIs.insert(PHI);
+				}
+			}
+		}
+	}
+
+	// { PHIValInst[] -> IncomingValInst[] }
+	isl::union_map AllPHIMaps = makeEmptyUnionMap();
+
+	DenseSet<PHINode *> AllPHIs;
+	for (ScopStmt &Stmt : *S) {
+		for (MemoryAccess *MA : Stmt) {
+			if (!MA->isOriginalPHIKind())
+				continue;
+			if (!MA->isRead())
+				continue;
+
+			PHINode *PHI = cast<PHINode>(MA->getAccessInstruction());
+			if (RecursivePHIs.count(PHI))
+				continue;
+
+			const ScopArrayInfo* SAI = MA->getOriginalScopArrayInfo();
+
+			// { PHIDomain[] -> PHIValInst[] }
+			isl::map PHIValInst = makeValInst(PHI, &Stmt, Stmt.getSurroundingLoop());
+
+
+			// { IncomingDomain[] -> IncomingValInst[] }
+			isl::union_map IncomingValInsts = makeEmptyUnionMap();
+
+			for (auto *MA : S->getPHIIncomings(SAI)) {
+				ScopStmt* IncomingStmt = MA->getStatement();
+				auto Incoming = MA->getIncoming();
+				Value *IncomingVal = PHI;
+				if (Incoming.size() == 1)
+					IncomingVal = Incoming[0].second;
+
+
+				// TODO: For Incoming.size() > 1, ensure that 
+				// [RegionStmtDomain[] -> Val_PHI[]] 
+				// is the ValInst.
+				// { IncomingDomain[] -> IncomingValInst[] }
+				isl::map IncomingValInst = makeValInst(IncomingVal, IncomingStmt,
+					IncomingStmt->getSurroundingLoop());
+
+
+
+				IncomingValInsts = IncomingValInsts.add_map(IncomingValInst);
+			}
+
+			// { PHIDomain[] -> IncomingDomain[] }
+			isl::union_map PerPHI = computePerPHI(SAI);
+
+			// { PHIValInst[] -> IncomingValInst[] }
+			isl::union_map PHIMap =
+				PerPHI.apply_domain(PHIValInst).apply_range(IncomingValInsts);
+			assert(!PHIMap.is_single_valued().is_false());
+
+			PHIMap = normalizeValInst(PHIMap, AllPHIMaps, AllPHIs);
+			AllPHIs.insert(PHI);
+			AllPHIMaps = normalizeValInst(AllPHIMaps, PHIMap, AllPHIs);
+
+			AllPHIMaps = AllPHIMaps.unite(PHIMap);
+			NumNormalizablePHIs++;
+		}
+	}
+
+	ComputedPHIs = AllPHIs;
+	NormalizedPHI = AllPHIMaps;
+	simplify(NormalizedPHI);
+
+	assert(!NormalizedPHI || isNormalized(NormalizedPHI));
 }
 
 void ZoneAlgorithm::printAccesses(llvm::raw_ostream &OS, int Indent) const {
