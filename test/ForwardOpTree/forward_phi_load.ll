@@ -47,3 +47,36 @@ return:
   ret void
 }
 
+
+; CHECK: Statistics {
+; CHECK:     Reloads: 2
+; CHECK: }
+
+; CHECK-NEXT: After statements {
+; CHECK-NEXT:     Stmt_bodyA
+; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 0]
+; CHECK-NEXT:                 [n] -> { Stmt_bodyA[i0] -> MemRef_B[i0] };
+; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 1]
+; CHECK-NEXT:                 [n] -> { Stmt_bodyA[i0] -> MemRef_phi__phi[] };
+; CHECK-NEXT:             Instructions {
+; CHECK-NEXT:                   %val = load double, double* %B_idx
+; CHECK-NEXT:             }
+; CHECK-NEXT:     Stmt_bodyB
+; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 1]
+; CHECK-NEXT:                 [n] -> { Stmt_bodyB[i0] -> MemRef_phi__phi[] };
+; CHECK-NEXT:            new: [n] -> { Stmt_bodyB[i0] -> MemRef_B[i0] };
+; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 1]
+; CHECK-NEXT:                 [n] -> { Stmt_bodyB[i0] -> MemRef_phi[] };
+; CHECK-NEXT:             Instructions {
+; CHECK-NEXT:                   %phi = phi double [ %val, %bodyA ]
+; CHECK-NEXT:             }
+; CHECK-NEXT:     Stmt_bodyC
+; CHECK-NEXT:             MustWriteAccess :=  [Reduction Type: NONE] [Scalar: 0]
+; CHECK-NEXT:                 [n] -> { Stmt_bodyC[i0] -> MemRef_A[i0] };
+; CHECK-NEXT:             ReadAccess :=       [Reduction Type: NONE] [Scalar: 1]
+; CHECK-NEXT:                 [n] -> { Stmt_bodyC[i0] -> MemRef_phi[] };
+; CHECK-NEXT:            new: [n] -> { Stmt_bodyC[i0] -> MemRef_B[i0] };
+; CHECK-NEXT:             Instructions {
+; CHECK-NEXT:                   store double %phi, double* %A_idx
+; CHECK-NEXT:             }
+; CHECK-NEXT: }

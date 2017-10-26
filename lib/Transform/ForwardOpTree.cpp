@@ -52,9 +52,9 @@ static cl::opt<bool>
                  cl::cat(PollyCategory), cl::init(true), cl::Hidden);
 
 static cl::opt<bool>
-NormalizePHIs("polly-optree-normalize-phi",
-	cl::desc("Replace PHIs by their incoming values"),
-	cl::cat(PollyCategory), cl::init(false), cl::Hidden);
+    NormalizePHIs("polly-optree-normalize-phi",
+                  cl::desc("Replace PHIs by their incoming values"),
+                  cl::cat(PollyCategory), cl::init(false), cl::Hidden);
 
 static cl::opt<unsigned>
     MaxOps("polly-optree-max-ops",
@@ -285,8 +285,8 @@ public:
       IslQuotaScope QuotaScope = MaxOpGuard.enter();
 
       computeCommon();
-	  if (NormalizePHIs)
-		computeNormalizedPHIs();
+      if (NormalizePHIs)
+        computeNormalizedPHIs();
       Known = computeKnown(true, true);
 
       // Preexisting ValInsts use the known content analysis of themselves.
@@ -314,7 +314,7 @@ public:
                           << '\n';
     OS.indent(Indent + 4) << "Known loads forwarded: " << NumKnownLoadsForwarded
                           << '\n';
-	OS.indent(Indent + 4) << "Reloads: " << NumReloads<< '\n';
+    OS.indent(Indent + 4) << "Reloads: " << NumReloads << '\n';
     OS.indent(Indent + 4) << "Read-only accesses copied: " << NumReadOnlyCopied
                           << '\n';
     OS.indent(Indent + 4) << "Operand trees forwarded: " << NumForwardedTrees

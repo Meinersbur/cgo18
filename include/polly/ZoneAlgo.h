@@ -126,6 +126,10 @@ protected:
 
   /// For computed PHIs, contains the ValInst they stand for.
   ///
+  /// Only ValInsts in #ComputedPHIs are present in this map. Other values are
+  /// assumed to represent themselves. This is to avoid adding lots of identity
+  /// entries to this map.
+  ///
   /// { PHIValInst[] -> IncomingValInst[] }
   isl::union_map NormalizedPHI;
 
@@ -294,7 +298,8 @@ protected:
   /// Compute the different zones.
   void computeCommon();
 
-  ///  Compute the normalization map that replaces PHIs by their incoming values.
+  ///  Compute the normalization map that replaces PHIs by their incoming
+  ///  values.
   void computeNormalizedPHIs();
 
   /// Print the current state of all MemoryAccesses to @p.
