@@ -168,7 +168,6 @@ inline llvm::APInt APIntFromVal(isl::val V) {
 std::string stringFromIslObj(__isl_keep isl_map *map);
 std::string stringFromIslObj(__isl_keep isl_union_map *umap);
 std::string stringFromIslObj(__isl_keep isl_set *set);
-std::string stringFromIslObj(__isl_keep isl_basic_set *bset);
 std::string stringFromIslObj(__isl_keep isl_union_set *uset);
 std::string stringFromIslObj(__isl_keep isl_schedule *schedule);
 std::string stringFromIslObj(__isl_keep isl_multi_aff *maff);
@@ -195,12 +194,6 @@ inline llvm::raw_ostream &operator<<(llvm::raw_ostream &OS,
 inline llvm::raw_ostream &operator<<(llvm::raw_ostream &OS,
                                      __isl_keep isl_set *Set) {
   OS << polly::stringFromIslObj(Set);
-  return OS;
-}
-
-inline llvm::raw_ostream &operator<<(llvm::raw_ostream &OS,
-                                     __isl_keep isl_basic_set *BSet) {
-  OS << polly::stringFromIslObj(BSet);
   return OS;
 }
 
