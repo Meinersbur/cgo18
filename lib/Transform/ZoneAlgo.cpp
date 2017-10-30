@@ -822,8 +822,8 @@ bool ZoneAlgorithm::isCompatibleAccess(MemoryAccess *MA) {
 }
 
 bool ZoneAlgorithm::isNormalized(isl::map Map) {
-  auto Space = Map.get_space();
-  auto RangeSpace = Space.range();
+  isl::space Space = Map.get_space();
+  isl::space RangeSpace = Space.range();
 
   if (!RangeSpace.is_wrapping())
     return true;
@@ -835,7 +835,7 @@ bool ZoneAlgorithm::isNormalized(isl::map Map) {
 
   // TODO: Check whether we really use the Incoming RegionStmt to identify the
   // normalized value.
-  auto IncomingStmt = static_cast<ScopStmt *>(
+  auto *IncomingStmt = static_cast<ScopStmt *>(
       RangeSpace.unwrap().get_tuple_id(isl::dim::in).get_user());
   if (IncomingStmt->isRegionStmt())
     return true;
@@ -853,6 +853,30 @@ bool ZoneAlgorithm::isNormalized(isl::union_map UMap) {
     return isl::stat::error;
   });
   return Result == isl::stat::ok;
+}
+
+bool ZoneAlgorithm::isNormalizable(MemoryAccess *MA) {
+	assert(MA->isRead());
+
+	// Exclude ExitPHIs, we are assuming that a normalizable PHI has a READ MemoryAccess.
+	if (!MA->isOriginalPHIKind())
+		return false;
+
+	// Exclude recursive PHIs, normalizing them would require a transitive closure.
+	auto *PHI = cast<PHINode>(MA->getAccessInstruction());
+	if (RecursivePHIs.count(PHI))
+		return false;
+
+	// Ensure that each incoming value can be represented by a ValInst[].
+	// We do represent values from statements associated to multiple incoming value by the PHI itself, but we do not handle this case yet (especially isNormalized()) when normalizing.
+	const ScopArrayInfo *SAI = MA->getOriginalScopArrayInfo();
+	auto Incomings = S->getPHIIncomings(SAI);
+	for (MemoryAccess* Incoming : Incomings) {
+		if (Incoming->getIncoming().size() != 1)
+			return false;
+	}
+
+	return true;
 }
 
 void ZoneAlgorithm::computeCommon() {
@@ -921,12 +945,11 @@ void ZoneAlgorithm::computeNormalizedPHIs() {
         continue;
       if (!MA->isRead())
         continue;
+	  if (!isNormalizable(MA))
+		  continue;
 
-      auto *PHI = cast<PHINode>(MA->getAccessInstruction());
-      if (RecursivePHIs.count(PHI))
-        continue;
-
-      const ScopArrayInfo *SAI = MA->getOriginalScopArrayInfo();
+	  auto *PHI = cast<PHINode>( MA->getAccessInstruction());
+	  const ScopArrayInfo *SAI = MA->getOriginalScopArrayInfo();
 
       // { PHIDomain[] -> PHIValInst[] }
       isl::map PHIValInst = makeValInst(PHI, &Stmt, Stmt.getSurroundingLoop());
@@ -937,14 +960,10 @@ void ZoneAlgorithm::computeNormalizedPHIs() {
       // Get all incoming values.
       for (MemoryAccess *MA : S->getPHIIncomings(SAI)) {
         ScopStmt *IncomingStmt = MA->getStatement();
-        auto Incoming = MA->getIncoming();
-        Value *IncomingVal = PHI;
-        if (Incoming.size() == 1)
-          IncomingVal = Incoming[0].second;
 
-        // TODO: For Incoming.size() > 1, ensure that
-        // [RegionStmtDomain[] -> Val_PHI[]]
-        // is the ValInst.
+        auto Incoming = MA->getIncoming();
+		assert(Incoming.size() == 1 && "The incoming value must be representable by something else than the PHI itself") ;
+        Value *  IncomingVal = Incoming[0].second;
 
         // { IncomingDomain[] -> IncomingValInst[] }
         isl::map IncomingValInst = makeValInst(

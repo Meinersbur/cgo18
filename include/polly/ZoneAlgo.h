@@ -312,6 +312,8 @@ protected:
   bool isNormalized(isl::union_map Map);
   /// @}
 
+  bool isNormalizable(MemoryAccess *MA);
+
 public:
   /// Return the SCoP this object is analyzing.
   Scop *getScop() const { return S; }
