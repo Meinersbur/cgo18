@@ -1222,7 +1222,7 @@ public:
     }
     DeLICMAnalyzed++;
 
-    if (!NormalizedPHI || !EltUnused || !EltKnown || !EltWritten) {
+    if (!EltUnused || !EltKnown || !EltWritten) {
       assert(isl_ctx_last_error(IslCtx.get()) == isl_error_quota &&
              "The only reason that these things have not been computed should "
              "be if the max-operations limit hit");

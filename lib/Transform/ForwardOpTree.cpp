@@ -293,11 +293,11 @@ public:
       Translator = makeIdentityMap(Known.range(), false);
     }
 
-    if (!Known || !Translator || !NormalizedPHI) {
+    if (!Known || !Translator || !NormalizedPHIs) {
       assert(isl_ctx_last_error(IslCtx.get()) == isl_error_quota);
       Known = nullptr;
       Translator = nullptr;
-      NormalizedPHI = nullptr;
+      NormalizedPHIs = nullptr;
       DEBUG(dbgs() << "Known analysis exceeded max_operations\n");
       return false;
     }

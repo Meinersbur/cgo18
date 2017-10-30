@@ -484,19 +484,19 @@ void ZoneAlgorithm::addArrayWriteAccess(MemoryAccess *MA) {
 ///   %phi2 = phi [%phi1, %bb]
 ///
 /// In this example, %phi1 is recursive, but %phi2 is not.
-static bool isRecursivePHI(PHINode *PHI) {
-  SmallVector<PHINode *, 8> Worklist;
-  SmallPtrSet<PHINode *, 8> Visited;
+static bool isRecursivePHI(const PHINode *PHI) {
+  SmallVector<const PHINode *, 8> Worklist;
+  SmallPtrSet<const PHINode *, 8> Visited;
   Worklist.push_back(PHI);
 
   while (!Worklist.empty()) {
-    PHINode *Cur = Worklist.pop_back_val();
+    const PHINode *Cur = Worklist.pop_back_val();
 
     if (Visited.count(Cur))
       continue;
     Visited.insert(Cur);
 
-    for (Use &Incoming : Cur->incoming_values()) {
+    for (const Use &Incoming : Cur->incoming_values()) {
       Value *IncomingVal = Incoming.get();
       auto *IncomingPHI = dyn_cast<PHINode>(IncomingVal);
       if (!IncomingPHI)
@@ -768,12 +768,17 @@ isl::map ZoneAlgorithm::makeValInst(Value *Val, ScopStmt *UserStmt, Loop *Scope,
 
 /// Remove all computed PHIs out of @p Input and replace by their incoming
 /// value.
+///
+/// @param Input          { [] -> ValInst[] }
+/// @param ComputedPHIs   Set of PHIs that are replaced. Its ValInst must appear
+///                       on the LHS of @p NormalizedPHIs.
+/// @param NormalizedPHIs { ValInst[] -> ValInst[] }
 static isl::union_map normalizeValInst(isl::union_map Input,
-                                       isl::union_map NormalizedPHIs,
-                                       DenseSet<PHINode *> &TranslatedPHIs) {
+                                       const DenseSet<PHINode *> &ComputedPHIs,
+                                       isl::union_map NormalizedPHIs) {
   isl::union_map Result = isl::union_map::empty(Input.get_space());
   Input.foreach_map(
-      [&Result, &NormalizedPHIs, &TranslatedPHIs](isl::map Map) -> isl::stat {
+      [&Result, &NormalizedPHIs, &ComputedPHIs](isl::map Map) -> isl::stat {
         isl::space Space = Map.get_space();
         isl::space RangeSpace = Space.range();
 
@@ -788,7 +793,7 @@ static isl::union_map normalizeValInst(isl::union_map Input,
             RangeSpace.unwrap().get_tuple_id(isl::dim::out).get_user()));
 
         // If no normalization is necessary, then the ValInst stands for itself.
-        if (!TranslatedPHIs.count(PHI)) {
+        if (!ComputedPHIs.count(PHI)) {
           Result = Result.add_map(Map);
           return isl::stat::ok;
         }
@@ -808,7 +813,7 @@ isl::union_map ZoneAlgorithm::makeNormalizedValInst(llvm::Value *Val,
                                                     bool IsCertain) {
   isl::map ValInst = makeValInst(Val, UserStmt, Scope, IsCertain);
   isl::union_map Normalized =
-      normalizeValInst(ValInst, NormalizedPHI, this->ComputedPHIs);
+      normalizeValInst(ValInst, ComputedPHIs, NormalizedPHIs);
   return Normalized;
 }
 
@@ -861,14 +866,10 @@ bool ZoneAlgorithm::isNormalized(isl::map Map) {
   if (!PHI)
     return true;
 
-  // TODO: Check whether we really use the Incoming RegionStmt to identify the
-  // normalized value.
   auto *IncomingStmt = static_cast<ScopStmt *>(
       RangeSpace.unwrap().get_tuple_id(isl::dim::in).get_user());
-  if (IncomingStmt->isRegionStmt())
-    return true;
-
-  if (RecursivePHIs.count(PHI))
+  MemoryAccess *PHIRead = IncomingStmt->lookupPHIReadOf(PHI);
+  if (!isNormalizable(PHIRead))
     return true;
 
   return false;
@@ -892,7 +893,7 @@ void ZoneAlgorithm::computeCommon() {
 
   // Default to empty, i.e. no normalization/replacement is taking place. Call
   // computeNormalizedPHIs() to initialize.
-  NormalizedPHI = makeEmptyUnionMap();
+  NormalizedPHIs = makeEmptyUnionMap();
   ComputedPHIs.clear();
 
   for (ScopStmt &Stmt : *S) {
@@ -992,9 +993,9 @@ void ZoneAlgorithm::computeNormalizedPHIs() {
       // may reference a previously normalized PHI. At the same time, already
       // normalized PHIs might be normalized to the new PHI. At the end, none of
       // the PHIs may appear on the right-hand-side of the normalization map.
-      PHIMap = normalizeValInst(PHIMap, AllPHIMaps, AllPHIs);
+      PHIMap = normalizeValInst(PHIMap, AllPHIs, AllPHIMaps);
       AllPHIs.insert(PHI);
-      AllPHIMaps = normalizeValInst(AllPHIMaps, PHIMap, AllPHIs);
+      AllPHIMaps = normalizeValInst(AllPHIMaps, AllPHIs, PHIMap);
 
       AllPHIMaps = AllPHIMaps.unite(PHIMap);
       NumNormalizablePHIs++;
@@ -1004,9 +1005,9 @@ void ZoneAlgorithm::computeNormalizedPHIs() {
 
   // Apply the normalization.
   ComputedPHIs = AllPHIs;
-  NormalizedPHI = AllPHIMaps;
+  NormalizedPHIs = AllPHIMaps;
 
-  assert(!NormalizedPHI || isNormalized(NormalizedPHI));
+  assert(!NormalizedPHIs || isNormalized(NormalizedPHIs));
 }
 
 void ZoneAlgorithm::printAccesses(llvm::raw_ostream &OS, int Indent) const {

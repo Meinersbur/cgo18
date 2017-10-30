@@ -115,7 +115,7 @@ protected:
   /// List of PHIs that may transitively refer to themselves.
   ///
   /// Computing them would require a polyhedral transitive closure operation,
-  /// for which isl may only return an approximation. We correctness, we always
+  /// for which isl may only return an approximation. For correctness, we always
   /// require an exact result. Hence, we exclude such PHIs.
   llvm::SmallPtrSet<llvm::PHINode *, 4> RecursivePHIs;
 
@@ -137,7 +137,7 @@ protected:
   ///
   /// The value %phi will be either %val1 or %val2, depending on whether in
   /// iteration i %bb1 or %bb2 has been executed before. In SCoPs, this can be
-  /// determined at compile-time, and the result stored in #NormalizedPHI. For
+  /// determined at compile-time, and the result stored in #NormalizedPHIs. For
   /// the previous example, it could be:
   ///
   ///   { [Stmt[i] -> phi[]] -> [Stmt[0] -> val1[]];
@@ -148,7 +148,7 @@ protected:
   /// entries to this map.
   ///
   /// { PHIValInst[] -> IncomingValInst[] }
-  isl::union_map NormalizedPHI;
+  isl::union_map NormalizedPHIs;
 
   /// Cache for computePerPHI(const ScopArrayInfo *)
   llvm::SmallDenseMap<llvm::PHINode *, isl::union_map> PerPHIMaps;
@@ -304,6 +304,7 @@ protected:
   ///
   /// @see makeValInst
   /// @see normalizeValInst
+  /// @see #NormalizedPHI
   isl::union_map makeNormalizedValInst(llvm::Value *Val, ScopStmt *UserStmt,
                                        llvm::Loop *Scope,
                                        bool IsCertain = true);
@@ -317,17 +318,23 @@ protected:
 
   ///  Compute the normalization map that replaces PHIs by their incoming
   ///  values.
+  ///
+  /// @see #NormalizedPHIs
   void computeNormalizedPHIs();
 
   /// Print the current state of all MemoryAccesses to @p.
   void printAccesses(llvm::raw_ostream &OS, int Indent = 0) const;
 
   /// Is @p MA a PHI READ access that can be normalized?
+  ///
+  /// @see #NormalizedPHIs
   bool isNormalizable(MemoryAccess *MA);
 
   /// @{
   /// Determine whether the argument does not map to any computed PHI. Those
   /// should have been replaced by their incoming values.
+  ///
+  /// @see #NormalizedPHI
   bool isNormalized(isl::map Map);
   bool isNormalized(isl::union_map Map);
   /// @}
