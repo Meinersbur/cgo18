@@ -121,7 +121,7 @@ protected:
 
   /// PHIs that have been computed.
   ///
-  /// Computed PHIs are replaced by their incoming values.
+  /// Computed PHIs are replaced by their incoming values using #NormalizeMap.
   llvm::DenseSet<llvm::PHINode *> ComputedPHIs;
 
   /// For computed PHIs, contains the ValInst they stand for.
@@ -137,7 +137,7 @@ protected:
   ///
   /// The value %phi will be either %val1 or %val2, depending on whether in
   /// iteration i %bb1 or %bb2 has been executed before. In SCoPs, this can be
-  /// determined at compile-time, and the result stored in #NormalizedPHIs. For
+  /// determined at compile-time, and the result stored in #NormalizeMap. For
   /// the previous example, it could be:
   ///
   ///   { [Stmt[i] -> phi[]] -> [Stmt[0] -> val1[]];
@@ -148,7 +148,7 @@ protected:
   /// entries to this map.
   ///
   /// { PHIValInst[] -> IncomingValInst[] }
-  isl::union_map NormalizedPHIs;
+  isl::union_map NormalizeMap;
 
   /// Cache for computePerPHI(const ScopArrayInfo *)
   llvm::SmallDenseMap<llvm::PHINode *, isl::union_map> PerPHIMaps;
@@ -319,7 +319,7 @@ protected:
   ///  Compute the normalization map that replaces PHIs by their incoming
   ///  values.
   ///
-  /// @see #NormalizedPHIs
+  /// @see #NormalizeMap
   void computeNormalizedPHIs();
 
   /// Print the current state of all MemoryAccesses to @p.
@@ -327,7 +327,7 @@ protected:
 
   /// Is @p MA a PHI READ access that can be normalized?
   ///
-  /// @see #NormalizedPHIs
+  /// @see #NormalizeMap
   bool isNormalizable(MemoryAccess *MA);
 
   /// @{

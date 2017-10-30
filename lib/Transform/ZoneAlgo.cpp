@@ -769,16 +769,16 @@ isl::map ZoneAlgorithm::makeValInst(Value *Val, ScopStmt *UserStmt, Loop *Scope,
 /// Remove all computed PHIs out of @p Input and replace by their incoming
 /// value.
 ///
-/// @param Input          { [] -> ValInst[] }
-/// @param ComputedPHIs   Set of PHIs that are replaced. Its ValInst must appear
-///                       on the LHS of @p NormalizedPHIs.
-/// @param NormalizedPHIs { ValInst[] -> ValInst[] }
+/// @param Input        { [] -> ValInst[] }
+/// @param ComputedPHIs Set of PHIs that are replaced. Its ValInst must appear
+///                     on the LHS of @p NormalizeMap.
+/// @param NormalizeMap { ValInst[] -> ValInst[] }
 static isl::union_map normalizeValInst(isl::union_map Input,
                                        const DenseSet<PHINode *> &ComputedPHIs,
-                                       isl::union_map NormalizedPHIs) {
+                                       isl::union_map NormalizeMap) {
   isl::union_map Result = isl::union_map::empty(Input.get_space());
   Input.foreach_map(
-      [&Result, &NormalizedPHIs, &ComputedPHIs](isl::map Map) -> isl::stat {
+      [&Result, &ComputedPHIs, &NormalizeMap](isl::map Map) -> isl::stat {
         isl::space Space = Map.get_space();
         isl::space RangeSpace = Space.range();
 
@@ -799,7 +799,7 @@ static isl::union_map normalizeValInst(isl::union_map Input,
         }
 
         // Otherwise, apply the normalization.
-        isl::union_map Mapped = isl::union_map(Map).apply_range(NormalizedPHIs);
+        isl::union_map Mapped = isl::union_map(Map).apply_range(NormalizeMap);
         Result = Result.unite(Mapped);
         NumPHINormialization++;
         return isl::stat::ok;
@@ -813,7 +813,7 @@ isl::union_map ZoneAlgorithm::makeNormalizedValInst(llvm::Value *Val,
                                                     bool IsCertain) {
   isl::map ValInst = makeValInst(Val, UserStmt, Scope, IsCertain);
   isl::union_map Normalized =
-      normalizeValInst(ValInst, ComputedPHIs, NormalizedPHIs);
+      normalizeValInst(ValInst, ComputedPHIs, NormalizeMap);
   return Normalized;
 }
 
@@ -893,7 +893,7 @@ void ZoneAlgorithm::computeCommon() {
 
   // Default to empty, i.e. no normalization/replacement is taking place. Call
   // computeNormalizedPHIs() to initialize.
-  NormalizedPHIs = makeEmptyUnionMap();
+  NormalizeMap = makeEmptyUnionMap();
   ComputedPHIs.clear();
 
   for (ScopStmt &Stmt : *S) {
@@ -1005,9 +1005,9 @@ void ZoneAlgorithm::computeNormalizedPHIs() {
 
   // Apply the normalization.
   ComputedPHIs = AllPHIs;
-  NormalizedPHIs = AllPHIMaps;
+  NormalizeMap = AllPHIMaps;
 
-  assert(!NormalizedPHIs || isNormalized(NormalizedPHIs));
+  assert(!NormalizeMap || isNormalized(NormalizeMap));
 }
 
 void ZoneAlgorithm::printAccesses(llvm::raw_ostream &OS, int Indent) const {
