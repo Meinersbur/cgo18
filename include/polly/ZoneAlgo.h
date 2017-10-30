@@ -126,6 +126,23 @@ protected:
 
   /// For computed PHIs, contains the ValInst they stand for.
   ///
+  /// To show an example, assume the following PHINode:
+  ///
+  ///   Stmt:
+  ///     %phi = phi double [%val1, %bb1], [%val2, %bb2]
+  ///
+  /// It's ValInst is:
+  ///
+  ///   { [Stmt[i] -> phi[]] }
+  ///
+  /// The value %phi will be either %val1 or %val2, depending on whether in
+  /// iteration i %bb1 or %bb2 has been executed before. In SCoPs, this can be
+  /// determined at compile-time, and the result stored in #NormalizedPHI. For
+  /// the previous example, it could be:
+  ///
+  ///   { [Stmt[i] -> phi[]] -> [Stmt[0] -> val1[]];
+  ///     [Stmt[i] -> phi[]] -> [Stmt[i] -> val2[]] : i > 0 }
+  ///
   /// Only ValInsts in #ComputedPHIs are present in this map. Other values are
   /// assumed to represent themselves. This is to avoid adding lots of identity
   /// entries to this map.
@@ -305,14 +322,15 @@ protected:
   /// Print the current state of all MemoryAccesses to @p.
   void printAccesses(llvm::raw_ostream &OS, int Indent = 0) const;
 
+  /// Is @p MA a PHI READ access that can be normalized?
+  bool isNormalizable(MemoryAccess *MA);
+
   /// @{
   /// Determine whether the argument does not map to any computed PHI. Those
   /// should have been replaced by their incoming values.
   bool isNormalized(isl::map Map);
   bool isNormalized(isl::union_map Map);
   /// @}
-
-  bool isNormalizable(MemoryAccess *MA);
 
 public:
   /// Return the SCoP this object is analyzing.
