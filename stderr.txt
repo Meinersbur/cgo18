@@ -1,0 +1,191 @@
+$ perf stat ls
+
+ Performance counter stats for 'ls':
+
+          2.040420      task-clock (msec)         #    0.805 CPUs utilized          
+                 0      context-switches          #    0.000 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+               244      page-faults               #    0.120 M/sec                  
+         7,187,165      cycles                    #    3.522 GHz                    
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+         6,860,184      instructions              #    0.95  insns per cycle        
+         1,333,712      branches                  #  653.646 M/sec                  
+            15,470      branch-misses             #    1.16% of all branches        
+
+       0.002535473 seconds time elapsed
+
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && git remote add official http://llvm.org/git/llvm.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && git fetch official --prune)
+From http://llvm.org/git/llvm
+   1536007..d619fda  master     -> official/master
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && git remote add github-mirror https://github.com/llvm-mirror/llvm.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && git fetch github-mirror --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && git remote add meinersbur git@meinersbur.de:llvm.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git remote add official http://llvm.org/git/clang.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git fetch official --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git remote add github-mirror https://github.com/llvm-mirror/clang.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git fetch github-mirror --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git remote add meinersbur git@meinersbur.de:clang.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git checkout --detach)
+HEAD is now at 68e0414... Driver: default to `unsigned int` `wchar_t` for ARM
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && git checkout --detach --force 68e041468bfb4a364acdfa32abb0c7e38cfb938e)
+HEAD is now at 68e0414... Driver: default to `unsigned int` `wchar_t` for ARM
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git remote add official http://llvm.org/git/test-suite.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git fetch official --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git remote add github-mirror https://github.com/llvm-mirror/test-suite.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git fetch github-mirror --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git remote add meinersbur git@meinersbur.de:test-suite.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git checkout --detach)
+HEAD is now at abffb5e... Merge remote-tracking branch 'official/master' into HEAD
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && git checkout --detach --force abffb5e306ab31e5f83fb16c6bb0a22754e698c2)
+HEAD is now at abffb5e... Merge remote-tracking branch 'official/master' into HEAD
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git remote add official http://llvm.org/git/libcxxabi.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git fetch official --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git remote add github-mirror https://github.com/llvm-mirror/libcxxabi.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git fetch github-mirror --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git remote add meinersbur git@meinersbur.de:libcxxabi.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git checkout --detach)
+HEAD is now at 05ba328... Fix ASAN build with older compiler-rt versions.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && git checkout --detach --force 05ba3281482304ae8de31123a594972a495da06d)
+HEAD is now at 05ba328... Fix ASAN build with older compiler-rt versions.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git remote add official http://llvm.org/git/libcxx.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git fetch official --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git remote add github-mirror https://github.com/llvm-mirror/libcxx.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git fetch github-mirror --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git remote add meinersbur git@meinersbur.de:libcxx.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git checkout --detach)
+HEAD is now at 9bc42cf... Initial triage
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && git checkout --detach --force 9bc42cf1d7e0f098d04b9837f126d4187b4e3c55)
+HEAD is now at 9bc42cf... Initial triage
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && git checkout --detach)
+HEAD is now at e78fad8... [GVN][NFC] Mark instruction for deletion instead of immediate erasing in LoadPRE
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && git checkout --detach --force e78fad81ecb318619aabe6639e4ab54d11c1fc9e)
+HEAD is now at e78fad8... [GVN][NFC] Mark instruction for deletion instead of immediate erasing in LoadPRE
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm && LC_ALL=C git log e78fad81ecb318619aabe6639e4ab54d11c1fc9e -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/tools/clang && LC_ALL=C git log 68e041468bfb4a364acdfa32abb0c7e38cfb938e -n1)
+$ (cd /scratch/shared/leone/krusemi/execslave/work && LC_ALL=C git rev-parse HEAD)
+$ (cd /scratch/shared/leone/krusemi/execslave/work && LC_ALL=C git log 828ec53990e44e82422dec6b45f4d367fe12e6e5 -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite && LC_ALL=C git log abffb5e306ab31e5f83fb16c6bb0a22754e698c2 -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxxabi && LC_ALL=C git log 05ba3281482304ae8de31123a594972a495da06d -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm/projects/libcxx && LC_ALL=C git log 9bc42cf1d7e0f098d04b9837f126d4187b4e3c55 -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm-build && cmake /users/krusemi/scratch/execslave/persistent/llvm -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=-DLLVM_ENABLE_STATS=ON -DCMAKE_CXX_FLAGS=-DLLVM_ENABLE_STATS=ON -DLLVM_TOOL_POLLY_BUILD=ON -DLLVM_POLLY_BUILD=ON -DLLVM_EXTERNAL_POLLY_SOURCE_DIR=/scratch/shared/leone/krusemi/execslave/work -DLLVM_TARGETS_TO_BUILD=X86 -DCMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc -DLLVM_ENABLE_ASSERTIONS=ON)
+$ (cd /users/krusemi/scratch/execslave/persistent/llvm-build && ninja clang llvm-size cxx_shared)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && cmake /users/krusemi/scratch/execslave/persistent/llvm/projects/test-suite -GNinja '-DTEST_SUITE_HOST_CC=gcc;-std=c99' -DTEST_SUITE_ENABLE_BITCODE_TESTS=OFF -DCMAKE_C_COMPILER=/users/krusemi/scratch/execslave/persistent/llvm-build/bin/clang -DCMAKE_CXX_COMPILER=/users/krusemi/scratch/execslave/persistent/llvm-build/bin/clang++ '-DTEST_SUITE_SUBDIRS=Polybench/Polybench-boost;Performance/Polybench-421' -DCMAKE_BUILD_TYPE=Release -DTEST_SUITE_LLVM_SIZE=/users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-size -DTEST_SUITE_LIT=/users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -DTEST_SUITE_COLLECT_STATS=ON '-DCMAKE_C_FLAGS=-mllvm -polly -ffast-math -march=native -DEXTRALARGE_DATASET -fno-exceptions -mllvm -polly-only-func=kernel_ -mllvm -polly-optree-max-ops=0 -mllvm -inline-threshold=4096 -mllvm -polly-optree-normalize-phi -mllvm -polly-position=before-vectorizer -mllvm -polly-enable-simplify=0 -mllvm -polly-enable-optree=0 -mllvm -polly-enable-delicm=0' '-DCMAKE_CXX_FLAGS=-stdlib=libc++ -L /users/krusemi/scratch/execslave/persistent/llvm-build/lib -mllvm -polly -ffast-math -march=native -DEXTRALARGE_DATASET -fno-exceptions -mllvm -polly-only-func=kernel_ -mllvm -polly-optree-max-ops=0 -mllvm -inline-threshold=4096 -mllvm -polly-optree-normalize-phi -mllvm -polly-position=before-vectorizer -mllvm -polly-enable-simplify=0 -mllvm -polly-enable-optree=0 -mllvm -polly-enable-delicm=0' '-DTEST_SUITE_LIT_FLAGS=-j1;-s;-o;/scratch/shared/leone/krusemi/execslave/work/run-test-suite/output.json;Polybench/Polybench-boost;Performance/Polybench-421')
+-- No reference output found for test Pboost_correlation
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/datamining/correlation/Pboost_correlation.test
+-- No reference output found for test Pboost_covariance
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/datamining/covariance/Pboost_covariance.test
+-- No reference output found for test Pboost_gemm
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/linear-algebra/blas/gemm/Pboost_gemm.test
+-- No reference output found for test Pboost_2mm
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/linear-algebra/kernels/2mm/Pboost_2mm.test
+-- No reference output found for test Pboost_3mm
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Polybench/Polybench-boost/linear-algebra/kernels/3mm/Pboost_3mm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/datamining/correlation/Pb421-perf_correlation.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/datamining/correlation/Pb421-perf-restrict_correlation.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/datamining/covariance/Pb421-perf_covariance.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/datamining/covariance/Pb421-perf-restrict_covariance.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/delicm/rowwisesum/Pb421-perf_rowwisesum.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/delicm/rowwisesum/Pb421-perf-restrict_rowwisesum.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/delicm/columnwisesum/Pb421-perf_columnwisesum.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/delicm/columnwisesum/Pb421-perf-restrict_columnwisesum.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm-interchange.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm-interchange.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm-onestmt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm-onestmt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf_gemm-interchange-onestmt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm-interchange-onestmt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemver/Pb421-perf_gemver.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemver/Pb421-perf-restrict_gemver.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gesummv/Pb421-perf_gesummv.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gesummv/Pb421-perf-restrict_gesummv.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/symm/Pb421-perf_symm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/symm/Pb421-perf-restrict_symm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syr2k/Pb421-perf_syr2k.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syr2k/Pb421-perf-restrict_syr2k.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syrk/Pb421-perf_syrk.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syrk/Pb421-perf-restrict_syrk.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/trmm/Pb421-perf_trmm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/blas/trmm/Pb421-perf-restrict_trmm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/2mm/Pb421-perf_2mm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/2mm/Pb421-perf-restrict_2mm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/3mm/Pb421-perf_3mm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/3mm/Pb421-perf-restrict_3mm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/atax/Pb421-perf_atax.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/atax/Pb421-perf-restrict_atax.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/bicg/Pb421-perf_bicg.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/bicg/Pb421-perf-restrict_bicg.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/doitgen/Pb421-perf_doitgen.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/doitgen/Pb421-perf-restrict_doitgen.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/mvt/Pb421-perf_mvt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/mvt/Pb421-perf-restrict_mvt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/cholesky/Pb421-perf_cholesky.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/cholesky/Pb421-perf-restrict_cholesky.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/durbin/Pb421-perf_durbin.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/durbin/Pb421-perf-restrict_durbin.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/gramschmidt/Pb421-perf_gramschmidt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/gramschmidt/Pb421-perf-restrict_gramschmidt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/lu/Pb421-perf_lu.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/lu/Pb421-perf-restrict_lu.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/ludcmp/Pb421-perf_ludcmp.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/ludcmp/Pb421-perf-restrict_ludcmp.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/trisolv/Pb421-perf_trisolv.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/trisolv/Pb421-perf-restrict_trisolv.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/deriche/Pb421-perf_deriche.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/deriche/Pb421-perf-restrict_deriche.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/floyd-warshall/Pb421-perf_floyd-warshall.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/floyd-warshall/Pb421-perf-restrict_floyd-warshall.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/nussinov/Pb421-perf_nussinov.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/medley/nussinov/Pb421-perf-restrict_nussinov.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/adi/Pb421-perf_adi.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/adi/Pb421-perf-restrict_adi.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/fdtd-2d/Pb421-perf_fdtd-2d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/fdtd-2d/Pb421-perf-restrict_fdtd-2d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/heat-3d/Pb421-perf_heat-3d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/heat-3d/Pb421-perf-restrict_heat-3d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/jacobi-1d/Pb421-perf_jacobi-1d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/jacobi-1d/Pb421-perf-restrict_jacobi-1d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/jacobi-2d/Pb421-perf_jacobi-2d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/jacobi-2d/Pb421-perf-restrict_jacobi-2d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/seidel-2d/Pb421-perf_seidel-2d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/run-test-suite/Performance/Polybench-421/stencils/seidel-2d/Pb421-perf-restrict_seidel-2d.test
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    TEST_SUITE_ENABLE_BITCODE_TESTS
+
+
+$ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && ninja -k0 Polybench/Polybench-boost/all Performance/Polybench-421/all)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-0.json Polybench/Polybench-boost Performance/Polybench-421)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-1.json Polybench/Polybench-boost Performance/Polybench-421)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-2.json Polybench/Polybench-boost Performance/Polybench-421)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-3.json Polybench/Polybench-boost Performance/Polybench-421)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/llvm-build/bin/llvm-lit -j1 -s -o /scratch/shared/leone/krusemi/execslave/work/run-test-suite/output-4.json Polybench/Polybench-boost Performance/Polybench-421)
