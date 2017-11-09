@@ -1,0 +1,5 @@
+RUN: /scratch/shared/leone/krusemi/execslave/work/work3/run-test-suite/Performance/Polybench-421/medley/floyd-warshall/Pb421-perf-restrict_floyd-warshall 
+TIMEFOMOUTPUT: YES
+PREFIX: Pb421-perf-restrict_
+SOURCE: /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite/Performance/Polybench-421/medley/floyd-warshall/floyd-warshall.c
+SOURCEDIR: /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite/Performance/Polybench-421/medley/floyd-warshall
