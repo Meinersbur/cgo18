@@ -1,0 +1,5 @@
+RUN: /scratch/shared/leone/krusemi/execslave/work/work4/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/ludcmp/Pb421-perf-restrict_ludcmp 
+TIMEFOMOUTPUT: YES
+PREFIX: Pb421-perf-restrict_
+SOURCE: /users/krusemi/scratch/execslave/persistent/persistent4/llvm/projects/test-suite/Performance/Polybench-421/linear-algebra/solvers/ludcmp/ludcmp.c
+SOURCEDIR: /users/krusemi/scratch/execslave/persistent/persistent4/llvm/projects/test-suite/Performance/Polybench-421/linear-algebra/solvers/ludcmp
