@@ -1,0 +1,5 @@
+RUN: /scratch/shared/leone/krusemi/execslave/work/work0/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/2mm/Pb421-perf-restrict_2mm 
+TIMEFOMOUTPUT: YES
+PREFIX: Pb421-perf-restrict_
+SOURCE: /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite/Performance/Polybench-421/linear-algebra/kernels/2mm/2mm.c
+SOURCEDIR: /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite/Performance/Polybench-421/linear-algebra/kernels/2mm
