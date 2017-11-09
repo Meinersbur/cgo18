@@ -1,0 +1,5 @@
+RUN: /scratch/shared/leone/krusemi/execslave/work/work1/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/cholesky/Pb421-perf-restrict_cholesky 
+TIMEFOMOUTPUT: YES
+PREFIX: Pb421-perf-restrict_
+SOURCE: /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite/Performance/Polybench-421/linear-algebra/solvers/cholesky/cholesky.c
+SOURCEDIR: /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite/Performance/Polybench-421/linear-algebra/solvers/cholesky
