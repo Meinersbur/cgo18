@@ -1,0 +1,6 @@
+Start: 2017-11-09 18:19:37.058910
+Duration: 0:00:26.611177
+Exit-code: 128
+
+Platform: Linux-2.6.32-573.42.2.el6.x86_64-x86_64-with-redhat-6.7-Santiago
+Processor: x86_64

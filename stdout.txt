@@ -1,0 +1,516 @@
+Running on: leone11
+job config: -v --suite-exec-threads=1 --revision=r317808 --llvm-revision=5be95c616464685ae999906ad030accfd0774bf0 --clang-revision=5140a709d303679fce3218d238fd4ee5043ae851 --libcxxabi-revision=05ba3281482304ae8de31123a594972a495da06d --libcxx-revision=eada02443aaa17a44ef6c8401f042eb48f1a3fcc --suite-revision=3329a21363eef1ffbe488ced0342ab594e193004 --llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON --test-only=Performance/Polybench-421 --test-only=Performance/Polybench-421-boost --suite-build-flags=-ffast-math --suite-build-flags=-march=native --suite-build-flags=-DEXTRALARGE_DATASET --suite-build-flags=-fno-exceptions --suite-build-mllvm=-polly-only-func=kernel_ --suite-build-mllvm=-polly-optree-max-ops=0 --suite-build-mllvm=-inline-threshold=4096 --suite-build-mllvm=-polly-optree-normalize-phi --stats --multisample=5
+Parsed config: ['-v', '--suite-exec-threads=1', '--revision=r317808', '--llvm-revision=5be95c616464685ae999906ad030accfd0774bf0', '--clang-revision=5140a709d303679fce3218d238fd4ee5043ae851', '--libcxxabi-revision=05ba3281482304ae8de31123a594972a495da06d', '--libcxx-revision=eada02443aaa17a44ef6c8401f042eb48f1a3fcc', '--suite-revision=3329a21363eef1ffbe488ced0342ab594e193004', '--llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON', '--test-only=Performance/Polybench-421', '--test-only=Performance/Polybench-421-boost', '--suite-build-flags=-ffast-math', '--suite-build-flags=-march=native', '--suite-build-flags=-DEXTRALARGE_DATASET', '--suite-build-flags=-fno-exceptions', '--suite-build-mllvm=-polly-only-func=kernel_', '--suite-build-mllvm=-polly-optree-max-ops=0', '--suite-build-mllvm=-inline-threshold=4096', '--suite-build-mllvm=-polly-optree-normalize-phi', '--stats', '--multisample=5']
+default config: 
+override config: --llvm-build-cmakedefs=LLVM_TARGETS_TO_BUILD=X86 --libcxx --suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99 --llvm-build-cmakedefs=CMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc --suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF
+effective config: ['-v', '--suite-exec-threads=1', '--revision=r317808', '--llvm-revision=5be95c616464685ae999906ad030accfd0774bf0', '--clang-revision=5140a709d303679fce3218d238fd4ee5043ae851', '--libcxxabi-revision=05ba3281482304ae8de31123a594972a495da06d', '--libcxx-revision=eada02443aaa17a44ef6c8401f042eb48f1a3fcc', '--suite-revision=3329a21363eef1ffbe488ced0342ab594e193004', '--llvm-build-cmakedefs=LLVM_TARGETS_TO_BUILD=X86', '--llvm-build-cmakedefs=CMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc', '--llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON', '--test-only=Performance/Polybench-421', '--test-only=Performance/Polybench-421-boost', '--suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99', '--suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF', '--suite-build-flags=-ffast-math', '--suite-build-flags=-march=native', '--suite-build-flags=-DEXTRALARGE_DATASET', '--suite-build-flags=-fno-exceptions', '--suite-build-mllvm=-polly-only-func=kernel_', '--suite-build-mllvm=-polly-optree-max-ops=0', '--suite-build-mllvm=-inline-threshold=4096', '--suite-build-mllvm=-polly-optree-normalize-phi', '--stats', '--libcxx', '--suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99', '--suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF', '--multisample=5']
+cmake
+CMakeLists.txt
+CREDITS.txt
+docs
+gittool.py
+include
+lib
+LICENSE.txt
+output.txt
+perl.exe.stackdump
+__pycache__
+README
+run-test-suite.py
+stderr.txt
+stdout.txt
+test
+tools
+unittests
+utils
+www
+Has_perf result is True (use_perf=None)
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 0
+cpu cores	: 8
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6392.74
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 2
+cpu cores	: 8
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6392.74
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 4
+cpu cores	: 8
+apicid		: 8
+initial apicid	: 8
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6392.74
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 6
+cpu cores	: 8
+apicid		: 12
+initial apicid	: 12
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6392.74
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 4
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 0
+cpu cores	: 8
+apicid		: 16
+initial apicid	: 16
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6391.89
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 5
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 2
+cpu cores	: 8
+apicid		: 20
+initial apicid	: 20
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6391.89
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 6
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 4
+cpu cores	: 8
+apicid		: 24
+initial apicid	: 24
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6391.89
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 7
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 6
+cpu cores	: 8
+apicid		: 28
+initial apicid	: 28
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6391.89
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 8
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 1
+cpu cores	: 8
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6392.74
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 9
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 3
+cpu cores	: 8
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6392.74
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 10
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 5
+cpu cores	: 8
+apicid		: 10
+initial apicid	: 10
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6392.74
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 11
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 7
+cpu cores	: 8
+apicid		: 14
+initial apicid	: 14
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6392.74
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 12
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 1
+cpu cores	: 8
+apicid		: 18
+initial apicid	: 18
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6391.89
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 13
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 3
+cpu cores	: 8
+apicid		: 22
+initial apicid	: 22
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6391.89
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 14
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 5
+cpu cores	: 8
+apicid		: 26
+initial apicid	: 26
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6391.89
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 15
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+stepping	: 2
+microcode	: 53
+cpu MHz		: 3196.374
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 7
+cpu cores	: 8
+apicid		: 30
+initial apicid	: 30
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 15
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 6391.89
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+
+
+/proc/meminfo:
+MemTotal:       794082400 kB
+MemFree:        778084128 kB
+Buffers:               0 kB
+Cached:          3772504 kB
+SwapCached:            0 kB
+Active:          1283436 kB
+Inactive:        2766268 kB
+Active(anon):    1153524 kB
+Inactive(anon):  2623068 kB
+Active(file):     129912 kB
+Inactive(file):   143200 kB
+Unevictable:     2097152 kB
+Mlocked:           36800 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:                 0 kB
+Writeback:             0 kB
+AnonPages:       2372748 kB
+Mapped:           249464 kB
+Shmem:           3499392 kB
+Slab:            2666088 kB
+SReclaimable:     145596 kB
+SUnreclaim:      2520492 kB
+KernelStack:       14432 kB
+PageTables:        12800 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    794082400 kB
+Committed_AS:    6538276 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:     3184232 kB
+VmallocChunk:   33946924928 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   2156544 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:       12288 kB
+DirectMap2M:     2011136 kB
+DirectMap1G:    803209216 kB
+
+
+/proc/loadavg:
+0.15 0.09 0.12 2/888 11783
+
+
+/proc/uptime:
+3727828.61 56847612.07
+
+
+/proc/version:
+Linux version 2.6.32-573.42.2.el6.x86_64 (mockbuild@x86-031.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-16) (GCC) ) #1 SMP Tue Jun 6 07:38:33 EDT 2017
+
+LLVM source      : /users/krusemi/scratch/execslave/persistent/persistent1/llvm
+LLVM build       : /users/krusemi/scratch/execslave/persistent/persistent1/llvm-build
+test-suite source: /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite
+test-suite build : /scratch/shared/leone/krusemi/execslave/work/work1/run-test-suite
+### Checking out llvm
+## Merging /users/krusemi/scratch/execslave/persistent/persistent1/llvm
+### Checking out polly
+## Chosen not to checkout subproject /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/polly
+### Checking out clang
+## Merging /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang
+### Checking out test-suite
+## Merging /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite
