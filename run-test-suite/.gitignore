@@ -1,0 +1,14 @@
+
+; Exclude all files, but include directories (to make globs below apply)
+*
+!*/
+
+; Include this file, otherwise it is not added to the slave's workdir
+!.gitignore
+
+!*.time
+!*.perfstats
+!*.stats
+!*.out
+!*.stdout
+!*.json
