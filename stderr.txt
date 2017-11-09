@@ -1,0 +1,75 @@
+$ perf stat ls
+
+ Performance counter stats for 'ls':
+
+          2.107826      task-clock (msec)         #    0.826 CPUs utilized          
+                 0      context-switches          #    0.000 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+               244      page-faults               #    0.116 M/sec                  
+         7,293,604      cycles                    #    3.460 GHz                    
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+         6,676,474      instructions              #    0.92  insns per cycle        
+         1,260,539      branches                  #  598.028 M/sec                  
+            15,113      branch-misses             #    1.20% of all branches        
+
+       0.002552087 seconds time elapsed
+
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm && git remote add official http://llvm.org/git/llvm.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm && git fetch official --prune)
+From http://llvm.org/git/llvm
+   a5b99ed..d90f53e  master     -> official/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm && git remote add github-mirror https://github.com/llvm-mirror/llvm.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm && git fetch github-mirror --prune)
+From https://github.com/llvm-mirror/llvm
+   a5b99ed..d90f53e  master     -> github-mirror/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm && git remote add meinersbur git@meinersbur.de:llvm.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm && git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/tools/clang && git remote add official http://llvm.org/git/clang.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/tools/clang && git fetch official --prune)
+From http://llvm.org/git/clang
+   9d17442..a5d15d1  master     -> official/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/tools/clang && git remote add github-mirror https://github.com/llvm-mirror/clang.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/tools/clang && git fetch github-mirror --prune)
+From https://github.com/llvm-mirror/clang
+   9d17442..a5d15d1  master     -> github-mirror/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/tools/clang && git remote add meinersbur git@meinersbur.de:clang.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/tools/clang && git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/tools/clang && git checkout --detach)
+HEAD is now at e2686b2... SystemZ Swift TargetInfo: swifterror support in the backend is broken
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/tools/clang && git checkout --detach --force 5140a709d303679fce3218d238fd4ee5043ae851)
+Previous HEAD position was e2686b2... SystemZ Swift TargetInfo: swifterror support in the backend is broken
+HEAD is now at 5140a70... [VirtualFileSystem] InMemoryFileSystem::addFile(): Type and Perms
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git remote add official http://llvm.org/git/test-suite.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git fetch official --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git remote add github-mirror https://github.com/llvm-mirror/test-suite.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git fetch github-mirror --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git remote add github git@github.com:Meinersbur/test-suite.git)
+fatal: remote github already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git fetch github --prune)
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git remote add meinersbur git@meinersbur.de:test-suite.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git fetch meinersbur --prune)
+From meinersbur.de:test-suite
+ * [new branch]      cgo        -> meinersbur/cgo
+ * [new branch]      external   -> meinersbur/external
+ * [new branch]      master     -> meinersbur/master
+ * [new branch]      pb42_stripped -> meinersbur/pb42_stripped
+ * [new branch]      speccpu2017 -> meinersbur/speccpu2017
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git checkout --detach)
+fatal: You are on a branch yet to be born
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite && git checkout --detach --force 3329a21363eef1ffbe488ced0342ab594e193004)
+fatal: reference is not a tree: 3329a21363eef1ffbe488ced0342ab594e193004
