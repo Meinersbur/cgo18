@@ -1,0 +1,6 @@
+Start: 2017-11-09 14:57:53.849791
+Duration: 0:00:43.288282
+Exit-code: 1
+
+Platform: Linux-2.6.32-573.42.2.el6.x86_64-x86_64-with-redhat-6.7-Santiago
+Processor: x86_64
