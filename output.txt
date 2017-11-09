@@ -1,0 +1,585 @@
+[stdout] Running on: leone10
+[stdout] job config: -v --suite-exec-threads=1 --revision=r317808 --llvm-revision=5be95c616464685ae999906ad030accfd0774bf0 --clang-revision=5140a709d303679fce3218d238fd4ee5043ae851 --libcxxabi-revision=05ba3281482304ae8de31123a594972a495da06d --libcxx-revision=eada02443aaa17a44ef6c8401f042eb48f1a3fcc --suite-revision=3329a21363eef1ffbe488ced0342ab594e193004 --llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON --test-only=Performance/Polybench-421 --test-only=Performance/Polybench-421-boost --suite-build-flags=-ffast-math --suite-build-flags=-march=native --suite-build-flags=-DEXTRALARGE_DATASET --suite-build-flags=-fno-exceptions --suite-build-mllvm=-polly-only-func=kernel_ --suite-build-mllvm=-polly-optree-max-ops=0 --suite-build-mllvm=-inline-threshold=4096 --suite-build-mllvm=-polly-optree-normalize-phi --polly --stats --multisample=5
+[stdout] Parsed config: ['-v', '--suite-exec-threads=1', '--revision=r317808', '--llvm-revision=5be95c616464685ae999906ad030accfd0774bf0', '--clang-revision=5140a709d303679fce3218d238fd4ee5043ae851', '--libcxxabi-revision=05ba3281482304ae8de31123a594972a495da06d', '--libcxx-revision=eada02443aaa17a44ef6c8401f042eb48f1a3fcc', '--suite-revision=3329a21363eef1ffbe488ced0342ab594e193004', '--llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON', '--test-only=Performance/Polybench-421', '--test-only=Performance/Polybench-421-boost', '--suite-build-flags=-ffast-math', '--suite-build-flags=-march=native', '--suite-build-flags=-DEXTRALARGE_DATASET', '--suite-build-flags=-fno-exceptions', '--suite-build-mllvm=-polly-only-func=kernel_', '--suite-build-mllvm=-polly-optree-max-ops=0', '--suite-build-mllvm=-inline-threshold=4096', '--suite-build-mllvm=-polly-optree-normalize-phi', '--polly', '--stats', '--multisample=5']
+[stdout] default config: 
+[stdout] override config: --llvm-build-cmakedefs=LLVM_TARGETS_TO_BUILD=X86 --libcxx --suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99 --llvm-build-cmakedefs=CMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc --suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF
+[stdout] effective config: ['-v', '--suite-exec-threads=1', '--revision=r317808', '--llvm-revision=5be95c616464685ae999906ad030accfd0774bf0', '--clang-revision=5140a709d303679fce3218d238fd4ee5043ae851', '--libcxxabi-revision=05ba3281482304ae8de31123a594972a495da06d', '--libcxx-revision=eada02443aaa17a44ef6c8401f042eb48f1a3fcc', '--suite-revision=3329a21363eef1ffbe488ced0342ab594e193004', '--llvm-build-cmakedefs=LLVM_TARGETS_TO_BUILD=X86', '--llvm-build-cmakedefs=CMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc', '--llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON', '--test-only=Performance/Polybench-421', '--test-only=Performance/Polybench-421-boost', '--suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99', '--suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF', '--suite-build-flags=-ffast-math', '--suite-build-flags=-march=native', '--suite-build-flags=-DEXTRALARGE_DATASET', '--suite-build-flags=-fno-exceptions', '--suite-build-mllvm=-polly-only-func=kernel_', '--suite-build-mllvm=-polly-optree-max-ops=0', '--suite-build-mllvm=-inline-threshold=4096', '--suite-build-mllvm=-polly-optree-normalize-phi', '--polly', '--stats', '--libcxx', '--suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99', '--suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF', '--multisample=5']
+[stderr] $ perf stat ls
+[stdout] cmake
+[stdout] CMakeLists.txt
+[stdout] CREDITS.txt
+[stdout] docs
+[stdout] gittool.py
+[stdout] include
+[stdout] lib
+[stdout] LICENSE.txt
+[stdout] output.txt
+[stdout] perl.exe.stackdump
+[stdout] __pycache__
+[stdout] README
+[stdout] run-test-suite.py
+[stdout] stderr.txt
+[stdout] stdout.txt
+[stdout] test
+[stdout] tools
+[stdout] unittests
+[stdout] utils
+[stdout] www
+[stderr] 
+[stderr]  Performance counter stats for 'ls':
+[stderr] 
+[stderr]           1.929393      task-clock (msec)         #    0.814 CPUs utilized          
+[stderr]                  0      context-switches          #    0.000 K/sec                  
+[stderr]                  0      cpu-migrations            #    0.000 K/sec                  
+[stderr]                244      page-faults               #    0.126 M/sec                  
+[stderr]          6,811,969      cycles                    #    3.531 GHz                    
+[stderr]    <not supported>      stalled-cycles-frontend  
+[stderr]    <not supported>      stalled-cycles-backend   
+[stderr]          6,701,122      instructions              #    0.98  insns per cycle        
+[stderr]          1,267,420      branches                  #  656.901 M/sec                  
+[stderr]             15,512      branch-misses             #    1.22% of all branches        
+[stderr] 
+[stderr]        0.002370170 seconds time elapsed
+[stderr] 
+[stdout] Has_perf result is True (use_perf=None)
+[stdout] 
+[stdout] /proc/cpuinfo:
+[stdout] processor	: 0
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 0
+[stdout] cpu cores	: 8
+[stdout] apicid		: 0
+[stdout] initial apicid	: 0
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.04
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 1
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 2
+[stdout] cpu cores	: 8
+[stdout] apicid		: 4
+[stdout] initial apicid	: 4
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.04
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 2
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 4
+[stdout] cpu cores	: 8
+[stdout] apicid		: 8
+[stdout] initial apicid	: 8
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.04
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 3
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 6
+[stdout] cpu cores	: 8
+[stdout] apicid		: 12
+[stdout] initial apicid	: 12
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.04
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 4
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 0
+[stdout] cpu cores	: 8
+[stdout] apicid		: 16
+[stdout] initial apicid	: 16
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 5
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 2
+[stdout] cpu cores	: 8
+[stdout] apicid		: 20
+[stdout] initial apicid	: 20
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 6
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 4
+[stdout] cpu cores	: 8
+[stdout] apicid		: 24
+[stdout] initial apicid	: 24
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 7
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 6
+[stdout] cpu cores	: 8
+[stdout] apicid		: 28
+[stdout] initial apicid	: 28
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 8
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 1
+[stdout] cpu cores	: 8
+[stdout] apicid		: 2
+[stdout] initial apicid	: 2
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.04
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 9
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 3
+[stdout] cpu cores	: 8
+[stdout] apicid		: 6
+[stdout] initial apicid	: 6
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.04
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 10
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 5
+[stdout] cpu cores	: 8
+[stdout] apicid		: 10
+[stdout] initial apicid	: 10
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.04
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 11
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 7
+[stdout] cpu cores	: 8
+[stdout] apicid		: 14
+[stdout] initial apicid	: 14
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.04
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 12
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 1
+[stdout] cpu cores	: 8
+[stdout] apicid		: 18
+[stdout] initial apicid	: 18
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 13
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 3
+[stdout] cpu cores	: 8
+[stdout] apicid		: 22
+[stdout] initial apicid	: 22
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 14
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 5
+[stdout] cpu cores	: 8
+[stdout] apicid		: 26
+[stdout] initial apicid	: 26
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 15
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.020
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 7
+[stdout] cpu cores	: 8
+[stdout] apicid		: 30
+[stdout] initial apicid	: 30
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] 
+[stdout] 
+[stdout] /proc/meminfo:
+[stdout] MemTotal:       794082400 kB
+[stdout] MemFree:        777801984 kB
+[stdout] Buffers:               0 kB
+[stdout] Cached:          3979648 kB
+[stdout] SwapCached:            0 kB
+[stdout] Active:          1376436 kB
+[stdout] Inactive:        2887128 kB
+[stdout] Active(anon):    1182092 kB
+[stdout] Inactive(anon):  2793248 kB
+[stdout] Active(file):     194344 kB
+[stdout] Inactive(file):    93880 kB
+[stdout] Unevictable:     2097152 kB
+[stdout] Mlocked:           36800 kB
+[stdout] SwapTotal:             0 kB
+[stdout] SwapFree:              0 kB
+[stdout] Dirty:                 0 kB
+[stdout] Writeback:             0 kB
+[stdout] AnonPages:       2377620 kB
+[stdout] Mapped:           338948 kB
+[stdout] Shmem:           3691672 kB
+[stdout] Slab:            2647464 kB
+[stdout] SReclaimable:     127160 kB
+[stdout] SUnreclaim:      2520304 kB
+[stdout] KernelStack:       15120 kB
+[stdout] PageTables:        12340 kB
+[stdout] NFS_Unstable:          0 kB
+[stdout] Bounce:                0 kB
+[stdout] WritebackTmp:          0 kB
+[stdout] CommitLimit:    794082400 kB
+[stdout] Committed_AS:    6769172 kB
+[stdout] VmallocTotal:   34359738367 kB
+[stdout] VmallocUsed:     3274528 kB
+[stdout] VmallocChunk:   33946834808 kB
+[stdout] HardwareCorrupted:     0 kB
+[stdout] AnonHugePages:   2160640 kB
+[stdout] HugePages_Total:       0
+[stdout] HugePages_Free:        0
+[stdout] HugePages_Rsvd:        0
+[stdout] HugePages_Surp:        0
+[stdout] Hugepagesize:       2048 kB
+[stdout] DirectMap4k:       12288 kB
+[stdout] DirectMap2M:     2011136 kB
+[stdout] DirectMap1G:    803209216 kB
+[stdout] 
+[stdout] 
+[stdout] /proc/loadavg:
+[stdout] 0.56 0.56 0.71 2/928 17467
+[stdout] 
+[stdout] 
+[stdout] /proc/uptime:
+[stdout] 3727811.75 53016623.43
+[stdout] 
+[stdout] 
+[stdout] /proc/version:
+[stdout] Linux version 2.6.32-573.42.2.el6.x86_64 (mockbuild@x86-031.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-16) (GCC) ) #1 SMP Tue Jun 6 07:38:33 EDT 2017
+[stdout] 
+[stdout] LLVM source      : /users/krusemi/scratch/execslave/persistent/persistent0/llvm
+[stdout] LLVM build       : /users/krusemi/scratch/execslave/persistent/persistent0/llvm-build
+[stdout] test-suite source: /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite
+[stdout] test-suite build : /scratch/shared/leone/krusemi/execslave/work/work0/run-test-suite
+[stdout] ### Checking out llvm
+[stdout] ## Merging /users/krusemi/scratch/execslave/persistent/persistent0/llvm
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm && git remote add official http://llvm.org/git/llvm.git)
+[stderr] fatal: remote official already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm && git fetch official --prune)
+[stderr] From http://llvm.org/git/llvm
+[stderr]    a4b0c61..d90f53e  master     -> official/master
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm && git remote add github-mirror https://github.com/llvm-mirror/llvm.git)
+[stderr] fatal: remote github-mirror already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm && git fetch github-mirror --prune)
+[stderr] From https://github.com/llvm-mirror/llvm
+[stderr]    a4b0c61..d90f53e  master     -> github-mirror/master
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm && git remote add meinersbur git@meinersbur.de:llvm.git)
+[stderr] fatal: remote meinersbur already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm && git fetch meinersbur --prune)
+[stdout] ### Checking out polly
+[stdout] ## Chosen not to checkout subproject /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/polly
+[stdout] ### Checking out clang
+[stdout] ## Merging /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/clang
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/clang && git remote add official http://llvm.org/git/clang.git)
+[stderr] fatal: remote official already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/clang && git fetch official --prune)
+[stderr] From http://llvm.org/git/clang
+[stderr]    9d17442..a5d15d1  master     -> official/master
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/clang && git remote add github-mirror https://github.com/llvm-mirror/clang.git)
+[stderr] fatal: remote github-mirror already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/clang && git fetch github-mirror --prune)
+[stderr] From https://github.com/llvm-mirror/clang
+[stderr]    9d17442..a5d15d1  master     -> github-mirror/master
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/clang && git remote add meinersbur git@meinersbur.de:clang.git)
+[stderr] fatal: remote meinersbur already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/clang && git fetch meinersbur --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/clang && git checkout --detach)
+[stderr] HEAD is now at e2686b2... SystemZ Swift TargetInfo: swifterror support in the backend is broken
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/tools/clang && git checkout --detach --force 5140a709d303679fce3218d238fd4ee5043ae851)
+[stderr] Previous HEAD position was e2686b2... SystemZ Swift TargetInfo: swifterror support in the backend is broken
+[stderr] HEAD is now at 5140a70... [VirtualFileSystem] InMemoryFileSystem::addFile(): Type and Perms
+[stdout] ### Checking out test-suite
+[stdout] ## Merging /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git remote add official http://llvm.org/git/test-suite.git)
+[stderr] fatal: remote official already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git fetch official --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git remote add github-mirror https://github.com/llvm-mirror/test-suite.git)
+[stderr] fatal: remote github-mirror already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git fetch github-mirror --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git remote add github git@github.com:Meinersbur/test-suite.git)
+[stderr] fatal: remote github already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git fetch github --prune)
+[stderr] Host key verification failed.
+[stderr] fatal: Could not read from remote repository.
+[stderr] 
+[stderr] Please make sure you have the correct access rights
+[stderr] and the repository exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git remote add meinersbur git@meinersbur.de:test-suite.git)
+[stderr] fatal: remote meinersbur already exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git fetch meinersbur --prune)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git checkout --detach)
+[stderr] HEAD is now at ac616a8... Re-add correctness
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite && git checkout --detach --force 3329a21363eef1ffbe488ced0342ab594e193004)
+[stderr] fatal: reference is not a tree: 3329a21363eef1ffbe488ced0342ab594e193004
