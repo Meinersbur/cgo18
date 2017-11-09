@@ -1,0 +1,1146 @@
+[stdout] Running on: leone11
+[stdout] job config: --suite-exec-threads=1 --revision=r317495 --llvm-revision=6cf02b953eb786809e75e20b9f556e4791b2eabe --clang-revision=e2686b2cbccd63ecf0f1f346b7230bf4aa7d6a7f --libcxxabi-revision=05ba3281482304ae8de31123a594972a495da06d --libcxx-revision=2e390822e56bb0dbd876d02f806dc19f0f97f0a6 --suite-revision=4b3ddcc690efc852478fc19640140b5680a04bee --llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON --test-only=Performance/Polybench-421 --test-only=Polybench/Polybench-boost --suite-build-flags=-ffast-math --suite-build-flags=-march=native --suite-build-flags=-DEXTRALARGE_DATASET --suite-build-flags=-fno-exceptions --suite-build-mllvm=-polly-only-func=kernel_ --suite-build-mllvm=-polly-optree-max-ops=0 --suite-build-mllvm=-inline-threshold=4096 --suite-build-mllvm=-polly-optree-normalize-phi --polly --stats --multisample=5
+[stdout] Parsed config: ['--suite-exec-threads=1', '--revision=r317495', '--llvm-revision=6cf02b953eb786809e75e20b9f556e4791b2eabe', '--clang-revision=e2686b2cbccd63ecf0f1f346b7230bf4aa7d6a7f', '--libcxxabi-revision=05ba3281482304ae8de31123a594972a495da06d', '--libcxx-revision=2e390822e56bb0dbd876d02f806dc19f0f97f0a6', '--suite-revision=4b3ddcc690efc852478fc19640140b5680a04bee', '--llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON', '--test-only=Performance/Polybench-421', '--test-only=Polybench/Polybench-boost', '--suite-build-flags=-ffast-math', '--suite-build-flags=-march=native', '--suite-build-flags=-DEXTRALARGE_DATASET', '--suite-build-flags=-fno-exceptions', '--suite-build-mllvm=-polly-only-func=kernel_', '--suite-build-mllvm=-polly-optree-max-ops=0', '--suite-build-mllvm=-inline-threshold=4096', '--suite-build-mllvm=-polly-optree-normalize-phi', '--polly', '--stats', '--multisample=5']
+[stdout] default config: 
+[stdout] override config: --llvm-build-cmakedefs=LLVM_TARGETS_TO_BUILD=X86 --libcxx --suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99 --llvm-build-cmakedefs=CMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc --suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF
+[stdout] effective config: ['--suite-exec-threads=1', '--revision=r317495', '--llvm-revision=6cf02b953eb786809e75e20b9f556e4791b2eabe', '--clang-revision=e2686b2cbccd63ecf0f1f346b7230bf4aa7d6a7f', '--libcxxabi-revision=05ba3281482304ae8de31123a594972a495da06d', '--libcxx-revision=2e390822e56bb0dbd876d02f806dc19f0f97f0a6', '--suite-revision=4b3ddcc690efc852478fc19640140b5680a04bee', '--llvm-build-cmakedefs=LLVM_TARGETS_TO_BUILD=X86', '--llvm-build-cmakedefs=CMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc', '--llvm-build-cmakedefs=LLVM_ENABLE_ASSERTIONS=ON', '--test-only=Performance/Polybench-421', '--test-only=Polybench/Polybench-boost', '--suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99', '--suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF', '--suite-build-flags=-ffast-math', '--suite-build-flags=-march=native', '--suite-build-flags=-DEXTRALARGE_DATASET', '--suite-build-flags=-fno-exceptions', '--suite-build-mllvm=-polly-only-func=kernel_', '--suite-build-mllvm=-polly-optree-max-ops=0', '--suite-build-mllvm=-inline-threshold=4096', '--suite-build-mllvm=-polly-optree-normalize-phi', '--polly', '--stats', '--libcxx', '--suite-build-cmakedefs=TEST_SUITE_HOST_CC=gcc;-std=c99', '--suite-build-cmakedefs=TEST_SUITE_ENABLE_BITCODE_TESTS=OFF', '--multisample=5']
+[stderr] $ perf stat ls
+[stdout] cmake
+[stdout] CMakeLists.txt
+[stdout] CREDITS.txt
+[stdout] docs
+[stdout] gittool.py
+[stdout] include
+[stdout] lib
+[stdout] LICENSE.txt
+[stdout] output.txt
+[stdout] __pycache__
+[stdout] README
+[stdout] run-test-suite
+[stdout] run-test-suite.py
+[stdout] stderr.txt
+[stdout] stdout.txt
+[stdout] test
+[stdout] tools
+[stdout] unittests
+[stdout] utils
+[stdout] www
+[stderr] 
+[stderr]  Performance counter stats for 'ls':
+[stderr] 
+[stderr]           2.083964      task-clock (msec)         #    0.817 CPUs utilized          
+[stderr]                  1      context-switches          #    0.480 K/sec                  
+[stderr]                  0      cpu-migrations            #    0.000 K/sec                  
+[stderr]                244      page-faults               #    0.117 M/sec                  
+[stderr]          7,206,654      cycles                    #    3.458 GHz                    
+[stderr]    <not supported>      stalled-cycles-frontend  
+[stderr]    <not supported>      stalled-cycles-backend   
+[stderr]          6,721,520      instructions              #    0.93  insns per cycle        
+[stderr]          1,272,287      branches                  #  610.513 M/sec                  
+[stderr]             15,517      branch-misses             #    1.22% of all branches        
+[stderr] 
+[stderr]        0.002550042 seconds time elapsed
+[stderr] 
+[stdout] Has_perf result is True (use_perf=None)
+[stdout] 
+[stdout] /proc/cpuinfo:
+[stdout] processor	: 0
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 0
+[stdout] cpu cores	: 8
+[stdout] apicid		: 0
+[stdout] initial apicid	: 0
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.74
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 1
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 2
+[stdout] cpu cores	: 8
+[stdout] apicid		: 4
+[stdout] initial apicid	: 4
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.74
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 2
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 4
+[stdout] cpu cores	: 8
+[stdout] apicid		: 8
+[stdout] initial apicid	: 8
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.74
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 3
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 6
+[stdout] cpu cores	: 8
+[stdout] apicid		: 12
+[stdout] initial apicid	: 12
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.74
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 4
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 0
+[stdout] cpu cores	: 8
+[stdout] apicid		: 16
+[stdout] initial apicid	: 16
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 5
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 2
+[stdout] cpu cores	: 8
+[stdout] apicid		: 20
+[stdout] initial apicid	: 20
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 6
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 4
+[stdout] cpu cores	: 8
+[stdout] apicid		: 24
+[stdout] initial apicid	: 24
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 7
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 6
+[stdout] cpu cores	: 8
+[stdout] apicid		: 28
+[stdout] initial apicid	: 28
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 8
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 1
+[stdout] cpu cores	: 8
+[stdout] apicid		: 2
+[stdout] initial apicid	: 2
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.74
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 9
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 3
+[stdout] cpu cores	: 8
+[stdout] apicid		: 6
+[stdout] initial apicid	: 6
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.74
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 10
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 5
+[stdout] cpu cores	: 8
+[stdout] apicid		: 10
+[stdout] initial apicid	: 10
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.74
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 11
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 0
+[stdout] siblings	: 8
+[stdout] core id		: 7
+[stdout] cpu cores	: 8
+[stdout] apicid		: 14
+[stdout] initial apicid	: 14
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6392.74
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 12
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 1
+[stdout] cpu cores	: 8
+[stdout] apicid		: 18
+[stdout] initial apicid	: 18
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 13
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 3
+[stdout] cpu cores	: 8
+[stdout] apicid		: 22
+[stdout] initial apicid	: 22
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 14
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 5
+[stdout] cpu cores	: 8
+[stdout] apicid		: 26
+[stdout] initial apicid	: 26
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stdout] processor	: 15
+[stdout] vendor_id	: GenuineIntel
+[stdout] cpu family	: 6
+[stdout] model		: 63
+[stdout] model name	: Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz
+[stdout] stepping	: 2
+[stdout] microcode	: 53
+[stdout] cpu MHz		: 3196.374
+[stdout] cache size	: 20480 KB
+[stdout] physical id	: 1
+[stdout] siblings	: 8
+[stdout] core id		: 7
+[stdout] cpu cores	: 8
+[stdout] apicid		: 30
+[stdout] initial apicid	: 30
+[stdout] fpu		: yes
+[stdout] fpu_exception	: yes
+[stdout] cpuid level	: 15
+[stdout] wp		: yes
+[stdout] flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+[stdout] bogomips	: 6391.89
+[stdout] clflush size	: 64
+[stdout] cache_alignment	: 64
+[stdout] address sizes	: 46 bits physical, 48 bits virtual
+[stdout] power management:
+[stdout] 
+[stderr] $ git init /users/krusemi/scratch/execslave/persistent/persistent1/llvm
+[stdout] 
+[stdout] 
+[stdout] /proc/meminfo:
+[stdout] MemTotal:       794082400 kB
+[stdout] MemFree:        778107404 kB
+[stdout] Buffers:               0 kB
+[stdout] Cached:          3755584 kB
+[stdout] SwapCached:            0 kB
+[stdout] Active:          1251712 kB
+[stdout] Inactive:        2779056 kB
+[stdout] Active(anon):    1149864 kB
+[stdout] Inactive(anon):  2624584 kB
+[stdout] Active(file):     101848 kB
+[stdout] Inactive(file):   154472 kB
+[stdout] Unevictable:     2097152 kB
+[stdout] Mlocked:           36800 kB
+[stdout] SwapTotal:             0 kB
+[stdout] SwapFree:              0 kB
+[stdout] Dirty:                 4 kB
+[stdout] Writeback:             0 kB
+[stdout] AnonPages:       2367360 kB
+[stdout] Mapped:           249216 kB
+[stdout] Shmem:           3499248 kB
+[stdout] Slab:            2665084 kB
+[stdout] SReclaimable:     145024 kB
+[stdout] SUnreclaim:      2520060 kB
+[stdout] KernelStack:       14096 kB
+[stdout] PageTables:        11956 kB
+[stdout] NFS_Unstable:          0 kB
+[stdout] Bounce:                0 kB
+[stdout] WritebackTmp:          0 kB
+[stdout] CommitLimit:    794082400 kB
+[stdout] Committed_AS:    6524968 kB
+[stdout] VmallocTotal:   34359738367 kB
+[stdout] VmallocUsed:     3184232 kB
+[stdout] VmallocChunk:   33946924928 kB
+[stdout] HardwareCorrupted:     0 kB
+[stdout] AnonHugePages:   2156544 kB
+[stdout] HugePages_Total:       0
+[stdout] HugePages_Free:        0
+[stdout] HugePages_Rsvd:        0
+[stdout] HugePages_Surp:        0
+[stdout] Hugepagesize:       2048 kB
+[stdout] DirectMap4k:       12288 kB
+[stdout] DirectMap2M:     2011136 kB
+[stdout] DirectMap1G:    803209216 kB
+[stdout] 
+[stdout] 
+[stdout] /proc/loadavg:
+[stdout] 0.11 0.15 0.11 2/868 24874
+[stdout] 
+[stdout] 
+[stdout] /proc/uptime:
+[stdout] 3714196.01 56629956.75
+[stdout] 
+[stdout] 
+[stdout] /proc/version:
+[stdout] Linux version 2.6.32-573.42.2.el6.x86_64 (mockbuild@x86-031.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-16) (GCC) ) #1 SMP Tue Jun 6 07:38:33 EDT 2017
+[stdout] 
+[stdout] LLVM source      : /users/krusemi/scratch/execslave/persistent/persistent1/llvm
+[stdout] LLVM build       : /users/krusemi/scratch/execslave/persistent/persistent1/llvm-build
+[stdout] test-suite source: /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite
+[stdout] test-suite build : /scratch/shared/leone/krusemi/execslave/work/work1/run-test-suite
+[stdout] ### Checking out llvm
+[stdout] ## Creating /users/krusemi/scratch/execslave/persistent/persistent1/llvm
+[stderr] warning: templates not found /users/krusemi/share/git-core/templates
+[stdout] Initialized empty Git repository in /scratch/shared/leone/krusemi/execslave/persistent/persistent1/llvm/.git/
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git config user.email llvm@meinersbur.de)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git remote add official http://llvm.org/git/llvm.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git fetch official --prune)
+[stderr] From http://llvm.org/git/llvm
+[stderr]  * [new branch]      master     -> official/master
+[stderr]  * [new branch]      release_1  -> official/release_1
+[stderr]  * [new branch]      release_16 -> official/release_16
+[stderr]  * [new branch]      release_20 -> official/release_20
+[stderr]  * [new branch]      release_21 -> official/release_21
+[stderr]  * [new branch]      release_22 -> official/release_22
+[stderr]  * [new branch]      release_23 -> official/release_23
+[stderr]  * [new branch]      release_24 -> official/release_24
+[stderr]  * [new branch]      release_25 -> official/release_25
+[stderr]  * [new branch]      release_26 -> official/release_26
+[stderr]  * [new branch]      release_27 -> official/release_27
+[stderr]  * [new branch]      release_28 -> official/release_28
+[stderr]  * [new branch]      release_29 -> official/release_29
+[stderr]  * [new branch]      release_30 -> official/release_30
+[stderr]  * [new branch]      release_31 -> official/release_31
+[stderr]  * [new branch]      release_32 -> official/release_32
+[stderr]  * [new branch]      release_33 -> official/release_33
+[stderr]  * [new branch]      release_34 -> official/release_34
+[stderr]  * [new branch]      release_35 -> official/release_35
+[stderr]  * [new branch]      release_35@215010 -> official/release_35@215010
+[stderr]  * [new branch]      release_36 -> official/release_36
+[stderr]  * [new branch]      release_37 -> official/release_37
+[stderr]  * [new branch]      release_38 -> official/release_38
+[stderr]  * [new branch]      release_39 -> official/release_39
+[stderr]  * [new branch]      release_40 -> official/release_40
+[stderr]  * [new branch]      release_50 -> official/release_50
+[stderr]  * [new branch]      stable     -> official/stable
+[stderr]  * [new branch]      testing    -> official/testing
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git remote add github-mirror https://github.com/llvm-mirror/llvm.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git fetch github-mirror --prune)
+[stderr] From https://github.com/llvm-mirror/llvm
+[stderr]  * [new branch]      master     -> github-mirror/master
+[stderr]  * [new branch]      release_1  -> github-mirror/release_1
+[stderr]  * [new branch]      release_16 -> github-mirror/release_16
+[stderr]  * [new branch]      release_20 -> github-mirror/release_20
+[stderr]  * [new branch]      release_21 -> github-mirror/release_21
+[stderr]  * [new branch]      release_22 -> github-mirror/release_22
+[stderr]  * [new branch]      release_23 -> github-mirror/release_23
+[stderr]  * [new branch]      release_24 -> github-mirror/release_24
+[stderr]  * [new branch]      release_25 -> github-mirror/release_25
+[stderr]  * [new branch]      release_26 -> github-mirror/release_26
+[stderr]  * [new branch]      release_27 -> github-mirror/release_27
+[stderr]  * [new branch]      release_28 -> github-mirror/release_28
+[stderr]  * [new branch]      release_29 -> github-mirror/release_29
+[stderr]  * [new branch]      release_30 -> github-mirror/release_30
+[stderr]  * [new branch]      release_31 -> github-mirror/release_31
+[stderr]  * [new branch]      release_32 -> github-mirror/release_32
+[stderr]  * [new branch]      release_33 -> github-mirror/release_33
+[stderr]  * [new branch]      release_34 -> github-mirror/release_34
+[stderr]  * [new branch]      release_35 -> github-mirror/release_35
+[stderr]  * [new branch]      release_35@215010 -> github-mirror/release_35@215010
+[stderr]  * [new branch]      release_36 -> github-mirror/release_36
+[stderr]  * [new branch]      release_37 -> github-mirror/release_37
+[stderr]  * [new branch]      release_38 -> github-mirror/release_38
+[stderr]  * [new branch]      release_39 -> github-mirror/release_39
+[stderr]  * [new branch]      release_40 -> github-mirror/release_40
+[stderr]  * [new branch]      release_50 -> github-mirror/release_50
+[stderr]  * [new branch]      stable     -> github-mirror/stable
+[stderr]  * [new branch]      testing    -> github-mirror/testing
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git remote add meinersbur git@meinersbur.de:llvm.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git fetch meinersbur --prune)
+[stderr] From meinersbur.de:llvm
+[stderr]  * [new branch]      basicaa    -> meinersbur/basicaa
+[stderr]  * [new branch]      bgclang    -> meinersbur/bgclang
+[stderr]  * [new branch]      bgclang-r180241 -> meinersbur/bgclang-r180241
+[stderr]  * [new branch]      bgclang-r181589 -> meinersbur/bgclang-r181589
+[stderr]  * [new branch]      bgclang-r184137 -> meinersbur/bgclang-r184137
+[stderr]  * [new branch]      bgclang-r185415 -> meinersbur/bgclang-r185415
+[stderr]  * [new branch]      bgclang-r193439 -> meinersbur/bgclang-r193439
+[stderr]  * [new branch]      bgclang-r203443 -> meinersbur/bgclang-r203443
+[stderr]  * [new branch]      bgclang-r205936 -> meinersbur/bgclang-r205936
+[stderr]  * [new branch]      bgclang-r209570 -> meinersbur/bgclang-r209570
+[stderr]  * [new branch]      comparing  -> meinersbur/comparing
+[stderr]  * [new branch]      master     -> meinersbur/master
+[stderr]  * [new branch]      master-r180241 -> meinersbur/master-r180241
+[stderr]  * [new branch]      master-r181589 -> meinersbur/master-r181589
+[stderr]  * [new branch]      master-r184137 -> meinersbur/master-r184137
+[stderr]  * [new branch]      master-r185415 -> meinersbur/master-r185415
+[stderr]  * [new branch]      master-r193439 -> meinersbur/master-r193439
+[stderr]  * [new branch]      master-r203443 -> meinersbur/master-r203443
+[stderr]  * [new branch]      master-r205936 -> meinersbur/master-r205936
+[stderr]  * [new branch]      master-r209570 -> meinersbur/master-r209570
+[stderr]  * [new branch]      molly      -> meinersbur/molly
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git checkout official/master)
+[stderr] Note: checking out 'official/master'.
+[stderr] 
+[stderr] You are in 'detached HEAD' state. You can look around, make experimental
+[stderr] changes and commit them, and you can discard any commits you make in this
+[stderr] state without impacting any branches by performing another checkout.
+[stderr] 
+[stderr] If you want to create a new branch to retain commits you create, you may
+[stderr] do so (now or later) by using -b with the checkout command again. Example:
+[stderr] 
+[stderr]   git checkout -b <new-branch-name>
+[stderr] 
+[stderr] HEAD is now at a5b99ed... Add -print-schedule scheduling comments to inline asm. Differential Revision: https://reviews.llvm.org/D39728
+[stdout] ### Checking out polly
+[stdout] ## Chosen not to checkout subproject /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/polly
+[stdout] ### Checking out clang
+[stdout] ## Creating /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang
+[stderr] $ git init /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang
+[stderr] warning: templates not found /users/krusemi/share/git-core/templates
+[stdout] Initialized empty Git repository in /scratch/shared/leone/krusemi/execslave/persistent/persistent1/llvm/tools/clang/.git/
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git config user.email clang@meinersbur.de)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git remote add official http://llvm.org/git/clang.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git fetch official --prune)
+[stderr] From http://llvm.org/git/clang
+[stderr]  * [new branch]      google/stable -> official/google/stable
+[stderr]  * [new branch]      google/testing -> official/google/testing
+[stderr]  * [new branch]      master     -> official/master
+[stderr]  * [new branch]      release_26 -> official/release_26
+[stderr]  * [new branch]      release_27 -> official/release_27
+[stderr]  * [new branch]      release_28 -> official/release_28
+[stderr]  * [new branch]      release_29 -> official/release_29
+[stderr]  * [new branch]      release_30 -> official/release_30
+[stderr]  * [new branch]      release_31 -> official/release_31
+[stderr]  * [new branch]      release_32 -> official/release_32
+[stderr]  * [new branch]      release_33 -> official/release_33
+[stderr]  * [new branch]      release_34 -> official/release_34
+[stderr]  * [new branch]      release_35 -> official/release_35
+[stderr]  * [new branch]      release_35@215011 -> official/release_35@215011
+[stderr]  * [new branch]      release_36 -> official/release_36
+[stderr]  * [new branch]      release_37 -> official/release_37
+[stderr]  * [new branch]      release_38 -> official/release_38
+[stderr]  * [new branch]      release_39 -> official/release_39
+[stderr]  * [new branch]      release_40 -> official/release_40
+[stderr]  * [new branch]      release_50 -> official/release_50
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git remote add github-mirror https://github.com/llvm-mirror/clang.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git fetch github-mirror --prune)
+[stderr] From https://github.com/llvm-mirror/clang
+[stderr]  * [new branch]      google/stable -> github-mirror/google/stable
+[stderr]  * [new branch]      google/testing -> github-mirror/google/testing
+[stderr]  * [new branch]      master     -> github-mirror/master
+[stderr]  * [new branch]      release_26 -> github-mirror/release_26
+[stderr]  * [new branch]      release_27 -> github-mirror/release_27
+[stderr]  * [new branch]      release_28 -> github-mirror/release_28
+[stderr]  * [new branch]      release_29 -> github-mirror/release_29
+[stderr]  * [new branch]      release_30 -> github-mirror/release_30
+[stderr]  * [new branch]      release_31 -> github-mirror/release_31
+[stderr]  * [new branch]      release_32 -> github-mirror/release_32
+[stderr]  * [new branch]      release_33 -> github-mirror/release_33
+[stderr]  * [new branch]      release_34 -> github-mirror/release_34
+[stderr]  * [new branch]      release_35 -> github-mirror/release_35
+[stderr]  * [new branch]      release_35@215011 -> github-mirror/release_35@215011
+[stderr]  * [new branch]      release_36 -> github-mirror/release_36
+[stderr]  * [new branch]      release_37 -> github-mirror/release_37
+[stderr]  * [new branch]      release_38 -> github-mirror/release_38
+[stderr]  * [new branch]      release_39 -> github-mirror/release_39
+[stderr]  * [new branch]      release_40 -> github-mirror/release_40
+[stderr]  * [new branch]      release_50 -> github-mirror/release_50
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git remote add meinersbur git@meinersbur.de:clang.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git fetch meinersbur --prune)
+[stderr] From meinersbur.de:clang
+[stderr]  * [new branch]      bgclang    -> meinersbur/bgclang
+[stderr]  * [new branch]      bgclang-juqueen -> meinersbur/bgclang-juqueen
+[stderr]  * [new branch]      bgclang-juqueen-r180241 -> meinersbur/bgclang-juqueen-r180241
+[stderr]  * [new branch]      bgclang-juqueen-r181589 -> meinersbur/bgclang-juqueen-r181589
+[stderr]  * [new branch]      bgclang-juqueen-r184137 -> meinersbur/bgclang-juqueen-r184137
+[stderr]  * [new branch]      bgclang-juqueen-r185415 -> meinersbur/bgclang-juqueen-r185415
+[stderr]  * [new branch]      bgclang-juqueen-r193439 -> meinersbur/bgclang-juqueen-r193439
+[stderr]  * [new branch]      bgclang-juqueen-r209570 -> meinersbur/bgclang-juqueen-r209570
+[stderr]  * [new branch]      bgclang-omp-r203443 -> meinersbur/bgclang-omp-r203443
+[stderr]  * [new branch]      bgclang-omp-r205936 -> meinersbur/bgclang-omp-r205936
+[stderr]  * [new branch]      bgclang-omp-r209570 -> meinersbur/bgclang-omp-r209570
+[stderr]  * [new branch]      bgclang-r181589 -> meinersbur/bgclang-r181589
+[stderr]  * [new branch]      bgclang-r184137 -> meinersbur/bgclang-r184137
+[stderr]  * [new branch]      bgclang-r185415 -> meinersbur/bgclang-r185415
+[stderr]  * [new branch]      bgclang-r193439 -> meinersbur/bgclang-r193439
+[stderr]  * [new branch]      bgclang-r203443 -> meinersbur/bgclang-r203443
+[stderr]  * [new branch]      bgclang-r205936 -> meinersbur/bgclang-r205936
+[stderr]  * [new branch]      bgclang-r209570 -> meinersbur/bgclang-r209570
+[stderr]  * [new branch]      juqueen-r181589 -> meinersbur/juqueen-r181589
+[stderr]  * [new branch]      master     -> meinersbur/master
+[stderr]  * [new branch]      master-r180241 -> meinersbur/master-r180241
+[stderr]  * [new branch]      master-r181589 -> meinersbur/master-r181589
+[stderr]  * [new branch]      master-r184137 -> meinersbur/master-r184137
+[stderr]  * [new branch]      master-r185415 -> meinersbur/master-r185415
+[stderr]  * [new branch]      master-r193439 -> meinersbur/master-r193439
+[stderr]  * [new branch]      master-r203443 -> meinersbur/master-r203443
+[stderr]  * [new branch]      master-r205936 -> meinersbur/master-r205936
+[stderr]  * [new branch]      master-r209570 -> meinersbur/master-r209570
+[stderr]  * [new branch]      molly      -> meinersbur/molly
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git checkout official/master)
+[stderr] Note: checking out 'official/master'.
+[stderr] 
+[stderr] You are in 'detached HEAD' state. You can look around, make experimental
+[stderr] changes and commit them, and you can discard any commits you make in this
+[stderr] state without impacting any branches by performing another checkout.
+[stderr] 
+[stderr] If you want to create a new branch to retain commits you create, you may
+[stderr] do so (now or later) by using -b with the checkout command again. Example:
+[stderr] 
+[stderr]   git checkout -b <new-branch-name>
+[stderr] 
+[stderr] HEAD is now at 9d17442... [clang-format] Fix a clang-tidy finding, NFC
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git checkout --detach)
+[stderr] HEAD is now at 9d17442... [clang-format] Fix a clang-tidy finding, NFC
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/tools/clang && git checkout --detach --force e2686b2cbccd63ecf0f1f346b7230bf4aa7d6a7f)
+[stderr] Previous HEAD position was 9d17442... [clang-format] Fix a clang-tidy finding, NFC
+[stderr] HEAD is now at e2686b2... SystemZ Swift TargetInfo: swifterror support in the backend is broken
+[stdout] ### Checking out test-suite
+[stdout] ## Creating /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite
+[stderr] $ git init /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite
+[stderr] warning: templates not found /users/krusemi/share/git-core/templates
+[stdout] Initialized empty Git repository in /scratch/shared/leone/krusemi/execslave/persistent/persistent1/llvm/projects/test-suite/.git/
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git config user.email test-suite@meinersbur.de)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git remote add official http://llvm.org/git/test-suite.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git fetch official --prune)
+[stderr] From http://llvm.org/git/test-suite
+[stderr]  * [new branch]      ggreif     -> official/ggreif
+[stderr]  * [new branch]      master     -> official/master
+[stderr]  * [new branch]      parallel   -> official/parallel
+[stderr]  * [new branch]      release_1  -> official/release_1
+[stderr]  * [new branch]      release_11 -> official/release_11
+[stderr]  * [new branch]      release_12 -> official/release_12
+[stderr]  * [new branch]      release_13 -> official/release_13
+[stderr]  * [new branch]      release_14 -> official/release_14
+[stderr]  * [new branch]      release_15 -> official/release_15
+[stderr]  * [new branch]      release_16 -> official/release_16
+[stderr]  * [new branch]      release_17 -> official/release_17
+[stderr]  * [new branch]      release_18 -> official/release_18
+[stderr]  * [new branch]      release_19 -> official/release_19
+[stderr]  * [new branch]      release_20 -> official/release_20
+[stderr]  * [new branch]      release_21 -> official/release_21
+[stderr]  * [new branch]      release_22 -> official/release_22
+[stderr]  * [new branch]      release_23 -> official/release_23
+[stderr]  * [new branch]      release_24 -> official/release_24
+[stderr]  * [new branch]      release_25 -> official/release_25
+[stderr]  * [new branch]      release_26 -> official/release_26
+[stderr]  * [new branch]      release_27 -> official/release_27
+[stderr]  * [new branch]      release_28 -> official/release_28
+[stderr]  * [new branch]      release_29 -> official/release_29
+[stderr]  * [new branch]      release_30 -> official/release_30
+[stderr]  * [new branch]      release_31 -> official/release_31
+[stderr]  * [new branch]      release_32 -> official/release_32
+[stderr]  * [new branch]      release_33 -> official/release_33
+[stderr]  * [new branch]      release_34 -> official/release_34
+[stderr]  * [new branch]      release_35 -> official/release_35
+[stderr]  * [new branch]      release_350 -> official/release_350
+[stderr]  * [new branch]      release_36 -> official/release_36
+[stderr]  * [new branch]      release_37 -> official/release_37
+[stderr]  * [new branch]      release_38 -> official/release_38
+[stderr]  * [new branch]      release_39 -> official/release_39
+[stderr]  * [new branch]      release_40 -> official/release_40
+[stderr]  * [new branch]      release_50 -> official/release_50
+[stderr]  * [new branch]      svn-tags/May2007 -> official/svn-tags/May2007
+[stderr]  * [new branch]      svn-tags/RELEASE_1 -> official/svn-tags/RELEASE_1
+[stderr]  * [new branch]      svn-tags/RELEASE_11 -> official/svn-tags/RELEASE_11
+[stderr]  * [new branch]      svn-tags/RELEASE_12 -> official/svn-tags/RELEASE_12
+[stderr]  * [new branch]      svn-tags/RELEASE_13 -> official/svn-tags/RELEASE_13
+[stderr]  * [new branch]      svn-tags/RELEASE_14 -> official/svn-tags/RELEASE_14
+[stderr]  * [new branch]      svn-tags/RELEASE_15 -> official/svn-tags/RELEASE_15
+[stderr]  * [new branch]      svn-tags/RELEASE_16 -> official/svn-tags/RELEASE_16
+[stderr]  * [new branch]      svn-tags/RELEASE_20 -> official/svn-tags/RELEASE_20
+[stderr]  * [new branch]      svn-tags/RELEASE_21 -> official/svn-tags/RELEASE_21
+[stderr]  * [new branch]      svn-tags/RELEASE_22 -> official/svn-tags/RELEASE_22
+[stderr]  * [new branch]      svn-tags/RELEASE_23 -> official/svn-tags/RELEASE_23
+[stderr]  * [new branch]      svn-tags/RELEASE_24 -> official/svn-tags/RELEASE_24
+[stderr]  * [new branch]      svn-tags/RELEASE_25 -> official/svn-tags/RELEASE_25
+[stderr]  * [new branch]      svn-tags/RELEASE_26 -> official/svn-tags/RELEASE_26
+[stderr]  * [new branch]      svn-tags/RELEASE_27 -> official/svn-tags/RELEASE_27
+[stderr]  * [new branch]      svn-tags/RELEASE_28 -> official/svn-tags/RELEASE_28
+[stderr]  * [new branch]      svn-tags/RELEASE_29 -> official/svn-tags/RELEASE_29
+[stderr]  * [new branch]      svn-tags/RELEASE_30 -> official/svn-tags/RELEASE_30
+[stderr]  * [new branch]      svn-tags/RELEASE_31 -> official/svn-tags/RELEASE_31
+[stderr]  * [new branch]      svn-tags/RELEASE_32 -> official/svn-tags/RELEASE_32
+[stderr]  * [new branch]      svn-tags/RELEASE_33 -> official/svn-tags/RELEASE_33
+[stderr]  * [new branch]      svn-tags/RELEASE_34 -> official/svn-tags/RELEASE_34
+[stderr]  * [new branch]      svn-tags/RELEASE_342 -> official/svn-tags/RELEASE_342
+[stderr]  * [new branch]      svn-tags/RELEASE_35 -> official/svn-tags/RELEASE_35
+[stderr]  * [new branch]      svn-tags/RELEASE_350 -> official/svn-tags/RELEASE_350
+[stderr]  * [new branch]      svn-tags/RELEASE_351 -> official/svn-tags/RELEASE_351
+[stderr]  * [new branch]      svn-tags/RELEASE_352 -> official/svn-tags/RELEASE_352
+[stderr]  * [new branch]      svn-tags/RELEASE_360 -> official/svn-tags/RELEASE_360
+[stderr]  * [new branch]      svn-tags/RELEASE_361 -> official/svn-tags/RELEASE_361
+[stderr]  * [new branch]      svn-tags/RELEASE_362 -> official/svn-tags/RELEASE_362
+[stderr]  * [new branch]      svn-tags/RELEASE_370 -> official/svn-tags/RELEASE_370
+[stderr]  * [new branch]      svn-tags/RELEASE_371 -> official/svn-tags/RELEASE_371
+[stderr]  * [new branch]      svn-tags/RELEASE_380 -> official/svn-tags/RELEASE_380
+[stderr]  * [new branch]      svn-tags/RELEASE_381 -> official/svn-tags/RELEASE_381
+[stderr]  * [new branch]      svn-tags/RELEASE_390 -> official/svn-tags/RELEASE_390
+[stderr]  * [new branch]      svn-tags/RELEASE_391 -> official/svn-tags/RELEASE_391
+[stderr]  * [new branch]      svn-tags/RELEASE_400 -> official/svn-tags/RELEASE_400
+[stderr]  * [new branch]      svn-tags/RELEASE_401 -> official/svn-tags/RELEASE_401
+[stderr]  * [new branch]      svn-tags/RELEASE_500 -> official/svn-tags/RELEASE_500
+[stderr]  * [new branch]      svn-tags/RELEASE_501 -> official/svn-tags/RELEASE_501
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git remote add github-mirror https://github.com/llvm-mirror/test-suite.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git fetch github-mirror --prune)
+[stderr] From https://github.com/llvm-mirror/test-suite
+[stderr]  * [new branch]      ggreif     -> github-mirror/ggreif
+[stderr]  * [new branch]      master     -> github-mirror/master
+[stderr]  * [new branch]      parallel   -> github-mirror/parallel
+[stderr]  * [new branch]      release_1  -> github-mirror/release_1
+[stderr]  * [new branch]      release_11 -> github-mirror/release_11
+[stderr]  * [new branch]      release_12 -> github-mirror/release_12
+[stderr]  * [new branch]      release_13 -> github-mirror/release_13
+[stderr]  * [new branch]      release_14 -> github-mirror/release_14
+[stderr]  * [new branch]      release_15 -> github-mirror/release_15
+[stderr]  * [new branch]      release_16 -> github-mirror/release_16
+[stderr]  * [new branch]      release_17 -> github-mirror/release_17
+[stderr]  * [new branch]      release_18 -> github-mirror/release_18
+[stderr]  * [new branch]      release_19 -> github-mirror/release_19
+[stderr]  * [new branch]      release_20 -> github-mirror/release_20
+[stderr]  * [new branch]      release_21 -> github-mirror/release_21
+[stderr]  * [new branch]      release_22 -> github-mirror/release_22
+[stderr]  * [new branch]      release_23 -> github-mirror/release_23
+[stderr]  * [new branch]      release_24 -> github-mirror/release_24
+[stderr]  * [new branch]      release_25 -> github-mirror/release_25
+[stderr]  * [new branch]      release_26 -> github-mirror/release_26
+[stderr]  * [new branch]      release_27 -> github-mirror/release_27
+[stderr]  * [new branch]      release_28 -> github-mirror/release_28
+[stderr]  * [new branch]      release_29 -> github-mirror/release_29
+[stderr]  * [new branch]      release_30 -> github-mirror/release_30
+[stderr]  * [new branch]      release_31 -> github-mirror/release_31
+[stderr]  * [new branch]      release_32 -> github-mirror/release_32
+[stderr]  * [new branch]      release_33 -> github-mirror/release_33
+[stderr]  * [new branch]      release_34 -> github-mirror/release_34
+[stderr]  * [new branch]      release_35 -> github-mirror/release_35
+[stderr]  * [new branch]      release_350 -> github-mirror/release_350
+[stderr]  * [new branch]      release_36 -> github-mirror/release_36
+[stderr]  * [new branch]      release_37 -> github-mirror/release_37
+[stderr]  * [new branch]      release_38 -> github-mirror/release_38
+[stderr]  * [new branch]      release_39 -> github-mirror/release_39
+[stderr]  * [new branch]      release_40 -> github-mirror/release_40
+[stderr]  * [new branch]      release_50 -> github-mirror/release_50
+[stderr]  * [new branch]      svn-tags/May2007 -> github-mirror/svn-tags/May2007
+[stderr]  * [new branch]      svn-tags/RELEASE_1 -> github-mirror/svn-tags/RELEASE_1
+[stderr]  * [new branch]      svn-tags/RELEASE_11 -> github-mirror/svn-tags/RELEASE_11
+[stderr]  * [new branch]      svn-tags/RELEASE_12 -> github-mirror/svn-tags/RELEASE_12
+[stderr]  * [new branch]      svn-tags/RELEASE_13 -> github-mirror/svn-tags/RELEASE_13
+[stderr]  * [new branch]      svn-tags/RELEASE_14 -> github-mirror/svn-tags/RELEASE_14
+[stderr]  * [new branch]      svn-tags/RELEASE_15 -> github-mirror/svn-tags/RELEASE_15
+[stderr]  * [new branch]      svn-tags/RELEASE_16 -> github-mirror/svn-tags/RELEASE_16
+[stderr]  * [new branch]      svn-tags/RELEASE_20 -> github-mirror/svn-tags/RELEASE_20
+[stderr]  * [new branch]      svn-tags/RELEASE_21 -> github-mirror/svn-tags/RELEASE_21
+[stderr]  * [new branch]      svn-tags/RELEASE_22 -> github-mirror/svn-tags/RELEASE_22
+[stderr]  * [new branch]      svn-tags/RELEASE_23 -> github-mirror/svn-tags/RELEASE_23
+[stderr]  * [new branch]      svn-tags/RELEASE_24 -> github-mirror/svn-tags/RELEASE_24
+[stderr]  * [new branch]      svn-tags/RELEASE_25 -> github-mirror/svn-tags/RELEASE_25
+[stderr]  * [new branch]      svn-tags/RELEASE_26 -> github-mirror/svn-tags/RELEASE_26
+[stderr]  * [new branch]      svn-tags/RELEASE_27 -> github-mirror/svn-tags/RELEASE_27
+[stderr]  * [new branch]      svn-tags/RELEASE_28 -> github-mirror/svn-tags/RELEASE_28
+[stderr]  * [new branch]      svn-tags/RELEASE_29 -> github-mirror/svn-tags/RELEASE_29
+[stderr]  * [new branch]      svn-tags/RELEASE_30 -> github-mirror/svn-tags/RELEASE_30
+[stderr]  * [new branch]      svn-tags/RELEASE_31 -> github-mirror/svn-tags/RELEASE_31
+[stderr]  * [new branch]      svn-tags/RELEASE_32 -> github-mirror/svn-tags/RELEASE_32
+[stderr]  * [new branch]      svn-tags/RELEASE_33 -> github-mirror/svn-tags/RELEASE_33
+[stderr]  * [new branch]      svn-tags/RELEASE_34 -> github-mirror/svn-tags/RELEASE_34
+[stderr]  * [new branch]      svn-tags/RELEASE_342 -> github-mirror/svn-tags/RELEASE_342
+[stderr]  * [new branch]      svn-tags/RELEASE_35 -> github-mirror/svn-tags/RELEASE_35
+[stderr]  * [new branch]      svn-tags/RELEASE_350 -> github-mirror/svn-tags/RELEASE_350
+[stderr]  * [new branch]      svn-tags/RELEASE_351 -> github-mirror/svn-tags/RELEASE_351
+[stderr]  * [new branch]      svn-tags/RELEASE_352 -> github-mirror/svn-tags/RELEASE_352
+[stderr]  * [new branch]      svn-tags/RELEASE_360 -> github-mirror/svn-tags/RELEASE_360
+[stderr]  * [new branch]      svn-tags/RELEASE_361 -> github-mirror/svn-tags/RELEASE_361
+[stderr]  * [new branch]      svn-tags/RELEASE_362 -> github-mirror/svn-tags/RELEASE_362
+[stderr]  * [new branch]      svn-tags/RELEASE_370 -> github-mirror/svn-tags/RELEASE_370
+[stderr]  * [new branch]      svn-tags/RELEASE_371 -> github-mirror/svn-tags/RELEASE_371
+[stderr]  * [new branch]      svn-tags/RELEASE_380 -> github-mirror/svn-tags/RELEASE_380
+[stderr]  * [new branch]      svn-tags/RELEASE_381 -> github-mirror/svn-tags/RELEASE_381
+[stderr]  * [new branch]      svn-tags/RELEASE_390 -> github-mirror/svn-tags/RELEASE_390
+[stderr]  * [new branch]      svn-tags/RELEASE_391 -> github-mirror/svn-tags/RELEASE_391
+[stderr]  * [new branch]      svn-tags/RELEASE_400 -> github-mirror/svn-tags/RELEASE_400
+[stderr]  * [new branch]      svn-tags/RELEASE_401 -> github-mirror/svn-tags/RELEASE_401
+[stderr]  * [new branch]      svn-tags/RELEASE_500 -> github-mirror/svn-tags/RELEASE_500
+[stderr]  * [new branch]      svn-tags/RELEASE_501 -> github-mirror/svn-tags/RELEASE_501
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git remote add github git@github.com:Meinersbur/test-suite.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git fetch github --prune)
+[stderr] Host key verification failed.
+[stderr] fatal: Could not read from remote repository.
+[stderr] 
+[stderr] Please make sure you have the correct access rights
+[stderr] and the repository exists.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git remote add meinersbur git@meinersbur.de:test-suite.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git fetch meinersbur --prune)
+[stderr] From meinersbur.de:test-suite
+[stderr]  * [new branch]      cgo        -> meinersbur/cgo
+[stderr]  * [new branch]      external   -> meinersbur/external
+[stderr]  * [new branch]      master     -> meinersbur/master
+[stderr]  * [new branch]      pb42_stripped -> meinersbur/pb42_stripped
+[stderr]  * [new branch]      speccpu2017 -> meinersbur/speccpu2017
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git checkout official/master)
+[stderr] Note: checking out 'official/master'.
+[stderr] 
+[stderr] You are in 'detached HEAD' state. You can look around, make experimental
+[stderr] changes and commit them, and you can discard any commits you make in this
+[stderr] state without impacting any branches by performing another checkout.
+[stderr] 
+[stderr] If you want to create a new branch to retain commits you create, you may
+[stderr] do so (now or later) by using -b with the checkout command again. Example:
+[stderr] 
+[stderr]   git checkout -b <new-branch-name>
+[stderr] 
+[stderr] HEAD is now at 8e89fc2... Revert "[test-suite] Revert rL317483 (HACCKernels Benchmark)"
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git checkout --detach)
+[stderr] HEAD is now at 8e89fc2... Revert "[test-suite] Revert rL317483 (HACCKernels Benchmark)"
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite && git checkout --detach --force 4b3ddcc690efc852478fc19640140b5680a04bee)
+[stderr] Previous HEAD position was 8e89fc2... Revert "[test-suite] Revert rL317483 (HACCKernels Benchmark)"
+[stderr] HEAD is now at 4b3ddcc... Merge remote-tracking branch 'official/master' into HEAD
+[stdout] ### Checking out libcxxabi
+[stdout] ## Creating /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi
+[stderr] $ git init /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi
+[stderr] warning: templates not found /users/krusemi/share/git-core/templates
+[stdout] Initialized empty Git repository in /scratch/shared/leone/krusemi/execslave/persistent/persistent1/llvm/projects/libcxxabi/.git/
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git config user.email libcxxabi@meinersbur.de)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git remote add official http://llvm.org/git/libcxxabi.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git fetch official --prune)
+[stderr] From http://llvm.org/git/libcxxabi
+[stderr]  * [new branch]      master     -> official/master
+[stderr]  * [new branch]      release_32 -> official/release_32
+[stderr]  * [new branch]      release_36 -> official/release_36
+[stderr]  * [new branch]      release_37 -> official/release_37
+[stderr]  * [new branch]      release_38 -> official/release_38
+[stderr]  * [new branch]      release_39 -> official/release_39
+[stderr]  * [new branch]      release_40 -> official/release_40
+[stderr]  * [new branch]      release_50 -> official/release_50
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git remote add github-mirror https://github.com/llvm-mirror/libcxxabi.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git fetch github-mirror --prune)
+[stderr] From https://github.com/llvm-mirror/libcxxabi
+[stderr]  * [new branch]      master     -> github-mirror/master
+[stderr]  * [new branch]      release_32 -> github-mirror/release_32
+[stderr]  * [new branch]      release_36 -> github-mirror/release_36
+[stderr]  * [new branch]      release_37 -> github-mirror/release_37
+[stderr]  * [new branch]      release_38 -> github-mirror/release_38
+[stderr]  * [new branch]      release_39 -> github-mirror/release_39
+[stderr]  * [new branch]      release_40 -> github-mirror/release_40
+[stderr]  * [new branch]      release_50 -> github-mirror/release_50
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git remote add meinersbur git@meinersbur.de:libcxxabi.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git fetch meinersbur --prune)
+[stderr] From meinersbur.de:libcxxabi
+[stderr]  * [new branch]      master     -> meinersbur/master
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git checkout official/master)
+[stderr] Note: checking out 'official/master'.
+[stderr] 
+[stderr] You are in 'detached HEAD' state. You can look around, make experimental
+[stderr] changes and commit them, and you can discard any commits you make in this
+[stderr] state without impacting any branches by performing another checkout.
+[stderr] 
+[stderr] If you want to create a new branch to retain commits you create, you may
+[stderr] do so (now or later) by using -b with the checkout command again. Example:
+[stderr] 
+[stderr]   git checkout -b <new-branch-name>
+[stderr] 
+[stderr] HEAD is now at 05ba328... Fix ASAN build with older compiler-rt versions.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git checkout --detach)
+[stderr] HEAD is now at 05ba328... Fix ASAN build with older compiler-rt versions.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxxabi && git checkout --detach --force 05ba3281482304ae8de31123a594972a495da06d)
+[stderr] HEAD is now at 05ba328... Fix ASAN build with older compiler-rt versions.
+[stdout] ### Checking out libcxx
+[stdout] ## Creating /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx
+[stderr] $ git init /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx
+[stderr] warning: templates not found /users/krusemi/share/git-core/templates
+[stdout] Initialized empty Git repository in /scratch/shared/leone/krusemi/execslave/persistent/persistent1/llvm/projects/libcxx/.git/
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git config user.email libcxx@meinersbur.de)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git remote add official http://llvm.org/git/libcxx.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git fetch official --prune)
+[stderr] From http://llvm.org/git/libcxx
+[stderr]  * [new branch]      apple      -> official/apple
+[stderr]  * [new branch]      apple25    -> official/apple25
+[stderr]  * [new branch]      master     -> official/master
+[stderr]  * [new branch]      release_30 -> official/release_30
+[stderr]  * [new branch]      release_32 -> official/release_32
+[stderr]  * [new branch]      release_33 -> official/release_33
+[stderr]  * [new branch]      release_34 -> official/release_34
+[stderr]  * [new branch]      release_35 -> official/release_35
+[stderr]  * [new branch]      release_350 -> official/release_350
+[stderr]  * [new branch]      release_36 -> official/release_36
+[stderr]  * [new branch]      release_37 -> official/release_37
+[stderr]  * [new branch]      release_38 -> official/release_38
+[stderr]  * [new branch]      release_39 -> official/release_39
+[stderr]  * [new branch]      release_40 -> official/release_40
+[stderr]  * [new branch]      release_50 -> official/release_50
+[stderr]  * [new branch]      svn-tags/RELEASE_30 -> official/svn-tags/RELEASE_30
+[stderr]  * [new branch]      svn-tags/RELEASE_33 -> official/svn-tags/RELEASE_33
+[stderr]  * [new branch]      svn-tags/RELEASE_34 -> official/svn-tags/RELEASE_34
+[stderr]  * [new branch]      svn-tags/RELEASE_342 -> official/svn-tags/RELEASE_342
+[stderr]  * [new branch]      svn-tags/RELEASE_35 -> official/svn-tags/RELEASE_35
+[stderr]  * [new branch]      svn-tags/RELEASE_350 -> official/svn-tags/RELEASE_350
+[stderr]  * [new branch]      svn-tags/RELEASE_351 -> official/svn-tags/RELEASE_351
+[stderr]  * [new branch]      svn-tags/RELEASE_360 -> official/svn-tags/RELEASE_360
+[stderr]  * [new branch]      svn-tags/libcpp-10 -> official/svn-tags/libcpp-10
+[stderr]  * [new branch]      svn-tags/libcpp-11 -> official/svn-tags/libcpp-11
+[stderr]  * [new branch]      svn-tags/libcpp-12 -> official/svn-tags/libcpp-12
+[stderr]  * [new branch]      svn-tags/libcpp-13 -> official/svn-tags/libcpp-13
+[stderr]  * [new branch]      svn-tags/libcpp-14 -> official/svn-tags/libcpp-14
+[stderr]  * [new branch]      svn-tags/libcpp-15 -> official/svn-tags/libcpp-15
+[stderr]  * [new branch]      svn-tags/libcpp-16 -> official/svn-tags/libcpp-16
+[stderr]  * [new branch]      svn-tags/libcpp-17 -> official/svn-tags/libcpp-17
+[stderr]  * [new branch]      svn-tags/libcpp-18 -> official/svn-tags/libcpp-18
+[stderr]  * [new branch]      svn-tags/libcpp-19 -> official/svn-tags/libcpp-19
+[stderr]  * [new branch]      svn-tags/libcpp-20 -> official/svn-tags/libcpp-20
+[stderr]  * [new branch]      svn-tags/libcpp-21 -> official/svn-tags/libcpp-21
+[stderr]  * [new branch]      svn-tags/libcpp-22 -> official/svn-tags/libcpp-22
+[stderr]  * [new branch]      svn-tags/libcpp-23 -> official/svn-tags/libcpp-23
+[stderr]  * [new branch]      svn-tags/libcpp-23.1 -> official/svn-tags/libcpp-23.1
+[stderr]  * [new branch]      svn-tags/libcpp-24 -> official/svn-tags/libcpp-24
+[stderr]  * [new branch]      svn-tags/libcpp-25 -> official/svn-tags/libcpp-25
+[stderr]  * [new branch]      svn-tags/libcpp-25.1 -> official/svn-tags/libcpp-25.1
+[stderr]  * [new branch]      svn-tags/libcpp-26 -> official/svn-tags/libcpp-26
+[stderr]  * [new branch]      svn-tags/libcpp-27 -> official/svn-tags/libcpp-27
+[stderr]  * [new branch]      svn-tags/libcpp-28 -> official/svn-tags/libcpp-28
+[stderr]  * [new branch]      svn-tags/libcpp-29 -> official/svn-tags/libcpp-29
+[stderr]  * [new branch]      svn-tags/libcpp-30 -> official/svn-tags/libcpp-30
+[stderr]  * [new branch]      svn-tags/libcpp-31 -> official/svn-tags/libcpp-31
+[stderr]  * [new branch]      svn-tags/libcpp-4 -> official/svn-tags/libcpp-4
+[stderr]  * [new branch]      svn-tags/libcpp-5 -> official/svn-tags/libcpp-5
+[stderr]  * [new branch]      svn-tags/libcpp-6 -> official/svn-tags/libcpp-6
+[stderr]  * [new branch]      svn-tags/libcpp-7 -> official/svn-tags/libcpp-7
+[stderr]  * [new branch]      svn-tags/libcpp-8 -> official/svn-tags/libcpp-8
+[stderr]  * [new branch]      svn-tags/libcpp-8.1 -> official/svn-tags/libcpp-8.1
+[stderr]  * [new branch]      svn-tags/libcpp-9 -> official/svn-tags/libcpp-9
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git remote add github-mirror https://github.com/llvm-mirror/libcxx.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git fetch github-mirror --prune)
+[stderr] From https://github.com/llvm-mirror/libcxx
+[stderr]  * [new branch]      apple      -> github-mirror/apple
+[stderr]  * [new branch]      apple25    -> github-mirror/apple25
+[stderr]  * [new branch]      master     -> github-mirror/master
+[stderr]  * [new branch]      release_30 -> github-mirror/release_30
+[stderr]  * [new branch]      release_32 -> github-mirror/release_32
+[stderr]  * [new branch]      release_33 -> github-mirror/release_33
+[stderr]  * [new branch]      release_34 -> github-mirror/release_34
+[stderr]  * [new branch]      release_35 -> github-mirror/release_35
+[stderr]  * [new branch]      release_350 -> github-mirror/release_350
+[stderr]  * [new branch]      release_36 -> github-mirror/release_36
+[stderr]  * [new branch]      release_37 -> github-mirror/release_37
+[stderr]  * [new branch]      release_38 -> github-mirror/release_38
+[stderr]  * [new branch]      release_39 -> github-mirror/release_39
+[stderr]  * [new branch]      release_40 -> github-mirror/release_40
+[stderr]  * [new branch]      release_50 -> github-mirror/release_50
+[stderr]  * [new branch]      svn-tags/RELEASE_30 -> github-mirror/svn-tags/RELEASE_30
+[stderr]  * [new branch]      svn-tags/RELEASE_33 -> github-mirror/svn-tags/RELEASE_33
+[stderr]  * [new branch]      svn-tags/RELEASE_34 -> github-mirror/svn-tags/RELEASE_34
+[stderr]  * [new branch]      svn-tags/RELEASE_342 -> github-mirror/svn-tags/RELEASE_342
+[stderr]  * [new branch]      svn-tags/RELEASE_35 -> github-mirror/svn-tags/RELEASE_35
+[stderr]  * [new branch]      svn-tags/RELEASE_350 -> github-mirror/svn-tags/RELEASE_350
+[stderr]  * [new branch]      svn-tags/RELEASE_351 -> github-mirror/svn-tags/RELEASE_351
+[stderr]  * [new branch]      svn-tags/RELEASE_360 -> github-mirror/svn-tags/RELEASE_360
+[stderr]  * [new branch]      svn-tags/libcpp-10 -> github-mirror/svn-tags/libcpp-10
+[stderr]  * [new branch]      svn-tags/libcpp-11 -> github-mirror/svn-tags/libcpp-11
+[stderr]  * [new branch]      svn-tags/libcpp-12 -> github-mirror/svn-tags/libcpp-12
+[stderr]  * [new branch]      svn-tags/libcpp-13 -> github-mirror/svn-tags/libcpp-13
+[stderr]  * [new branch]      svn-tags/libcpp-14 -> github-mirror/svn-tags/libcpp-14
+[stderr]  * [new branch]      svn-tags/libcpp-15 -> github-mirror/svn-tags/libcpp-15
+[stderr]  * [new branch]      svn-tags/libcpp-16 -> github-mirror/svn-tags/libcpp-16
+[stderr]  * [new branch]      svn-tags/libcpp-17 -> github-mirror/svn-tags/libcpp-17
+[stderr]  * [new branch]      svn-tags/libcpp-18 -> github-mirror/svn-tags/libcpp-18
+[stderr]  * [new branch]      svn-tags/libcpp-19 -> github-mirror/svn-tags/libcpp-19
+[stderr]  * [new branch]      svn-tags/libcpp-20 -> github-mirror/svn-tags/libcpp-20
+[stderr]  * [new branch]      svn-tags/libcpp-21 -> github-mirror/svn-tags/libcpp-21
+[stderr]  * [new branch]      svn-tags/libcpp-22 -> github-mirror/svn-tags/libcpp-22
+[stderr]  * [new branch]      svn-tags/libcpp-23 -> github-mirror/svn-tags/libcpp-23
+[stderr]  * [new branch]      svn-tags/libcpp-23.1 -> github-mirror/svn-tags/libcpp-23.1
+[stderr]  * [new branch]      svn-tags/libcpp-24 -> github-mirror/svn-tags/libcpp-24
+[stderr]  * [new branch]      svn-tags/libcpp-25 -> github-mirror/svn-tags/libcpp-25
+[stderr]  * [new branch]      svn-tags/libcpp-25.1 -> github-mirror/svn-tags/libcpp-25.1
+[stderr]  * [new branch]      svn-tags/libcpp-26 -> github-mirror/svn-tags/libcpp-26
+[stderr]  * [new branch]      svn-tags/libcpp-27 -> github-mirror/svn-tags/libcpp-27
+[stderr]  * [new branch]      svn-tags/libcpp-28 -> github-mirror/svn-tags/libcpp-28
+[stderr]  * [new branch]      svn-tags/libcpp-29 -> github-mirror/svn-tags/libcpp-29
+[stderr]  * [new branch]      svn-tags/libcpp-30 -> github-mirror/svn-tags/libcpp-30
+[stderr]  * [new branch]      svn-tags/libcpp-31 -> github-mirror/svn-tags/libcpp-31
+[stderr]  * [new branch]      svn-tags/libcpp-4 -> github-mirror/svn-tags/libcpp-4
+[stderr]  * [new branch]      svn-tags/libcpp-5 -> github-mirror/svn-tags/libcpp-5
+[stderr]  * [new branch]      svn-tags/libcpp-6 -> github-mirror/svn-tags/libcpp-6
+[stderr]  * [new branch]      svn-tags/libcpp-7 -> github-mirror/svn-tags/libcpp-7
+[stderr]  * [new branch]      svn-tags/libcpp-8 -> github-mirror/svn-tags/libcpp-8
+[stderr]  * [new branch]      svn-tags/libcpp-8.1 -> github-mirror/svn-tags/libcpp-8.1
+[stderr]  * [new branch]      svn-tags/libcpp-9 -> github-mirror/svn-tags/libcpp-9
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git remote add meinersbur git@meinersbur.de:libcxx.git)
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git fetch meinersbur --prune)
+[stderr] From meinersbur.de:libcxx
+[stderr]  * [new branch]      bgclang    -> meinersbur/bgclang
+[stderr]  * [new branch]      bgclang-r193439 -> meinersbur/bgclang-r193439
+[stderr]  * [new branch]      bgclang-r205936 -> meinersbur/bgclang-r205936
+[stderr]  * [new branch]      bgclang-r209570 -> meinersbur/bgclang-r209570
+[stderr]  * [new branch]      master     -> meinersbur/master
+[stderr]  * [new branch]      master-r193439 -> meinersbur/master-r193439
+[stderr]  * [new branch]      master-r205936 -> meinersbur/master-r205936
+[stderr]  * [new branch]      master-r209570 -> meinersbur/master-r209570
+[stderr]  * [new branch]      molly      -> meinersbur/molly
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git checkout official/master)
+[stderr] Note: checking out 'official/master'.
+[stderr] 
+[stderr] You are in 'detached HEAD' state. You can look around, make experimental
+[stderr] changes and commit them, and you can discard any commits you make in this
+[stderr] state without impacting any branches by performing another checkout.
+[stderr] 
+[stderr] If you want to create a new branch to retain commits you create, you may
+[stderr] do so (now or later) by using -b with the checkout command again. Example:
+[stderr] 
+[stderr]   git checkout -b <new-branch-name>
+[stderr] 
+[stderr] HEAD is now at eada024... [libcxx] Mark test cxa_deleted_virtual.pass.cpp as failing for previous libcxx versions.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git checkout --detach)
+[stderr] HEAD is now at eada024... [libcxx] Mark test cxa_deleted_virtual.pass.cpp as failing for previous libcxx versions.
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/libcxx && git checkout --detach --force 2e390822e56bb0dbd876d02f806dc19f0f97f0a6)
+[stderr] Previous HEAD position was eada024... [libcxx] Mark test cxa_deleted_virtual.pass.cpp as failing for previous libcxx versions.
+[stderr] HEAD is now at 2e39082... Change a bunch of comments from C++1z to C++17. NFC
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git checkout --detach)
+[stderr] HEAD is now at a5b99ed... Add -print-schedule scheduling comments to inline asm. Differential Revision: https://reviews.llvm.org/D39728
+[stderr] $ (cd /users/krusemi/scratch/execslave/persistent/persistent1/llvm && git checkout --detach --force 6cf02b953eb786809e75e20b9f556e4791b2eabe)
+[stderr] Previous HEAD position was a5b99ed... Add -print-schedule scheduling comments to inline asm. Differential Revision: https://reviews.llvm.org/D39728
+[stderr] HEAD is now at 6cf02b9... [AArch64][SVE] Asm: Add SVE (Z) Register definitions and parsing support
+[stdout] Warning: /users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite/Polybench/Polybench-boost not in test-suite
+[stderr] Traceback (most recent call last):
+[stderr]   File "./run-test-suite.py", line 108, in <module>
+[stderr]     main()
+[stderr]   File "./run-test-suite.py", line 104, in main
+[stderr]     gittool.runtest(config,print_logs=True,enable_svn=False)
+[stderr]   File "/scratch/shared/leone/krusemi/execslave/work/work1/gittool.py", line 3264, in runtest
+[stderr]     raise Exception("Test '" + fulldir + "' not in test-suite")
+[stderr] Exception: Test '/users/krusemi/scratch/execslave/persistent/persistent1/llvm/projects/test-suite/Polybench/Polybench-boost' not in test-suite
