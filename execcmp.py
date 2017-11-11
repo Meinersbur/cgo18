@@ -317,6 +317,7 @@ def print_result(d, limit_output=True, shorten_names=True,
             del dataout[c]
 
     # Turn index into a column so we can format it...
+    # TODO: Insert at end of it, how to determine the number of columns?
     dataout.insert(0, 'Program', dataout.index)
 
     formatters = dict()

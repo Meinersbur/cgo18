@@ -476,8 +476,9 @@ class Remote:
     def __ne__(self, other):
         return not self.__eq__(other)
 
-    def fetch(self, refspec=None, prune=False, resumeonerror=False):
+    def fetch(self, refspec=None, prune=False, resumeonerror=False, batchmode=False):
         opts = []
+        addenv = dict()
         if prune:
             opts += ['--prune']
         if refspec is not None:
@@ -486,7 +487,9 @@ class Remote:
                     opts += [str(spec)]
             else:
                 opts += [str(refspec)]
-        self.rep.invoke_git('fetch', self.name, *opts, resumeonerror=resumeonerror)
+        if batchmode:
+            addenv['GIT_SSH_COMMAND'] = 'ssh -oBatchMode=yes'
+        self.rep.invoke_git('fetch', self.name, *opts, resumeonerror=resumeonerror,addenv=addenv)
 
     def set_url(self,url):
         self.rep.invoke_git('remote','set-url',self.name,url)
@@ -1110,12 +1113,15 @@ llvm_project.remote('chapuni', 'https://github.com/llvm-project/llvm-project.git
 llvm = Project('llvm')
 llvm.remote('official', 'http://llvm.org/git/llvm.git', svn='https://llvm.org/svn/llvm-project/llvm/trunk')
 llvm.remote('github-mirror', 'https://github.com/llvm-mirror/llvm.git')
+llvm.remote('github', 'git@github.com:Meinersbur/llvm.git')
+llvm.remote('github-public', 'https://github.com/Meinersbur/llvm.git')
 llvm.remote('meinersbur', 'git@meinersbur.de:llvm.git')
 
 polly = Project('polly')
 polly.remote('official', 'http://llvm.org/git/polly.git', svn='https://llvm.org/svn/llvm-project/polly/trunk')
 polly.remote('github-mirror', 'https://github.com/llvm-mirror/polly.git')
 polly.remote('github', 'git@github.com:Meinersbur/polly.git')
+polly.remote('github-public', 'https://github.com/Meinersbur/polly.git')
 polly.remote('meinersbur', 'git@meinersbur.de:polly.git')
 polly.remote('execjobs', 'git@meinersbur.de:execjobs.git')
 polly.remote('tobig', 'git@github.com:tobig/polly.git')
@@ -1137,6 +1143,7 @@ test_suite = Project('test-suite')
 test_suite.remote('official', 'http://llvm.org/git/test-suite.git', svn='https://llvm.org/svn/llvm-project/test-suite/trunk')
 test_suite.remote('github-mirror', 'https://github.com/llvm-mirror/test-suite.git')
 test_suite.remote('github', 'git@github.com:Meinersbur/test-suite.git')
+test_suite.remote('github-public', 'https://github.com/Meinersbur/test-suite.git')
 test_suite.remote('meinersbur', 'git@meinersbur.de:test-suite.git')
 llvm.subproject(test_suite, 'projects/test-suite', checkout=False)
 
@@ -1353,7 +1360,7 @@ def checkout_sub(project,parentdir,subdir,ismodule,parentrep=None,onlychildren=N
     # Note: the official 'pack' is smaller by half!
     for remote in project.remotes:
         repremote = rep.create_remote(remote.name, remote.url,resumeonerror=True)
-        repremote.fetch(prune=True,resumeonerror=ignore_fetch_errors)
+        repremote.fetch(prune=True,resumeonerror=ignore_fetch_errors,batchmode=ignore_fetch_errors)
 
     # Do an initial checkout without merge such that submodules exist
     if created:
@@ -3190,9 +3197,6 @@ def runtest(config,print_logs=False,enable_svn=True):
     suite_build_dir = os.path.abspath(suite_build_dir)
 
 
-
-
-
     if llvm_source_dir is not None:
         print("LLVM source      :", llvm_source_dir)
     print("LLVM build       :", llvm_build_dir)
@@ -3219,7 +3223,7 @@ def runtest(config,print_logs=False,enable_svn=True):
         if  'libcxx' in enabled_projects:
             onlychildren['libcxx'] = first_defined(config.get_libcxx_revision(), REV_KEEP)
 
-        checkout_sub(llvm, llvm_source_dir, subdir=[], ismodule=False, onlychildren=onlychildren, unlisted=REV_KEEP, ignore_fetch_errors=True,enable_svn=enable_svn) # Or delete unlisted?
+        checkout_sub(llvm, llvm_source_dir, subdir=[], ismodule=False, onlychildren=onlychildren, unlisted=REV_KEEP, ignore_fetch_errors=True, enable_svn=enable_svn) # Or delete unlisted?
 
     if config.llvm_checkout:
         llvm_checkout()
