@@ -1,0 +1,220 @@
+$ perf stat ls
+
+ Performance counter stats for 'ls':
+
+          2.097435      task-clock (msec)         #    0.784 CPUs utilized          
+                 0      context-switches          #    0.000 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+               245      page-faults               #    0.117 M/sec                  
+         7,187,489      cycles                    #    3.427 GHz                    
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+         6,667,560      instructions              #    0.93  insns per cycle        
+         1,257,696      branches                  #  599.635 M/sec                  
+            15,160      branch-misses             #    1.21% of all branches        
+
+       0.002675298 seconds time elapsed
+
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && git remote add official http://llvm.org/git/llvm.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch official --prune)
+From http://llvm.org/git/llvm
+   d90f53e..5b555fa  master     -> official/master
+   f5fafaf..64184ec  stable     -> official/stable
+   73877b7..ce7676b  testing    -> official/testing
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && git remote add github-mirror https://github.com/llvm-mirror/llvm.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch github-mirror --prune)
+From https://github.com/llvm-mirror/llvm
+   d90f53e..5b555fa  master     -> github-mirror/master
+   f5fafaf..64184ec  stable     -> github-mirror/stable
+   73877b7..ce7676b  testing    -> github-mirror/testing
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && git remote add github git@github.com:Meinersbur/llvm.git)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch github --prune)
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && git remote add github-public https://github.com/Meinersbur/llvm.git)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch github-public --prune)
+From https://github.com/Meinersbur/llvm
+ * [new branch]      basicaa3   -> github-public/basicaa3
+ * [new branch]      isl        -> github-public/isl
+ * [new branch]      master     -> github-public/master
+ * [new branch]      release_1  -> github-public/release_1
+ * [new branch]      release_16 -> github-public/release_16
+ * [new branch]      release_20 -> github-public/release_20
+ * [new branch]      release_21 -> github-public/release_21
+ * [new branch]      release_22 -> github-public/release_22
+ * [new branch]      release_23 -> github-public/release_23
+ * [new branch]      release_24 -> github-public/release_24
+ * [new branch]      release_25 -> github-public/release_25
+ * [new branch]      release_26 -> github-public/release_26
+ * [new branch]      release_27 -> github-public/release_27
+ * [new branch]      release_28 -> github-public/release_28
+ * [new branch]      release_29 -> github-public/release_29
+ * [new branch]      release_30 -> github-public/release_30
+ * [new branch]      release_31 -> github-public/release_31
+ * [new branch]      release_32 -> github-public/release_32
+ * [new branch]      release_33 -> github-public/release_33
+ * [new branch]      release_34 -> github-public/release_34
+ * [new branch]      release_35 -> github-public/release_35
+ * [new branch]      release_35@215010 -> github-public/release_35@215010
+ * [new branch]      release_36 -> github-public/release_36
+ * [new branch]      release_37 -> github-public/release_37
+ * [new branch]      release_38 -> github-public/release_38
+ * [new branch]      release_39 -> github-public/release_39
+ * [new branch]      release_40 -> github-public/release_40
+ * [new branch]      stable     -> github-public/stable
+ * [new branch]      testing    -> github-public/testing
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && git remote add meinersbur git@meinersbur.de:llvm.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && git remote add official http://llvm.org/git/clang.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch official --prune)
+From http://llvm.org/git/clang
+   ec037e2..e87a2b9  google/stable -> official/google/stable
+   cd1b175..41af169  google/testing -> official/google/testing
+   1e53b12..3e80fc7  master     -> official/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && git remote add github-mirror https://github.com/llvm-mirror/clang.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch github-mirror --prune)
+From https://github.com/llvm-mirror/clang
+   ec037e2..e87a2b9  google/stable -> github-mirror/google/stable
+   cd1b175..41af169  google/testing -> github-mirror/google/testing
+   a5d15d1..3e80fc7  master     -> github-mirror/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && git remote add meinersbur git@meinersbur.de:clang.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && git checkout --detach)
+HEAD is now at 5140a70... [VirtualFileSystem] InMemoryFileSystem::addFile(): Type and Perms
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && git checkout --detach --force 5140a709d303679fce3218d238fd4ee5043ae851)
+HEAD is now at 5140a70... [VirtualFileSystem] InMemoryFileSystem::addFile(): Type and Perms
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && git remote add official http://llvm.org/git/test-suite.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch official --prune)
+From http://llvm.org/git/test-suite
+   8e89fc2..789a44b  master     -> official/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && git remote add github-mirror https://github.com/llvm-mirror/test-suite.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch github-mirror --prune)
+From https://github.com/llvm-mirror/test-suite
+   8e89fc2..789a44b  master     -> github-mirror/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && git remote add github git@github.com:Meinersbur/test-suite.git)
+fatal: remote github already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch github --prune)
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && git remote add github-public https://github.com/Meinersbur/test-suite.git)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch github-public --prune)
+From https://github.com/Meinersbur/test-suite
+ * [new branch]      cgo18      -> github-public/cgo18
+ * [new branch]      master     -> github-public/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && git remote add meinersbur git@meinersbur.de:test-suite.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && git checkout --detach)
+HEAD is now at 3329a21... Merge remote-tracking branch 'official/master' into HEAD
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && git checkout --detach --force 3329a21363eef1ffbe488ced0342ab594e193004)
+HEAD is now at 3329a21... Merge remote-tracking branch 'official/master' into HEAD
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && git remote add official http://llvm.org/git/libcxxabi.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch official --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && git remote add github-mirror https://github.com/llvm-mirror/libcxxabi.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch github-mirror --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && git remote add meinersbur git@meinersbur.de:libcxxabi.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && git checkout --detach)
+HEAD is now at 05ba328... Fix ASAN build with older compiler-rt versions.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && git checkout --detach --force 05ba3281482304ae8de31123a594972a495da06d)
+HEAD is now at 05ba328... Fix ASAN build with older compiler-rt versions.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && git remote add official http://llvm.org/git/libcxx.git)
+fatal: remote official already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch official --prune)
+From http://llvm.org/git/libcxx
+   eada024..b4a34c0  master     -> official/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && git remote add github-mirror https://github.com/llvm-mirror/libcxx.git)
+fatal: remote github-mirror already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch github-mirror --prune)
+From https://github.com/llvm-mirror/libcxx
+   eada024..b4a34c0  master     -> github-mirror/master
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && git remote add meinersbur git@meinersbur.de:libcxx.git)
+fatal: remote meinersbur already exists.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && GIT_SSH_COMMAND='ssh -oBatchMode=yes' git fetch meinersbur --prune)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && git checkout --detach)
+HEAD is now at eada024... [libcxx] Mark test cxa_deleted_virtual.pass.cpp as failing for previous libcxx versions.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && git checkout --detach --force eada02443aaa17a44ef6c8401f042eb48f1a3fcc)
+HEAD is now at eada024... [libcxx] Mark test cxa_deleted_virtual.pass.cpp as failing for previous libcxx versions.
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && git checkout --detach)
+HEAD is now at 5be95c6... [mips] Correct microMIP's jump and add unconditional branch pseudo
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && git checkout --detach --force 5be95c616464685ae999906ad030accfd0774bf0)
+HEAD is now at 5be95c6... [mips] Correct microMIP's jump and add unconditional branch pseudo
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm && LC_ALL=C git log 5be95c616464685ae999906ad030accfd0774bf0 -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/tools/clang && LC_ALL=C git log 5140a709d303679fce3218d238fd4ee5043ae851 -n1)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/work2 && LC_ALL=C git rev-parse HEAD)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/work2 && LC_ALL=C git log 92747225a01c3f55590837d69978dedfb2376761 -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite && LC_ALL=C git log 3329a21363eef1ffbe488ced0342ab594e193004 -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxxabi && LC_ALL=C git log 05ba3281482304ae8de31123a594972a495da06d -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && LC_ALL=C git rev-parse HEAD)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/libcxx && LC_ALL=C git log eada02443aaa17a44ef6c8401f042eb48f1a3fcc -n1)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm-build && cmake /users/krusemi/scratch/execslave/persistent/persistent2/llvm -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=-DLLVM_ENABLE_STATS=ON -DCMAKE_CXX_FLAGS=-DLLVM_ENABLE_STATS=ON -DLLVM_TOOL_POLLY_BUILD=ON -DLLVM_POLLY_BUILD=ON -DLLVM_EXTERNAL_POLLY_SOURCE_DIR=/scratch/shared/leone/krusemi/execslave/work/work2 -DLLVM_TARGETS_TO_BUILD=X86 -DCMAKE_C_COMPILER=/apps/leone/UES/RH6.7_PE15.12/easybuild/software/GCCcore/5.3.0/bin/gcc -DLLVM_ENABLE_ASSERTIONS=ON)
+$ (cd /users/krusemi/scratch/execslave/persistent/persistent2/llvm-build && ninja -v cxx_shared llvm-size clang)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite && cmake /users/krusemi/scratch/execslave/persistent/persistent2/llvm/projects/test-suite -GNinja '-DTEST_SUITE_HOST_CC=gcc;-std=c99' -DTEST_SUITE_ENABLE_BITCODE_TESTS=OFF -DCMAKE_C_COMPILER=/users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/bin/clang -DCMAKE_CXX_COMPILER=/users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/bin/clang++ '-DTEST_SUITE_SUBDIRS=Performance/Polybench-421-boost;Performance/Polybench-421' -DCMAKE_BUILD_TYPE=Release -DTEST_SUITE_LLVM_SIZE=/users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/bin/llvm-size -DTEST_SUITE_LIT=/users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/bin/llvm-lit -DTEST_SUITE_COLLECT_STATS=ON '-DCMAKE_C_FLAGS=-mllvm -polly -ffast-math -march=native -DEXTRALARGE_DATASET -fno-exceptions -mllvm -polly-only-func=kernel_ -mllvm -polly-optree-max-ops=0 -mllvm -inline-threshold=4096 -mllvm -polly-optree-normalize-phi -mllvm -polly-position=early -mllvm -polly-enable-simplify=0 -mllvm -polly-enable-optree=0 -mllvm -polly-enable-delicm=0' '-DCMAKE_CXX_FLAGS=-stdlib=libc++ -L /users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/lib -mllvm -polly -ffast-math -march=native -DEXTRALARGE_DATASET -fno-exceptions -mllvm -polly-only-func=kernel_ -mllvm -polly-optree-max-ops=0 -mllvm -inline-threshold=4096 -mllvm -polly-optree-normalize-phi -mllvm -polly-position=early -mllvm -polly-enable-simplify=0 -mllvm -polly-enable-optree=0 -mllvm -polly-enable-delicm=0' '-DTEST_SUITE_LIT_FLAGS=-j1;-v;-o;/scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/output.json;Performance/Polybench-421-boost;Performance/Polybench-421')
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421-boost/datamining/correlation/Pboost_correlation.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421-boost/datamining/covariance/Pboost_covariance.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421-boost/linear-algebra/blas/gemm/Pboost_gemm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421-boost/linear-algebra/kernels/2mm/Pboost_2mm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421-boost/linear-algebra/kernels/3mm/Pboost_3mm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/datamining/correlation/Pb421-perf-restrict_correlation.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/datamining/covariance/Pb421-perf-restrict_covariance.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemm/Pb421-perf-restrict_gemm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gemver/Pb421-perf-restrict_gemver.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/blas/gesummv/Pb421-perf-restrict_gesummv.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/blas/symm/Pb421-perf-restrict_symm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syr2k/Pb421-perf-restrict_syr2k.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/blas/syrk/Pb421-perf-restrict_syrk.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/blas/trmm/Pb421-perf-restrict_trmm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/2mm/Pb421-perf-restrict_2mm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/3mm/Pb421-perf-restrict_3mm.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/atax/Pb421-perf-restrict_atax.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/bicg/Pb421-perf-restrict_bicg.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/doitgen/Pb421-perf-restrict_doitgen.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/kernels/mvt/Pb421-perf-restrict_mvt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/cholesky/Pb421-perf-restrict_cholesky.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/durbin/Pb421-perf-restrict_durbin.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/gramschmidt/Pb421-perf-restrict_gramschmidt.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/lu/Pb421-perf-restrict_lu.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/ludcmp/Pb421-perf-restrict_ludcmp.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/linear-algebra/solvers/trisolv/Pb421-perf-restrict_trisolv.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/medley/deriche/Pb421-perf-restrict_deriche.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/medley/floyd-warshall/Pb421-perf-restrict_floyd-warshall.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/medley/nussinov/Pb421-perf-restrict_nussinov.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/stencils/adi/Pb421-perf-restrict_adi.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/stencils/fdtd-2d/Pb421-perf-restrict_fdtd-2d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/stencils/heat-3d/Pb421-perf-restrict_heat-3d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/stencils/jacobi-1d/Pb421-perf-restrict_jacobi-1d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/stencils/jacobi-2d/Pb421-perf-restrict_jacobi-2d.test
+Written test file /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/Performance/Polybench-421/stencils/seidel-2d/Pb421-perf-restrict_seidel-2d.test
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    TEST_SUITE_ENABLE_BITCODE_TESTS
+
+
+$ (cd /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite && ninja -v -k0 Performance/Polybench-421-boost/all Performance/Polybench-421/all)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/bin/llvm-lit -j1 -v -o /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/output-0.json Performance/Polybench-421-boost Performance/Polybench-421)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/bin/llvm-lit -j1 -v -o /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/output-1.json Performance/Polybench-421-boost Performance/Polybench-421)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/bin/llvm-lit -j1 -v -o /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/output-2.json Performance/Polybench-421-boost Performance/Polybench-421)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/bin/llvm-lit -j1 -v -o /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/output-3.json Performance/Polybench-421-boost Performance/Polybench-421)
+$ (cd /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite && LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/lib python3 /users/krusemi/scratch/execslave/persistent/persistent2/llvm-build/bin/llvm-lit -j1 -v -o /scratch/shared/leone/krusemi/execslave/work/work2/run-test-suite/output-4.json Performance/Polybench-421-boost Performance/Polybench-421)
