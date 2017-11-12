@@ -1,0 +1,5 @@
+RUN: /scratch/shared/leone/krusemi/execslave/work/work0/run-test-suite/Performance/Polybench-421/stencils/heat-3d/Pb421-perf-restrict_heat-3d 
+TIMEFOMOUTPUT: YES
+PREFIX: Pb421-perf-restrict_
+SOURCE: /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite/Performance/Polybench-421/stencils/heat-3d/heat-3d.c
+SOURCEDIR: /users/krusemi/scratch/execslave/persistent/persistent0/llvm/projects/test-suite/Performance/Polybench-421/stencils/heat-3d
