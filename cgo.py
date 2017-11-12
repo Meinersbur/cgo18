@@ -50,7 +50,7 @@ def main():
     print("## Static evaluation")
     def print_stats(branch, metric, desc):
         print("#",desc)
-        invoke('python3', execcmp, branch,  '-a', '--no-sort',  '-m', metric)
+        invoke('python3', execcmp, branch, 'vs', '-a', '-f', '--no-sort', '--integer',  '-m', metric)
 
     def print_transformations(branch):
         print_stats(branch, 'polly-optree.TotalInstructionsCopied+', "Forwarded instructions")
@@ -68,13 +68,20 @@ def main():
         print_stats(branch, 'polly-simplify.NumPHIWritesInLoops0+', "PHI writes before DeLICM")
         print_stats(branch, 'polly-simplify.NumValueWritesInLoops1+', "Value writes after DeLICM")
         print_stats(branch, 'polly-simplify.NumPHIWritesInLoops1+', "PHI writes after DeLICM")
-        print_stats(branch, 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings")
-        print_stats(branch, 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications")
 
     print("# Early")
     print_scalaropts_postops(hostname + '_A50_polly_early_delicm')
+    print_stats(hostname + '_A30_polly_early', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (without DeLICM)")
+    print_stats(hostname + '_A50_polly_early_delicm', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (with DeLICM)")
+    #print_stats(hostname + '_A30_polly_early', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (without DeLICM)")
+    print_stats(hostname + '_A50_polly_early_delicm', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (with DeLICM)")
+
     print("# Late")
     print_scalaropts_postops(hostname + '_A20_polly')
+    print_stats(hostname + '_A40_polly_late', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (without DeLICM)")
+    print_stats(hostname + '_A20_polly', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (with DeLICM)")
+    #print_stats(hostname + '_A40_polly_late', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (without DeLICM)")
+    print_stats(hostname + '_A20_polly', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (with DeLICM)")
     print()
 
     print("## Runtime evaluation")

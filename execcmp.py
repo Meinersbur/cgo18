@@ -400,21 +400,26 @@ def execcmp_compare(files,config,tmpdir):
         rhs = files[split+1:]
 
         # Filter minimum of lhs and rhs
-        lhs_d,lhs_datasetnames,lhs_uniquenames = readmulti(lhs,tmpdir=tmpdir)
-        lhs_merged = config.merge_function(lhs_d, level=1)
-        rhs_d,rhs_datasetnames,rhs_uniquenames = readmulti(rhs,tmpdir=tmpdir)
-        rhs_merged = config.merge_function(rhs_d, level=1)
-
-        lhsname = 'lhs'
-        if len(lhs_uniquenames)==1:
-            lhsname, = lhs_uniquenames
-        rhsname = 'rhs'
-        if len(rhs_uniquenames)==1:
-            rhsname, = rhs_uniquenames
+        nfiles = 1
+        if lhs:
+            lhs_d,lhs_datasetnames,lhs_uniquenames = readmulti(lhs,tmpdir=tmpdir)
+            lhs_merged = config.merge_function(lhs_d, level=1)
+            lhsname = 'lhs'
+            if len(lhs_uniquenames)==1:
+                lhsname, = lhs_uniquenames
+            data = pd.concat([lhs_merged], names=['l/r'], keys=[lhsname])
+        if rhs:
+            rhs_d,rhs_datasetnames,rhs_uniquenames = readmulti(rhs,tmpdir=tmpdir)
+            rhs_merged = config.merge_function(rhs_d, level=1)
+            rhsname = 'rhs'
+            if len(rhs_uniquenames)==1:
+                rhsname, = rhs_uniquenames
+            data = pd.concat([rhs_merged], names=['l/r'], keys=[rhsname])
 
         # Combine to new dataframe
-        data = pd.concat([lhs_merged, rhs_merged], names=['l/r'], keys=[lhsname, rhsname])
-        nfiles = 2
+        if lhs and rhs:
+            data = pd.concat([lhs_merged, rhs_merged], names=['l/r'], keys=[lhsname, rhsname])
+            nfiles = 2
     else:
         data,datasetnames,uniquenames = readmulti(files,tmpdir=tmpdir)
         nfiles = len(files)
@@ -426,9 +431,6 @@ def execcmp_compare(files,config,tmpdir):
 
 
 def process_compate(data, config, nfiles):
-    #assert(nfiles == data.index.get_level_values(0).nunique())
-
-
     # Decide which metric to display / what is our "main" metric
     metrics = config.metrics
     if len(metrics) == 0:
@@ -449,8 +451,6 @@ def process_compate(data, config, nfiles):
             if m and m not in data.columns:
                 sys.stderr.write("Unknown metric '%s'\n" % metric)
                 sys.exit(1)
-
-
 
     # Filter data
     proggroup = data.groupby(level=1)

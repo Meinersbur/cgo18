@@ -65,6 +65,8 @@ the following software must be installed on the system:
 
  - [Python](https://www.python.org) 2.7 *and* 3.4 or later
 
+ - [pandas](http://pandas.pydata.org)
+
  - [Git](https://git-scm.com) 2.5 or later
 
 
@@ -245,3 +247,7 @@ Explanation of compiler options used in the experiments:
 
  - "-mllvm -polly-optree-max-ops=0" disables a time-out for forward
    operand-tree cause by the aforementioned option.
+
+ - "-mllvm -polly-only-func=kernel_" ensures that only the performance-critical
+   kernel is optimized, and the static analysis is not affected by other parts
+   of the program, e.g. the value initialization loops.
