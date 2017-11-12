@@ -1,5 +1,5 @@
 #! /usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- coding: UTF-8-*-
 
 from gittool import Repository2, Commit, Branch, Remote, invoke, checkout_sub, llvm, REVISION, revToStr, TemporaryDirectory
 import tarfile
@@ -333,6 +333,11 @@ def infer_branch(rep, arg):
         if basename.startswith(bot + '_'):
             basename = basename[len(bot)+1:]
         if basename.startswith(job):
+            return branch,branch.get_basename()
+
+    for remote in rep.remotes():
+        branch = remote.get_branch(arg)
+        if branch.exists():
             return branch,branch.get_basename()
 
     return arg,arg
