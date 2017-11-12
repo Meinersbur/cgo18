@@ -1,0 +1,4 @@
+RUN: /scratch/shared/leone/krusemi/execslave/work/work3/run-test-suite/Performance/Polybench-421-boost/linear-algebra/kernels/3mm/Pboost_3mm 
+TIMEFOMOUTPUT: YES
+SOURCE: /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite/Performance/Polybench-421-boost/linear-algebra/kernels/3mm/3mm.cpp
+SOURCEDIR: /users/krusemi/scratch/execslave/persistent/persistent3/llvm/projects/test-suite/Performance/Polybench-421-boost/linear-algebra/kernels/3mm
