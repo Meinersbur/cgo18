@@ -59,9 +59,9 @@ In addition to the requirements to compile,
 [test-suite](https://llvm.org/docs/TestingGuide.html)
 the following software must be installed on the system:
 
- - [CMake](https://cmake.org) 3.4.3 or later
+ - [CMake](https://cmake.org) 3.6.3 or later
 
- - [Ninja](https://ninja-build.org) 1.7.2 or later
+ - [Ninja](https://ninja-build.org)
 
  - [Python](https://www.python.org) 2.7 *and* 3.4 or later
 
