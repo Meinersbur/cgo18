@@ -74,52 +74,7 @@ def read(name, handle=None):
     raise Exception("Cannot determine file format");
 
 
-def execcmp_cmp(lhs,rhs,config):
-    with TemporaryDirectory(prefix='execcmp-') as tmpdir:
-        lhsbot,lhsname = infer_branch(rep,lhs)
-        rhsbot,rhsname = infer_branch(rep,rhs)
-
-        lhstar = os.path.join(tmpdir, lhsname + '.tar')
-        rhstar = os.path.join(tmpdir, rhsname + '.tar')
-
-        rep.invoke_git('archive',  lhsbot , 'run-test-suite/build/output*.json', '-o', lhstar)
-        rep.invoke_git('archive',  rhsbot , 'run-test-suite/build/output*.json', '-o', rhstar)
-
-        lhs_d, lhs_merged = readtar(lhstar, config)
-        rhs_d, rhs_merged = readtar(rhstar, config)
-        data = pd.concat([lhs_merged, rhs_merged], names=['l/r'], keys=[lhsname, rhsname])
-
-        if config.show_diff is None:
-            config.show_diff = True
-
-        return process_compate(data,config,nfiles=2)
-
-
 rep = Repository2.from_directory('.')
-
-def execcmp_show(lhs,config):
-    with TemporaryDirectory(prefix='exec-') as tmpdir:
-        lhsbot,lhsname = infer_branch(rep,lhs)
-        lhstar = os.path.join(tmpdir, lhsname + '.tar')
-        rep.invoke_git('archive',  lhsbot , 'run-test-suite/build/output*.json', '-o', lhstar)
-
-        lhsdir = os.path.join(tmpdir, 'lhs')
-        os.makedirs(lhsdir)
-        rhsdir = os.path.join(tmpdir, 'rhs')
-        os.makedirs(rhsdir)
-
-        lhs_d, lhs_merged = readtar(lhstar, config)
-
-        if config.show_diff is None:
-            config.show_diff = False
-
-        #return process_compate(lhs_d,config,nfiles=lhs_d.index.get_level_values(0).nunique())
-
-        data = pd.concat([lhs_merged], names=['l/r'], keys=[lhsname])
-        return process_compate(data,config,nfiles=1)
-
-
-
 
 
 def readmulti(filenames,tmpdir):
@@ -178,7 +133,7 @@ def readmulti(filenames,tmpdir):
             lhsbot = arg
             lhsname = arg
         else:
-            raise Exception("Input {arg} is no file and there is no branch {arg}".format(arg=arg,lhsbot=lhsbot) )
+            raise Exception("Input {arg} is no file and there is no branch {arg}".format(arg=arg,lhsbot=lhsbot))
 
         lhstar = os.path.join(tmpdir, lhsname + '.tar')
         rep.invoke_git('archive',  lhsbot , 'run-test-suite/output*.json', '-o', lhstar)

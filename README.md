@@ -61,7 +61,7 @@ the following software must be installed on the system:
 
  - [CMake](https://cmake.org) 3.4.3 or later
 
- - [Ninja](https://ninja-build.org)
+ - [Ninja](https://ninja-build.org) 1.7.2 or later
 
  - [Python](https://www.python.org) 2.7 *and* 3.4 or later
 
