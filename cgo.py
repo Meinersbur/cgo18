@@ -50,7 +50,11 @@ def main():
     print("## Static evaluation")
     def print_stats(branch, metric, desc):
         print("#",desc)
-        invoke('python3', execcmp, branch, 'vs', '-a', '-f', '--no-sort', '--integer',  '-m', metric)
+        try:
+          invoke('python3', execcmp, branch, 'vs', '-a', '-f', '--no-sort', '--integer',  '-m', metric)
+        except:
+          print("Extracting data failed; The output 'Unknown metric <metric>' may also occur if all data points are zero.")
+          print()
 
     def print_transformations(branch):
         print_stats(branch, 'polly-optree.TotalInstructionsCopied+', "Forwarded instructions")
@@ -73,14 +77,14 @@ def main():
     print_scalaropts_postops(hostname + '_A50_polly_early_delicm')
     print_stats(hostname + '_A30_polly_early', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (without DeLICM)")
     print_stats(hostname + '_A50_polly_early_delicm', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (with DeLICM)")
-    #print_stats(hostname + '_A30_polly_early', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (without DeLICM)")
+    print_stats(hostname + '_A30_polly_early', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (without DeLICM)")
     print_stats(hostname + '_A50_polly_early_delicm', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (with DeLICM)")
 
     print("# Late")
     print_scalaropts_postops(hostname + '_A20_polly')
     print_stats(hostname + '_A40_polly_late', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (without DeLICM)")
     print_stats(hostname + '_A20_polly', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (with DeLICM)")
-    #print_stats(hostname + '_A40_polly_late', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (without DeLICM)")
+    print_stats(hostname + '_A40_polly_late', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (without DeLICM)")
     print_stats(hostname + '_A20_polly', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (with DeLICM)")
     print()
 
