@@ -50,11 +50,11 @@ def main():
     print("## Static evaluation")
     def print_stats(branch, metric, desc):
         print("#",desc)
-        try:
-          invoke('python3', execcmp, branch, 'vs', '-a', '-f', '--no-sort', '--integer',  '-m', metric)
-        except:
-          print("Extracting data failed; The output 'Unknown metric <metric>' may also occur if all data points are zero.")
-          print()
+        invoke('python3', execcmp, branch, 'vs', '-a', '-f', '--no-sort', '--integer',  '-m', metric)
+
+    def print_stats_diff(branch1, branch2, metric, desc):
+        print("#",desc)
+        invoke('python3', execcmp, branch1, 'vs', branch2, '-a', '-f', '--no-sort', '--integer',  '-m', metric, '--absolute')
 
     def print_transformations(branch):
         print_stats(branch, 'polly-optree.TotalInstructionsCopied+', "Forwarded instructions")
@@ -75,17 +75,14 @@ def main():
 
     print("# Early")
     print_scalaropts_postops(hostname + '_A50_polly_early_delicm')
-    print_stats(hostname + '_A30_polly_early', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (without DeLICM)")
-    print_stats(hostname + '_A50_polly_early_delicm', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (with DeLICM)")
-    print_stats(hostname + '_A30_polly_early', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (without DeLICM)")
-    print_stats(hostname + '_A50_polly_early_delicm', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (with DeLICM)")
+    print_stats_diff(hostname + '_A30_polly_early', hostname + '_A50_polly_early_delicm', 'polly-opt-isl.FirstLevelTileOpts+', "Additional post-ops: Tilings")
+    print_stats_diff(hostname + '_A30_polly_early', hostname + '_A50_polly_early_delicm', 'polly-opt-isl.MatMulOpts+', "Additional post-ops: Matrix-multiplications")
+    print()
 
     print("# Late")
     print_scalaropts_postops(hostname + '_A20_polly')
-    print_stats(hostname + '_A40_polly_late', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (without DeLICM)")
-    print_stats(hostname + '_A20_polly', 'polly-opt-isl.FirstLevelTileOpts+', "Post-ops: Tilings (with DeLICM)")
-    print_stats(hostname + '_A40_polly_late', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (without DeLICM)")
-    print_stats(hostname + '_A20_polly', 'polly-opt-isl.MatMulOpts+', "Post-ops: Matrix-multiplications (with DeLICM)")
+    print_stats_diff(hostname + '_A40_polly_late', hostname + '_A20_polly', 'polly-opt-isl.FirstLevelTileOpts+', "Additional post-ops: Tilings")
+    print_stats_diff(hostname + '_A40_polly_late', hostname + '_A20_polly', 'polly-opt-isl.MatMulOpts+', "Additional post-ops: Matrix-multiplications")
     print()
 
     print("## Runtime evaluation")
